@@ -1,0 +1,1 @@
+To test this code you only need to run npm run start since the server and front end dependencies are already installed

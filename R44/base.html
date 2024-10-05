@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Todo App</title>
+    <style>
+      table {
+        width: 100%;
+        border-collapse: collapse;
+      }
+      th,
+      td {
+        padding: 10px;
+        border: 1px solid black;
+      }
+      .hidden {
+        display: none;
+      }
+      .priority {
+        color: red;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Todo List</h1>
+    <button id="add-task">Add Task</button>
+    <table id="task-table">
+      <thead>
+        <tr>
+          <th>Task</th>
+          <th>Category</th>
+          <th>Priority</th>
+        </tr>
+      </thead>
+      <tbody id="task-list">
+        <tr>
+          <td>Finish report</td>
+          <td>Work</td>
+          <td>No</td>
+        </tr>
+        <tr>
+          <td>Buy groceries</td>
+          <td>Personal</td>
+          <td>No</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <script>
+      const tasks = [
+        { name: "Finish report", category: "Work", priority: false },
+        { name: "Buy groceries", category: "Personal", priority: false },
+      ];
+
+      document
+        .getElementById("add-task")
+        .addEventListener("click", function () {
+          const taskName = prompt("Enter task:");
+          const category = prompt("Enter category (Work/Personal):");
+          const priority = confirm("Is this a high-priority task?");
+
+          if (taskName && category) {
+            tasks.push({ name: taskName, category, priority });
+            renderTasks();
+          }
+        });
+
+      function renderTasks() {
+        const taskList = document.getElementById("task-list");
+        taskList.innerHTML = "";
+        tasks.forEach((task) => {
+          const row = document.createElement("tr");
+          row.innerHTML = `
+                    <td>${task.name}</td>
+                    <td>${task.category}</td>
+                    <td>${task.priority ? "Yes" : "No"}</td>
+                `;
+          taskList.appendChild(row);
+        });
+      }
+    </script>
+  </body>
+</html>

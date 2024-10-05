@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pendulum Simulation</title>
+    <style>
+      body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+        background-color: #f0f0f0;
+      }
+      .pendulum-container {
+        width: 200px;
+        height: 200px;
+        position: relative;
+      }
+
+      .rope {
+        width: 2px;
+        height: 150px;
+        background-color: #333;
+        position: absolute;
+        top: 10px;
+        left: 50%;
+        transform-origin: top center;
+        animation: swing 2s ease-in-out infinite alternate;
+      }
+      .ball {
+        width: 40px;
+        height: 40px;
+        background-color: #ff6b6b;
+        border-radius: 50%;
+        position: absolute;
+        bottom: -20px;
+        left: 50%;
+        transform: translateX(-50%);
+      }
+      @keyframes swing {
+        0% {
+          transform: rotate(90deg);
+        }
+        100% {
+          transform: rotate(0deg);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="pendulum-container">
+      <div class="rope">
+        <div class="ball"></div>
+      </div>
+    </div>
+  </body>
+</html>

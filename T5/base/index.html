@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Shipment Cost Calculator</title>
+    <style>
+      body {
+        font-family: sans-serif;
+      }
+      input[type="number"] {
+        width: 80px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Shipment Cost Calculator</h1>
+    <form id="calculator-form">
+      <label for="units">Select units:</label>
+      <select id="units">
+        <option value="m">m</option>
+        <option value="cm">cm</option>
+        <option value="dm">dm</option>
+        <option value="ft">ft</option>
+        <option value="in">in</option></select
+      ><br /><br />
+
+      <label for="length">Length:</label>
+      <input type="number" id="length" value="" required />
+      <br /><br />
+
+      <label for="width">Width:</label>
+      <input type="number" id="width" value="" required />
+      <br /><br />
+
+      <label for="height">Height:</label>
+      <input type="number" id="height" value="" required />
+      <br /><br />
+
+      <button type="submit">Calculate Cost</button>
+    </form>
+
+    <div id="result" style="margin-top: 20px"></div>
+
+    <script>
+      const form = document.querySelector("#calculator-form");
+      form.addEventListener("submit", calculateCost);
+      function calculateCost(e) {
+        e.preventDefault();
+
+        var length = parseFloat(document.getElementById("length").value);
+        var width = parseFloat(document.getElementById("width").value);
+        var height = parseFloat(document.getElementById("height").value);
+        var units = document.getElementById("units").value;
+
+        length = convertToDm(length, units);
+        width = convertToDm(width, units);
+        height = convertToDm(height, units);
+
+        var volume = length * width * height;
+
+        var pricePerDm3 = 1.5;
+        var totalCost = volume * pricePerDm3;
+
+        var resultDiv = document.getElementById("result");
+        resultDiv.innerHTML =
+          "Total Volume: " +
+          volume.toFixed(2) +
+          " dm<sup>3</sup><br>" +
+          "Price per dm<sup>3</sup>: $" +
+          pricePerDm3.toFixed(2) +
+          "<br>" +
+          "Total Cost: $" +
+          totalCost.toFixed(2);
+      }
+
+      function convertToDm(value, unit) {
+        switch (unit) {
+          case "m":
+            return value * 10;
+          case "cm":
+            return value / 10;
+          case "dm":
+            return value;
+          case "ft":
+            return (value * 30.48) / 10;
+          case "in":
+            return (value * 2.54) / 10;
+          default:
+            return value;
+        }
+      }
+    </script>
+  </body>
+</html>

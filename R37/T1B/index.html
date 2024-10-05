@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task Tracking Application</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>Task Tracking Application</h1>
+    <div class="panels">
+        <div class="panel" id="planning-panel">
+            <h2>Planning</h2>
+            <ul id="planning-tasks"></ul>
+        </div>
+        <div class="panel" id="development-panel">
+            <h2>Development</h2>
+            <ul id="development-tasks"></ul>
+        </div>
+        <div class="panel" id="testing-panel">
+            <h2>Testing</h2>
+            <ul id="testing-tasks"></ul>
+        </div>
+    </div>
+    <div class="task-form">
+        <h2>Add Task</h2>
+        <form id="task-form">
+            <label for="title">Title:</label>
+            <input type="text" id="title" required>
+            <label for="description">Description:</label>
+            <textarea id="description" required></textarea>
+            <label for="start-date">Start Date:</label>
+            <input type="date" id="start-date" required>
+            <label for="end-date">End Date:</label>
+            <input type="date" id="end-date" required>
+            <button id="add-task-btn">Add Task</button>
+        </form>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Blood Donor System</title>
+  <style>
+    table {
+      border-collapse: collapse;
+    }
+    th, td {
+      border: 1px solid #ddd;
+      padding: 8px;
+      text-align: left;
+    }
+  </style>
+</head>
+<body>
+  <h1>Blood Donor System</h1>
+  <table id="donor-table">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Blood Type</th>
+        <th>Location</th>
+      </tr>
+    </thead>
+    <tbody id="donor-data"></tbody>
+  </table>
+
+  <script>
+    fetch('donorData.json')
+      .then(response => response.json())
+      .then(data => {
+        console.log('Donor data:', data);
+        const donorTable = document.getElementById('donor-table');
+        const donorData = document.getElementById('donor-data');
+
+        data.forEach(donor => {
+          const row = document.createElement('tr');
+          row.innerHTML = `
+            <td>${donor.id}</td>
+            <td>${donor.name}</td>
+            <td>${donor.bloodType}</td>
+            <td>${donor.location.city}, ${donor.location.state}</td>
+          `;
+          donorData.appendChild(row);
+        });
+      })
+      .catch(error => console.error('Error fetching donor data:', error));
+  </script>
+</body>
+</html>

@@ -1,0 +1,14 @@
+{
+  "name": "tech-store",
+  "version": "1.0.0",
+  "description": "",
+  "main": "",
+  "scripts": {
+    "start": "npm run --prefix tech-store-backend start && npm run --prefix tech-store-frontend start",
+    "backend": "npm run --prefix tech-store-backend start",
+    "frontend": "npm run --prefix tech-store-frontend start"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}

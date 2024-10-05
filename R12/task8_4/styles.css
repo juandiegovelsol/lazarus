@@ -1,0 +1,235 @@
+/* General styles */
+body {
+  margin: 0;
+  padding: 0;
+  background-color: black;
+  color: white;
+  font-family: Arial, sans-serif;
+}
+
+/* Intro section */
+#intro {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+#brand-name {
+  font-size: 5rem;
+  animation: fadeIn 2s forwards;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+#explore-button {
+  font-size: 2rem;
+  padding: 1rem 2rem;
+  border: none;
+  border-radius: 10px;
+  background-color: #4caf50;
+  color: white;
+  cursor: pointer;
+  animation: bounce 2s infinite;
+  display: none;
+}
+
+@keyframes bounce {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+/* Features section */
+#features {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+#features-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  width: 80%;
+  max-width: 1200px;
+  height: 50%;
+  margin-top: 20vh; /* Adjust the vertical positioning */
+}
+
+.feature-box {
+  width: 30%;
+  height: 30vh;
+  background-color: #333;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 2rem;
+  cursor: pointer;
+  transition: transform 0.5s, font-size 0.5s;
+  text-align: center;
+}
+
+.feature-box:hover {
+  transform: scale(1.2);
+  font-size: 2.4rem;
+}
+
+#back-to-home {
+  font-size: 2rem;
+  padding: 1rem 2rem;
+  border: none;
+  border-radius: 10px;
+  background-color: #4caf50;
+  color: white;
+  cursor: pointer;
+  display: block;
+  margin-top: 20px;
+}
+
+/* Section titles */
+.section-title {
+  opacity: 0;
+  transform: translateY(-20px);
+  transition: opacity 2s, transform 2s;
+}
+
+.section-title.animate-title {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Content styles */
+.content {
+  display: none;
+  margin-top: 20px;
+  text-align: center;
+}
+
+.content img,
+.content video {
+  width: 30%;
+  height: auto;
+  object-fit: cover;
+  margin: 10px;
+  cursor: pointer;
+  transition: transform 0.5s;
+}
+
+.content img:hover,
+.content video:hover {
+  transform: scale(1.1);
+}
+
+/* Models table */
+#models-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 20px auto;
+}
+
+#models-table th,
+#models-table td {
+  border: 1px solid white;
+  padding: 10px;
+  text-align: center;
+}
+
+#models-table img {
+  width: 100px;
+  height: auto;
+}
+
+/* Back buttons */
+#back-to-features {
+  font-size: 2rem;
+  padding: 1rem 2rem;
+  border: none;
+  border-radius: 10px;
+  background-color: #4caf50;
+  color: white;
+  cursor: pointer;
+  display: none;
+  margin-top: 20px;
+}
+
+@media only screen and (max-width: 768px) {
+  #features-container {
+    flex-direction: column;
+  }
+
+  .feature-box {
+    width: 100%;
+    height: 30vh;
+    margin-bottom: 2rem;
+  }
+
+  .content img,
+  .content video {
+    width: 100%;
+    height: auto;
+  }
+
+  #models-table img {
+    width: 50px;
+  }
+}
+
+/* Add bouncing animation to images */
+.content img {
+  animation: bouncing 2s infinite;
+}
+
+@keyframes bouncing {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+/* Change colors of feature boxes and add bouncing animation */
+.feature-box {
+  animation: bouncing-box 2s infinite;
+}
+
+#design-box {
+  background-color: blue;
+}
+
+#sound-box {
+  background-color: green;
+}
+
+#models-box {
+  background-color: red;
+}
+
+@keyframes bouncing-box {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+}

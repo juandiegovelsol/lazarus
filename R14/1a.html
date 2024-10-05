@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title id="pageTitle" data-i18n="page.title">Welcome</title>
+    <style>
+      body {
+        direction: ltr;
+        font-family: Arial, sans-serif;
+      }
+      .rtl-content {
+        direction: rtl;
+      }
+      /* Improve accessibility for visually impaired users */
+      a:focus {
+        outline: 2px solid #000;
+      }
+    </style>
+  </head>
+  <body>
+    <header role="banner">
+      <h1 id="headerWelcome" data-i18n="header.welcome">Welcome to our site</h1>
+      <nav role="navigation" aria-label="Main Navigation">
+        <ul>
+          <li><a href="#" id="navHome" data-i18n="nav.home">Home</a></li>
+          <li><a href="#" id="navAbout" data-i18n="nav.about">About</a></li>
+          <li>
+            <a href="#" id="navContact" data-i18n="nav.contact">Contact</a>
+          </li>
+        </ul>
+      </nav>
+    </header>
+    <main role="main">
+      <section id="content" aria-labelledby="contentHeader">
+        <h2 id="contentHeader" data-i18n="content.header">Sample Content</h2>
+        <p id="contentParagraph" data-i18n="content.paragraph">
+          This is some sample content.
+        </p>
+      </section>
+    </main>
+    <footer role="contentinfo">
+      <p id="footerCopyright" data-i18n="footer.copyright">
+        &copy; 2023 Our Company
+      </p>
+    </footer>
+    <script>
+      const translations = {
+        en: {
+          "page.title": "Welcome",
+          "header.welcome": "Welcome to our site",
+          "nav.home": "Home",
+          "nav.about": "About",
+          "nav.contact": "Contact",
+          "content.header": "Sample Content",
+          "content.paragraph": "This is some sample content.",
+          "footer.copyright": "&copy; 2023 Our Company",
+        },
+        ar: {
+          "page.title": "مرحبا",
+          "header.welcome": "مرحبا في موقعنا",
+          "nav.home": "الصفحة الرئيسية",
+          "nav.about": "عنا",
+          "nav.contact": "اتصل بنا",
+          "content.header": "محتوى عينة",
+          "content.paragraph": "هذا بعض المحتوى العينة.",
+          "footer.copyright": "&copy; 2023 شركتنا",
+        },
+      };
+
+      function changeLanguage(lang) {
+        document.documentElement.lang = lang;
+        document.documentElement.dir = lang === "ar" ? "rtl" : "ltr";
+        document.body.classList.toggle("rtl-content", lang === "ar");
+
+        // Update page title
+        const titleElement = document.getElementById("pageTitle");
+        titleElement.textContent = translations[lang]["page.title"];
+
+        // Update content
+        const elements = document.querySelectorAll("[data-i18n]");
+        elements.forEach((element) => {
+          const key = element.getAttribute("data-i18n");
+          element.textContent = translations[lang][key];
+        });
+      }
+
+      // Example usage:
+      changeLanguage("ar");
+    </script>
+  </body>
+</html>

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <script src="script.js" defer></script>
+    <title>Library</title>
+  </head>
+  <body>
+    <div class="main-container">
+      <nav>
+        <span class="library-title">library</span>
+        <button type="button" class="btn-header add" data-open-btn>
+          + Add book
+        </button>
+        <span><button type="button" class="btn-header">Log in</button></span>
+      </nav>
+      <div>
+        <div class="modal" id="modal">
+          <div class="modal-header">
+            <span>Book details:</span>
+            <span class="close-btn" data-close-btn>&times;</span>
+          </div>
+          <form action="#">
+            <div>
+              <label for="title">Title: </label>
+              <input
+                type="text"
+                name="title"
+                id="title"
+                autocomplete="off"
+                required
+              />
+            </div>
+            <div>
+              <label for="author">Author: </label>
+              <input
+                type="text"
+                name="author"
+                id="author"
+                autocomplete="off"
+                required
+              />
+            </div>
+            <div>
+              <label for="pages">Pages: </label>
+              <input type="number" name="pages" id="pages" min="0" required />
+            </div>
+            <div class="read-status">
+              <button type="button" class="btn read-btn" id="read-status-btn">
+                Not read
+              </button>
+            </div>
+          </form>
+          <div class="modal-btns">
+            <button type="button" class="btn modal-button" data-add-btn>
+              ADD
+            </button>
+            <button type="button" class="btn modal-button" data-clear-btn>
+              CLEAR
+            </button>
+          </div>
+        </div>
+        <div class="overlay"></div>
+      </div>
+      <section class="library-grid"></section>
+      <footer>https://footer.com/</footer>
+    </div>
+  </body>
+</html>

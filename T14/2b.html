@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+      .sound-effect {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+        align-items: flex-start;
+        width: calc(100% - 24px);
+        height: calc(100% - 24px);
+        padding: 12px;
+        border-radius: 8px;
+        background-color: #f0f0f0;
+      }
+
+      .bar {
+        width: 0%;
+        height: 10px;
+        background-color: #ccc;
+      }
+
+      @keyframes sound-animation {
+        0% {
+          width: 0%;
+        }
+        50% {
+          width: var(--target-width);
+        }
+        100% {
+          width: 0%;
+        }
+      }
+
+      @keyframes colors {
+        0% {
+          background-color: #ccc;
+        }
+        50% {
+          background-color: #0f0;
+        }
+        100% {
+          background-color: #ccc;
+        }
+      }
+
+      .active {
+        background-color: #0f0;
+        animation: sound-animation 1s infinite linear,
+          colors 1s infinite alternate;
+      }
+
+      .box {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 200px;
+        height: 200px;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        background-color: #fff;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        resize: both;
+        overflow: hidden;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="box">
+      <div class="sound-effect">
+        <div class="bar" style="--target-width: 10%"></div>
+        <div class="bar" style="--target-width: 20%"></div>
+        <div class="bar" style="--target-width: 30%"></div>
+        <div class="bar" style="--target-width: 40%"></div>
+        <div class="bar" style="--target-width: 50%"></div>
+        <div class="bar" style="--target-width: 40%"></div>
+        <div class="bar" style="--target-width: 30%"></div>
+        <div class="bar" style="--target-width: 20%"></div>
+        <div class="bar" style="--target-width: 10%"></div>
+      </div>
+    </div>
+
+    <script>
+      // Get the bars
+      const bars = document.querySelectorAll(".bar");
+
+      // Function to change the color of the bars
+      function changeColor(active) {
+        bars.forEach((bar) => {
+          if (active) {
+            bar.classList.add("active");
+          } else {
+            bar.classList.remove("active");
+          }
+        });
+      }
+
+      // Function to detect audio
+      async function detectAudio() {
+        // Check if the browser supports the Web Audio API
+        if (navigator.mediaDevices.getUserMedia) {
+          // Get access to the user's microphone
+          const stream = await navigator.mediaDevices.getUserMedia({
+            audio: true,
+          });
+          const audioContext = new AudioContext();
+          const analyser = audioContext.createAnalyser();
+          const microphone = audioContext.createMediaStreamSource(stream);
+          microphone.connect(analyser);
+          analyser.fftSize = 256;
+          const frequencyData = new Uint8Array(analyser.frequencyBinCount);
+
+          // Continuously check the audio levels
+          function checkAudioLevels() {
+            requestAnimationFrame(checkAudioLevels);
+            analyser.getByteFrequencyData(frequencyData);
+            const average =
+              frequencyData.reduce((a, b) => a + b, 0) / frequencyData.length;
+            if (average > 50) {
+              changeColor(true);
+            } else {
+              changeColor(false);
+            }
+          }
+
+          checkAudioLevels();
+        }
+      }
+
+      detectAudio();
+
+      // Make the box draggable
+      const box = document.querySelector(".box");
+      let isDown = false;
+      let offset = [0, 0];
+
+      box.addEventListener("mousedown", (e) => {
+        if (e.button === 0) {
+          isDown = true;
+          offset = [box.offsetLeft - e.clientX, box.offsetTop - e.clientY];
+        }
+      });
+
+      document.addEventListener("mouseup", () => {
+        isDown = false;
+      });
+
+      document.addEventListener("mousemove", (e) => {
+        if (isDown) {
+          box.style.top = `${e.clientY + offset[1]}px`;
+          box.style.left = `${e.clientX + offset[0]}px`;
+        }
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Shipment Cost Calculator</title>
+    <style>
+      body {
+        font-family: sans-serif;
+      }
+      input[type="number"] {
+        width: 80px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Shipment Cost Calculator</h1>
+    <form id="calculator-form">
+      <label for="units">Select units:</label>
+      <select id="units">
+        <option value="m">m</option>
+        <option value="cm">cm</option>
+        <option value="dm">dm</option>
+        <option value="ft">ft</option>
+        <option value="in">in</option></select
+      ><br /><br />
+
+      <label for="length">Length:</label>
+      <input type="number" id="length" value="" required />
+      <br /><br />
+
+      <label for="width">Width:</label>
+      <input type="number" id="width" value="" required />
+      <br /><br />
+
+      <label for="height">Height:</label>
+      <input type="number" id="height" value="" required />
+      <br /><br />
+
+      <button type="submit">Calculate Cost</button>
+    </form>
+
+    <div id="result" style="margin-top: 20px"></div>
+
+    <script src="calculator.js"></script>
+    <script>
+      const form = document.querySelector("#calculator-form");
+      form.addEventListener("submit", (e) => {
+        e.preventDefault();
+
+        var length = parseFloat(document.getElementById("length").value);
+        var width = parseFloat(document.getElementById("width").value);
+        var height = parseFloat(document.getElementById("height").value);
+        var units = document.getElementById("units").value;
+
+        const result = calculateCost(length, width, height, units);
+
+        var resultDiv = document.getElementById("result");
+        resultDiv.innerHTML =
+          "Total Volume: " +
+          result.volume +
+          " dm<sup>3</sup><br>" +
+          "Price per dm<sup>3</sup>: $" +
+          result.pricePerDm3 +
+          "<br>" +
+          "Total Cost: $" +
+          result.totalCost;
+      });
+    </script>
+  </body>
+</html>

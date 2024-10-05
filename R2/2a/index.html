@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dynamic Weather Dashboard</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="dashboard">
+      <div class="city-card">
+        <div class="weather-severity" style="background-color: #ffff00"></div>
+        <div class="rain-container">
+          <div class="rain">
+            <div class="drop" style="left: 10%; animation-duration: 0.5s"></div>
+            <div class="drop" style="left: 20%; animation-duration: 0.7s"></div>
+            <div class="drop" style="left: 30%; animation-duration: 0.9s"></div>
+            <div class="drop" style="left: 40%; animation-duration: 0.8s"></div>
+            <div class="drop" style="left: 50%; animation-duration: 0.6s"></div>
+            <div class="drop" style="left: 60%; animation-duration: 1s"></div>
+            <div class="drop" style="left: 70%; animation-duration: 0.7s"></div>
+            <div class="drop" style="left: 80%; animation-duration: 0.9s"></div>
+            <div class="drop" style="left: 90%; animation-duration: 0.8s"></div>
+            <div class="splash" style="left: 10%"></div>
+            <div class="splash" style="left: 30%"></div>
+            <div class="splash" style="left: 50%"></div>
+            <div class="splash" style="left: 70%"></div>
+            <div class="splash" style="left: 90%"></div>
+          </div>
+        </div>
+        <h2 class="city-name">Seattle</h2>
+        <div class="current-weather">
+          <span class="temperature">55°F</span>
+        </div>
+        <div class="weather-details">
+          <p>Humidity: 80%</p>
+          <p>Wind: 8 mph SW</p>
+        </div>
+        <div class="forecast">
+          <!-- Forecast data -->
+        </div>
+        <div class="weather-condition">Raining</div>
+      </div>
+      <div class="extended-forecast">
+        <div class="forecast-day">
+          <h3>Day 1</h3>
+          <div class="forecast-icon">
+            <div class="sunny"></div>
+          </div>
+          <div class="forecast-temperature">58°F</div>
+        </div>
+        <div class="forecast-day">
+          <h3>Day 2</h3>
+          <div class="forecast-icon">
+            <div class="cloudy"></div>
+          </div>
+          <div class="forecast-temperature">52°F</div>
+        </div>
+        <div class="forecast-day">
+          <h3>Day 3</h3>
+          <div class="forecast-icon">
+            <div class="rain-container">
+              <div class="rain">
+                <div
+                  class="drop"
+                  style="left: 10%; animation-duration: 0.5s"
+                ></div>
+                <div
+                  class="drop"
+                  style="left: 20%; animation-duration: 0.7s"
+                ></div>
+                <div
+                  class="drop"
+                  style="left: 30%; animation-duration: 0.9s"
+                ></div>
+              </div>
+            </div>
+          </div>
+          <div class="forecast-temperature">48°F</div>
+        </div>
+      </div>
+
+      <div class="city-card">
+        <div class="weather-severity" style="background-color: #ff0000"></div>
+        <div class="snow">
+          <div class="snowflake" style="left: 10%; animation-duration: 10s, 3s">
+            �
+          </div>
+          <div class="snowflake" style="left: 20%; animation-duration: 8s, 4s">
+            ❅
+          </div>
+          <div class="snowflake" style="left: 30%; animation-duration: 12s, 6s">
+            ❆
+          </div>
+          <div class="snowflake" style="left: 40%; animation-duration: 9s, 5s">
+            �
+          </div>
+          <div class="snowflake" style="left: 50%; animation-duration: 11s, 7s">
+            ❅
+          </div>
+          <div class="snowflake" style="left: 60%; animation-duration: 10s, 6s">
+            ❆
+          </div>
+          <div class="snowflake" style="left: 70%; animation-duration: 13s, 8s">
+            �
+          </div>
+          <div class="snowflake" style="left: 80%; animation-duration: 9s, 4s">
+            ❅
+          </div>
+          <div class="snowflake" style="left: 90%; animation-duration: 11s, 5s">
+            ❆
+          </div>
+        </div>
+        <h2 class="city-name">Denver</h2>
+        <div class="current-weather">
+          <span class="temperature">28°F</span>
+        </div>
+        <div class="weather-details">
+          <p>Humidity: 65%</p>
+          <p>Wind: 5 mph NE</p>
+        </div>
+        <div class="forecast">
+          <!-- Forecast data -->
+        </div>
+        <div class="weather-condition">Snowing</div>
+      </div>
+      <div class="extended-forecast">
+        <div class="forecast-day">
+          <h3>Day 1</h3>
+          <div class="forecast-icon">
+            <div class="cloudy"></div>
+          </div>
+          <div class="forecast-temperature">32°F</div>
+        </div>
+        <div class="forecast-day">
+          <h3>Day 2</h3>
+          <div class="forecast-icon">
+            <div class="snow">
+              <div
+                class="snowflake"
+                style="left: 10%; animation-duration: 10s, 3s"
+              >
+                �
+              </div>
+              <div
+                class="snowflake"
+                style="left: 20%; animation-duration: 8s, 4s"
+              >
+                ❅
+              </div>
+              <div
+                class="snowflake"
+                style="left: 30%; animation-duration: 12s, 6s"
+              >
+                ❆
+              </div>
+            </div>
+          </div>
+          <div class="forecast-temperature">25°F</div>
+        </div>
+        <div class="forecast-day">
+          <h3>Day 3</h3>
+          <div class="forecast-icon">
+            <div class="sunny"></div>
+          </div>
+          <div class="forecast-temperature">30°F</div>
+        </div>
+      </div>
+
+      <div class="city-card">
+        <div class="weather-severity" style="background-color: #00ff00"></div>
+        <div class="weather-effect sunny"></div>
+        <h2 class="city-name">Los Angeles</h2>
+        <div class="current-weather">
+          <span class="temperature">75°F</span>
+        </div>
+        <div class="weather-details">
+          <p>Humidity: 45%</p>
+          <p>Wind: 3 mph W</p>
+        </div>
+        <div class="forecast">
+          <!-- Forecast data -->
+        </div>
+        <div class="weather-condition">Sunny</div>
+      </div>
+      <div class="extended-forecast">
+        <div class="forecast-day">
+          <h3>Day 1</h3>
+          <div class="forecast-icon">
+            <div class="cloudy"></div>
+          </div>
+          <div class="forecast-temperature">70°F</div>
+        </div>
+        <div class="forecast-day">
+          <h3>Day 2</h3>
+          <div class="forecast-icon">
+            <div class="rain-container">
+              <div class="rain">
+                <div
+                  class="drop"
+                  style="left: 10%; animation-duration: 0.5s"
+                ></div>
+                <div
+                  class="drop"
+                  style="left: 20%; animation-duration: 0.7s"
+                ></div>
+                <div
+                  class="drop"
+                  style="left: 30%; animation-duration: 0.9s"
+                ></div>
+              </div>
+            </div>
+          </div>
+          <div class="forecast-temperature">65°F</div>
+        </div>
+        <div class="forecast-day">
+          <h3>Day 3</h3>
+          <div class="forecast-icon">
+            <div class="sunny"></div>
+          </div>
+          <div class="forecast-temperature">75°F</div>
+        </div>
+      </div>
+
+      <div class="city-card">
+        <div class="weather-severity" style="background-color: #ffff00"></div>
+        <div class="weather-effect cloudy"></div>
+        <h2 class="city-name">New York</h2>
+        <div class="current-weather">
+          <span class="temperature">62°F</span>
+        </div>
+        <div class="weather-details">
+          <p>Humidity: 70%</p>
+          <p>Wind: 10 mph E</p>
+        </div>
+        <div class="forecast">
+          <!-- Forecast data -->
+        </div>
+        <div class="weather-condition">Cloudy</div>
+      </div>
+      <div class="extended-forecast">
+        <div class="forecast-day">
+          <h3>Day 1</h3>
+          <div class="forecast-icon">
+            <div class="rain-container">
+              <div class="rain">
+                <div
+                  class="drop"
+                  style="left: 10%; animation-duration: 0.5s"
+                ></div>
+                <div
+                  class="drop"
+                  style="left: 20%; animation-duration: 0.7s"
+                ></div>
+                <div
+                  class="drop"
+                  style="left: 30%; animation-duration: 0.9s"
+                ></div>
+              </div>
+            </div>
+          </div>
+          <div class="forecast-temperature">55°F</div>
+        </div>
+        <div class="forecast-day">
+          <h3>Day 2</h3>
+          <div class="forecast-icon">
+            <div class="cloudy"></div>
+          </div>
+          <div class="forecast-temperature">60°F</div>
+        </div>
+        <div class="forecast-day">
+          <h3>Day 3</h3>
+          <div class="forecast-icon">
+            <div class="sunny"></div>
+          </div>
+          <div class="forecast-temperature">65°F</div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

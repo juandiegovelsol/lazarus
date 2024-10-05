@@ -1,0 +1,85 @@
+<!-- Define the document type and language -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Set the character encoding for the document -->
+    <meta charset="UTF-8">
+    <!-- Set the viewport settings for responsive design -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Set the CSRF token for security -->
+    <meta name="csrf-token" content="your-csrf-token-here">
+    <!-- Set the title of the page -->
+    <title>Contact Form with Enhancements</title>
+    <!-- Link to the external stylesheet -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Create a container for the form -->
+    <div class="form-container">
+        <!-- Set the heading for the form -->
+        <h1>Contact Us</h1>
+        <!-- Define the form with an ID and ARIA attributes -->
+        <form id="contactForm" aria-labelledby="form-title" novalidate>
+            <!-- Create a form group for the name field -->
+            <div class="form-group" role="group" aria-labelledby="name-label">
+                <!-- Create an input field for the name -->
+                <input type="text" id="name" required aria-required="true" aria-describedby="nameError" aria-label="Name">
+                <!-- Create a label for the name field -->
+                <label id="name-label" for="name">Name</label>
+                <!-- Create an error message for the name field -->
+                <span id="nameError" class="error-message" role="alert">Name is required</span>
+            </div>
+            <!-- Create a form group for the email field -->
+            <div class="form-group" role="group" aria-labelledby="email-label">
+                <!-- Create an input field for the email -->
+                <input type="email" id="email" required aria-required="true" aria-describedby="emailError" aria-label="Email">
+                <!-- Create a label for the email field -->
+                <label id="email-label" for="email">Email</label>
+                <!-- Create an error message for the email field -->
+                <span id="emailError" class="error-message" role="alert">Please enter a valid email</span>
+            </div>
+            <!-- Create a form group for the message field -->
+            <div class="form-group" role="group" aria-labelledby="message-label">
+                <!-- Create a textarea for the message -->
+                <textarea id="message" required aria-required="true" aria-describedby="messageError" placeholder="Write your message here..." aria-label="Message"></textarea>
+                <!-- Create a label for the message field -->
+                <label id="message-label" for="message">Message</label>
+                <!-- Create an error message for the message field -->
+                <span id="messageError" class="error-message" role="alert">Message is required</span>
+            </div>
+            <!-- Create a form group for the captcha field -->
+            <div class="form-group captcha-group" role="group" aria-labelledby="captcha-label">
+                <!-- Create an input field for the captcha -->
+                <input type="text" id="captcha" required aria-required="true" aria-describedby="captchaError" aria-label="Captcha">
+                <!-- Create a label for the captcha field -->
+                <label id="captcha-label" for="captcha">Captcha</label>
+                <!-- Create an error message for the captcha field -->
+                <span id="captchaError" class="error-message" role="alert">Captcha is required</span>
+                <!-- Create a container for the captcha image and refresh button -->
+                <div class="captcha-container">
+                    <!-- Create a canvas element for the captcha image -->
+                    <canvas id="captchaCanvas" width="150" height="50" aria-label="Captcha image"></canvas>
+                    <!-- Create a refresh button for the captcha -->
+                    <button id="refreshCaptcha" type="button" aria-label="Refresh captcha">Refresh</button>
+                </div>
+            </div>
+            <!-- Create a honeypot field to prevent spam -->
+            <div class="form-group honeypot" aria-hidden="true" style="display:none;">
+                <!-- Create an input field for the honeypot -->
+                <input type="text" id="phoneNumber" name="phoneNumber" tabindex="-1" autocomplete="off">
+            </div>
+            <!-- Create a hidden input field for the CSRF token -->
+            <input type="hidden" name="_csrf" value="your-csrf-token-here">
+            <!-- Create a submit button for the form -->
+            <button type="submit" class="submit-btn" aria-label="Submit form">
+                <!-- Create a span element for the button text -->
+                <span>Submit</span>
+                <!-- Create a div element for the loading animation -->
+                <div class="loading"></div>
+            </button>
+        </form>
+    </div>
+    <!-- Link to the external JavaScript file -->
+    <script src="script.js"></script>
+</body>
+</html>

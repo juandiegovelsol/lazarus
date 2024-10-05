@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Parallax Page</title>
+    <style>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        font-family: Arial, sans-serif;
+        height: 100vh;
+        overflow: hidden;
+      }
+
+      header {
+        position: fixed;
+        /* Fix the navbar at the top */
+        top: 0;
+        left: 0;
+        right: 0;
+        background-color: rgba(0, 0, 0, 0.7);
+        /* Semi-transparent background */
+        padding: 10px 20px;
+        /* Padding around the navbar */
+        z-index: 1000;
+        /* Ensure navbar is on top */
+      }
+
+      nav ul {
+        list-style-type: none;
+        /* Remove bullet points */
+        display: flex;
+        /* Display list items in a row */
+        justify-content: space-around;
+        /* Space items evenly */
+        align-items: center;
+        /* Center items vertically */
+      }
+
+      nav ul li {
+        margin: 0 15px;
+        /* Spacing between list items */
+      }
+
+      nav ul li a {
+        text-decoration: none;
+        /* Remove underline */
+        color: white;
+        /* Text color */
+        font-size: 1.2rem;
+        /* Font size */
+        transition: color 0.3s;
+        /* Smooth transition for hover effect */
+      }
+
+      nav ul li a:hover {
+        color: #ff6347;
+        /* Change color on hover */
+      }
+
+      .container {
+        position: relative;
+        scroll-snap-type: y proximity;
+        /* Enable scroll snapping */
+        height: 100vh;
+        overflow-y: hidden;
+      }
+
+      .scrollbar {
+        position: absolute;
+        right: 10px;
+        top: 10px;
+        bottom: 10px;
+        width: 10px;
+        border-radius: 10px;
+        background-color: #ccc;
+        opacity: 0;
+        transition: opacity 0.5s;
+      }
+
+      .scrollbar:hover,
+      .scrollbar:active {
+        opacity: 1;
+      }
+
+      .scrollbar-thumb {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        width: 100%;
+        background-color: #666;
+        border-radius: 10px;
+        cursor: pointer;
+      }
+
+      section {
+        height: 100vh;
+        scroll-snap-align: start;
+        /* Align sections to start on snap */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 2.5rem;
+        color: white;
+      }
+
+      .section1 {
+        background-color: #ff6347;
+        /* Tomato */
+      }
+
+      .section2 {
+        background-color: #4682b4;
+        /* SteelBlue */
+      }
+
+      .section3 {
+        background-color: #32cd32;
+        /* LimeGreen */
+      }
+
+      .fade-in {
+        opacity: 0;
+        transform: translateY(50px);
+        transition: opacity 1s ease, transform 1s ease;
+      }
+
+      .visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    </style>
+  </head>
+
+  <body>
+    <header>
+      <nav>
+        <ul>
+          <li><a href="#section1">Section 1</a></li>
+          <li><a href="#section2">Section 2</a></li>
+          <li><a href="#section3">Section 3</a></li>
+        </ul>
+      </nav>
+    </header>
+    <div class="container">
+      <div class="scrollbar">
+        <div class="scrollbar-thumb"></div>
+      </div>
+      <div
+        class="content"
+        style="overflow-y: scroll; height: 100vh; padding-right: 20px"
+      >
+        <section class="section1" id="section1">
+          <div class="fade-in">
+            <h1>Welcome to Our Parallax Page</h1>
+          </div>
+        </section>
+
+        <section class="section2" id="section2">
+          <div class="fade-in">
+            <h1>Explore the Beauty of Design</h1>
+          </div>
+        </section>
+
+        <section class="section3" id="section3">
+          <div class="fade-in">
+            <h1>Join Us in This Journey</h1>
+          </div>
+        </section>
+      </div>
+    </div>
+
+    <script>
+      // Function to check if the element is in the viewport
+      const isInViewport = (element) => {
+        const rect = element.getBoundingClientRect();
+        return (
+          rect.top >= 0 &&
+          rect.left >= 0 &&
+          rect.bottom <=
+            (window.innerHeight || document.documentElement.clientHeight) &&
+          rect.right <=
+            (window.innerWidth || document.documentElement.clientWidth)
+        );
+      };
+
+      const sections = document.querySelectorAll(".fade-in");
+      const content = document.querySelector(".content");
+      const scrollbar = document.querySelector(".scrollbar");
+      const scrollbarThumb = document.querySelector(".scrollbar-thumb");
+      const links = document.querySelectorAll("nav ul li a");
+
+      const handleScroll = () => {
+        sections.forEach((section) => {
+          if (isInViewport(section)) {
+            section.classList.add("visible");
+          }
+        });
+
+        const scrollTop = content.scrollTop;
+        const scrollHeight = content.scrollHeight;
+        const height = content.offsetHeight;
+        const thumbHeight = (height / scrollHeight) * height;
+        const thumbTop = (scrollTop / scrollHeight) * height;
+
+        scrollbarThumb.style.height = `${thumbHeight}px`;
+        scrollbarThumb.style.top = `${thumbTop}px`;
+
+        scrollbar.style.opacity = 1;
+        clearTimeout(scrollbarTimeout);
+        scrollbarTimeout = setTimeout(() => {
+          scrollbar.style.opacity = 0;
+        }, 2000);
+      };
+
+      let scrollbarTimeout;
+      let isDragging = false;
+      let startY = 0;
+      let startThumbTop = 0;
+
+      content.addEventListener("scroll", handleScroll);
+
+      // Trigger scroll event on page load
+      handleScroll();
+
+      scrollbarThumb.addEventListener("mousedown", (e) => {
+        isDragging = true;
+        startY = e.clientY;
+        startThumbTop = scrollbarThumb.offsetTop;
+      });
+
+      document.addEventListener("mousemove", (e) => {
+        if (isDragging) {
+          const thumbTop = startThumbTop + (e.clientY - startY);
+          const scrollHeight = content.scrollHeight;
+          const height = content.offsetHeight;
+          const scrollTop = (thumbTop / height) * scrollHeight;
+
+          content.scrollTop = scrollTop;
+          handleScroll();
+        }
+      });
+
+      document.addEventListener("mouseup", () => {
+        isDragging = false;
+      });
+
+      // Smooth scrolling when clicking on a navbar link
+      links.forEach((link) => {
+        link.addEventListener("click", (e) => {
+          e.preventDefault();
+          const sectionId = link.getAttribute("href");
+          const section = document.querySelector(sectionId);
+          section.scrollIntoView({ behavior: "smooth", block: "start" });
+        });
+      });
+
+      scrollbar.addEventListener("mouseover", () => {
+        scrollbar.style.opacity = 1;
+        clearTimeout(scrollbarTimeout);
+      });
+
+      scrollbar.addEventListener("mouseout", () => {
+        scrollbarTimeout = setTimeout(() => {
+          scrollbar.style.opacity = 0;
+        }, 2000);
+      });
+    </script>
+  </body>
+</html>

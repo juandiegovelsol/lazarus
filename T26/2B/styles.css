@@ -1,0 +1,147 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+body {
+  font-family: Arial, sans-serif;
+  height: 100vh;
+  width: 100vw;
+}
+
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 10vh;
+  background-color: rgba(255, 255, 255, 0.9);
+  padding: 1em;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  z-index: 1;
+}
+
+header nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.logo {
+  font-size: 1.5em;
+  font-weight: bold;
+}
+
+.menu {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.menu button {
+  margin-right: 1em;
+  padding: 0.5em 1em;
+  border: none;
+  border-radius: 0.25em;
+  background-color: #4caf50;
+  color: #fff;
+  cursor: pointer;
+}
+
+main {
+  height: 100vh;
+  overflow-x: hidden;
+  overflow-y: auto;
+  perspective: 1px;
+}
+
+.parallax-background {
+  height: 200vh;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  transform: translateZ(-1px) scale(2);
+  background-image: url("https://picsum.photos/1920/1080");
+  background-size: cover;
+  background-position: top;
+  z-index: -1;
+}
+
+.content {
+  position: relative;
+  transform: translateZ(0);
+  z-index: 0;
+}
+
+.welcome {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 90vh;
+  margin-top: 10vh;
+  position: relative;
+}
+
+.welcome::before {
+  content: "";
+  position: absolute;
+  top: -50px;
+  left: -50px;
+  width: calc(100% + 100px);
+  height: calc(100% + 100px);
+  background-color: rgba(255, 255, 255, 0.5);
+  border-radius: 50px;
+  backdrop-filter: blur(10px);
+  z-index: -1;
+}
+
+.welcome h1 {
+  font-size: 3em;
+  margin-bottom: 1em;
+}
+
+.welcome button {
+  padding: 0.5em 1em;
+  border: none;
+  border-radius: 0.25em;
+  background-color: #4caf50;
+  color: #fff;
+  cursor: pointer;
+}
+
+.reviews {
+  padding: 2em;
+}
+
+.card-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2em;
+}
+
+.card {
+  background-color: #fff;
+  padding: 1em;
+  border-radius: 0.5em;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  width: 300px;
+}
+
+.card img {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 0.5em 0.5em 0 0;
+}
+
+.card p {
+  padding: 1em;
+}

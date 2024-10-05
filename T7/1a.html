@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+      :root {
+        height: 100vh;
+        width: 100vw;
+        overflow: hidden;
+      }
+      body {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: black;
+      }
+
+      .container {
+        height: 150px;
+        overflow: hidden;
+        font-size: 35px;
+        line-height: 43px;
+        color: white;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .bracket {
+        font-size: 1.8em;
+        font-weight: bold;
+        color: red;
+        animation: blink 3s infinite;
+      }
+
+      .message {
+        font-weight: 600;
+        overflow: hidden;
+        height: 40px;
+        padding: 0 40px;
+      }
+      .text {
+        display: inline;
+        float: left;
+        margin: 0;
+      }
+
+      .scroll-up {
+        margin-top: 0;
+        padding-left: 150px;
+        text-align: left;
+        list-style: none;
+        animation: scroll 10s infinite;
+      }
+      .list-item {
+        line-height: 40px;
+        margin: 0;
+      }
+
+      @keyframes blink {
+        0%,
+        100% {
+          opacity: 1;
+        }
+        50% {
+          opacity: 0;
+        }
+      }
+
+      @keyframes scroll {
+        0%,
+        12%,
+        100% {
+          transform: translateY(0);
+        }
+        16%,
+        29% {
+          transform: translateY(-20%);
+        }
+        33%,
+        45% {
+          transform: translateY(-40%);
+        }
+        49%,
+        62% {
+          transform: translateY(-80%);
+        }
+        66%,
+        79% {
+          transform: translateY(-60%);
+        }
+        83%,
+        95% {
+          transform: translateY(-20%);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <span class="bracket">[</span>
+      <div class="message">
+        <p class="text">Welcome</p>
+
+        <ul class="scroll-up">
+          <li class="list-item">users</li>
+          <li class="list-item">everyone</li>
+          <li class="list-item">visitors</li>
+          <li class="list-item">friends</li>
+          <li class="list-item">people</li>
+        </ul>
+      </div>
+      <span class="bracket">]</span>
+    </div>
+  </body>
+</html>

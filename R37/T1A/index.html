@@ -1,0 +1,39 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Task Tracking Application</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <h1>Task Tracking Application</h1>
+  <div class="task-panels">
+    <div id="planning-panel" class="panel"></div>
+    <div id="development-panel" class="panel"></div>
+    <div id="testing-panel" class="panel"></div>
+  </div>
+  <form id="add-task-form">
+    <input type="text" id="title" placeholder="Task Title">
+    <input type="text" id="description" placeholder="Task Description">
+    <input type="date" id="start-date" placeholder="Start Date">
+    <input type="date" id="end-date" placeholder="End Date">
+    <button type="submit">Add Task</button>
+  </form>
+  <form id="edit-task-form">
+    <input type="number" id="task-id" placeholder="Task ID">
+    <input type="text" id="new-title" placeholder="New Task Title">
+    <input type="text" id="new-description" placeholder="New Task Description">
+    <input type="date" id="new-start-date" placeholder="New Start Date">
+    <input type="date" id="new-end-date" placeholder="New End Date">
+    <button type="submit">Edit Task</button>
+  </form>
+  <form id="delete-task-form">
+    <input type="number" id="task-id-delete" placeholder="Task ID">
+    <button type="submit">Delete Task</button>
+  </form>
+  <script src="task.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

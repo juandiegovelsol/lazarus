@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+      .sound-effect {
+        display: flex;
+        justify-content: space-between;
+        width: 200px;
+        height: 20px;
+      }
+
+      .bar {
+        width: 10px;
+        background-color: #ccc;
+        animation: sound-animation 1s infinite linear;
+        transform-origin: bottom;
+      }
+
+      .bar:nth-child(1),
+      .bar:nth-child(9) {
+        height: 10%;
+      }
+
+      .bar:nth-child(2),
+      .bar:nth-child(8) {
+        height: 20%;
+      }
+
+      .bar:nth-child(3),
+      .bar:nth-child(7) {
+        height: 30%;
+      }
+
+      .bar:nth-child(4),
+      .bar:nth-child(6) {
+        height: 40%;
+      }
+
+      .bar:nth-child(5) {
+        height: 50%;
+      }
+
+      @keyframes sound-animation {
+        0% {
+          transform: scaleY(0.2);
+          background-color: #ccc;
+        }
+        50% {
+          transform: scaleY(1);
+          background-color: #0f0;
+        }
+        100% {
+          transform: scaleY(0.2);
+          background-color: #ccc;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="sound-effect">
+      <div class="bar"></div>
+      <div class="bar"></div>
+      <div class="bar"></div>
+      <div class="bar"></div>
+      <div class="bar"></div>
+      <div class="bar"></div>
+      <div class="bar"></div>
+      <div class="bar"></div>
+      <div class="bar"></div>
+    </div>
+
+    <script>
+      // Get the bars
+      const bars = document.querySelectorAll(".bar");
+
+      // Set up the audio context
+      const audioContext = new AudioContext();
+      const analyser = audioContext.createAnalyser();
+      const microphone = navigator.mediaDevices.getUserMedia({ audio: true });
+
+      // Set up the animation
+      let animationActive = false;
+
+      // Activate the animation when audio is detected
+      microphone.then((stream) => {
+        const source = audioContext.createMediaStreamSource(stream);
+        source.connect(analyser);
+        analyser.fftSize = 256;
+        const bufferLength = analyser.frequencyBinCount;
+        const data = new Uint8Array(bufferLength);
+
+        function animate() {
+          requestAnimationFrame(animate);
+          analyser.getByteFrequencyData(data);
+          const average = Math.average(...data);
+
+          // If the average is greater than 50, activate the animation
+          if (average > 50 && !animationActive) {
+            bars.forEach((bar) => {
+              bar.style.animationPlayState = "running";
+            });
+            animationActive = true;
+          } else if (average <= 50 && animationActive) {
+            bars.forEach((bar) => {
+              bar.style.animationPlayState = "paused";
+            });
+            animationActive = false;
+          }
+        }
+
+        animate();
+      });
+
+      // Calculate the average of an array of numbers
+      Math.average = function (...numbers) {
+        return numbers.reduce((a, b) => a + b, 0) / numbers.length;
+      };
+    </script>
+  </body>
+</html>

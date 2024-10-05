@@ -1,0 +1,28 @@
+{
+  "programming_language": ["HTML", "CSS"],
+
+  "install_commands": [],
+
+  "run_commands": [],
+
+  "output": [],
+
+  "output_expected": "no",
+
+  "output_mime_type": "HTML",
+
+  "stream_source": [],
+
+  "code": [
+    {
+      "name": "index.html",
+
+      "content": "<!DOCTYPE html>\r\n<html lang='en'>\r\n  <head>\r\n    <meta charset='UTF-8' />\r\n    <meta name='viewport' content='width=device-width, initial-scale=1.0' />\r\n    <title>Ecommerce Layout</title>\r\n    <link rel='stylesheet' href='styles.css' />\r\n  </head>\r\n  <body>\r\n    <header class='navbar'>\r\n      <div class='container'>\r\n        <h1>My Ecommerce</h1>\r\n        <nav>\r\n          <a href='#'>Home</a>\r\n          <a href='#'>Products</a>\r\n          <a href='#'>Contact</a>\r\n          <a href='#'>About Us</a>\r\n        </nav>\r\n      </div>\r\n    </header>\r\n\r\n    <div class='container'>\r\n      <aside class='sidebar'>\r\n        <h2>Categories</h2>\r\n        <ul>\r\n          <li><a href='#'>Electronics</a></li>\r\n          <li><a href='#'>Clothing</a></li>\r\n          <li><a href='#'>Home</a></li>\r\n          <li><a href='#'>Toys</a></li>\r\n          <li><a href='#'>Books</a></li>\r\n        </ul>\r\n      </aside>\r\n\r\n      <main class='products'>\r\n        <div class='product'>\r\n          <img src='https://via.placeholder.com/300' alt='Product 1' />\r\n          <h3>Product 1</h3>\r\n          <p>$10.00</p>\r\n        </div>\r\n        <div class='product'>\r\n          <img src='https://via.placeholder.com/300' alt='Product 2' />\r\n          <h3>Product 2</h3>\r\n          <p>$15.00</p>\r\n        </div>\r\n        <div class='product'>\r\n          <img src='https://via.placeholder.com/300' alt='Product 3' />\r\n          <h3>Product 3</h3>\r\n          <p>$20.00</p>\r\n        </div>\r\n        <div class='product'>\r\n          <img src='https://via.placeholder.com/300' alt='Product 4' />\r\n          <h3>Product 4</h3>\r\n          <p>$25.00</p>\r\n        </div>\r\n        <div class='product'>\r\n          <img src='https://via.placeholder.com/300' alt='Product 5' />\r\n          <h3>Product 5</h3>\r\n          <p>$30.00</p>\r\n        </div>\r\n        <div class='product'>\r\n          <img src='https://via.placeholder.com/300' alt='Product 6' />\r\n          <h3>Product 6</h3>\r\n          <p>$35.00</p>\r\n        </div>\r\n      </main>\r\n    </div>\r\n  </body>\r\n</html>\r\n\r\n"
+    },
+    {
+      "name": "styles.css",
+
+      "content": "/* Reset margin and padding for all elements */\r\n* {\r\n  margin: 0;\r\n  padding: 0;\r\n  box-sizing: border-box;\r\n}\r\n\r\n/* Styles for the navigation bar */\r\n.navbar {\r\n  background-color: #333;\r\n  color: #fff;\r\n  position: fixed;\r\n  width: 100%;\r\n  top: 0;\r\n  left: 0;\r\n  padding: 10px 20px;\r\n  z-index: 1000;\r\n}\r\n\r\n.navbar .container {\r\n  display: flex;\r\n  justify-content: space-between;\r\n  align-items: center;\r\n}\r\n\r\n.navbar nav a {\r\n  color: #fff;\r\n  text-decoration: none;\r\n  margin: 0 15px;\r\n}\r\n\r\n.navbar nav a:hover {\r\n  text-decoration: underline;\r\n}\r\n\r\n/* Styles for the main container */\r\n.container {\r\n  display: flex;\r\n  margin-top: 60px; /* Adjust according to the height of the navbar */\r\n}\r\n\r\n/* Styles for the sidebar */\r\n.sidebar {\r\n  background-color: #f4f4f4;\r\n  width: 250px;\r\n  padding: 15px;\r\n}\r\n\r\n.sidebar h2 {\r\n  margin-bottom: 10px;\r\n}\r\n\r\n.sidebar ul {\r\n  list-style: none;\r\n}\r\n\r\n.sidebar ul li {\r\n  margin-bottom: 10px;\r\n}\r\n\r\n.sidebar ul li a {\r\n  text-decoration: none;\r\n  color: #333;\r\n}\r\n\r\n.sidebar ul li a:hover {\r\n  text-decoration: underline;\r\n}\r\n\r\n/* Styles for the product area */\r\n.products {\r\n  flex: 1;\r\n  padding: 15px;\r\n  display: grid;\r\n  grid-template-columns: repeat(3, 1fr);\r\n  gap: 15px;\r\n}\r\n\r\n/* Styles for each product */\r\n.product {\r\n  background-color: #fff;\r\n  border: 1px solid #ddd;\r\n  padding: 10px;\r\n  text-align: center;\r\n}\r\n\r\n.product img {\r\n  width: 100%;\r\n  height: auto;\r\n  margin-bottom: 10px;\r\n}\r\n\r\n/* Responsiveness */\r\n@media (max-width: 768px) {\r\n  .navbar {\r\n    position: relative;\r\n  }\r\n\r\n  body {\r\n    padding-top: 60px; /* Adjust according to the height of the navbar */\r\n  }\r\n\r\n  .container {\r\n    flex-direction: column;\r\n  }\r\n\r\n  .sidebar {\r\n    display: none; /* Hide the sidebar on small screens */\r\n  }\r\n\r\n  .products {\r\n    grid-template-columns: 1fr;\r\n  }\r\n}"
+    }
+  ]
+}

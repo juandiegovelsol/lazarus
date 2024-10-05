@@ -1,0 +1,267 @@
+/* General styling and reset */
+* {
+    /* Reset the margin and padding for all elements */
+    margin: 0;
+    padding: 0;
+    /* Set the box-sizing property to border-box */
+    box-sizing: border-box;
+}
+
+body {
+    /* Set the font family for the body */
+    font-family: Arial, sans-serif;
+    /* Set the background color and gradient for the body */
+    background: linear-gradient(120deg, #fdfbfb, #ebedee);
+    /* Set the display property to flex and center the content */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* Set the height of the body to 100vh */
+    height: 100vh;
+}
+
+.form-container {
+    /* Set the background color and padding for the form container */
+    background-color: white;
+    padding: 40px;
+    /* Set the border radius and box shadow for the form container */
+    border-radius: 15px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+    /* Set the width of the form container */
+    width: 400px;
+    /* Set the position property to relative */
+    position: relative;
+    /* Set the animation property to fadeIn */
+    animation: fadeIn 0.6s ease-in-out;
+}
+
+h1 {
+    /* Set the text alignment and margin bottom for the heading */
+    text-align: center;
+    margin-bottom: 20px;
+    /* Set the font family for the heading */
+    font-family: 'Segoe UI', sans-serif;
+}
+
+.form-group {
+    /* Set the position property to relative and margin top and bottom */
+    position: relative;
+    margin-top: 20px;
+    margin-bottom: 30px;
+}
+
+input, textarea {
+    /* Set the width and padding for the input and textarea elements */
+    width: 100%;
+    padding: 12px 15px;
+    /* Set the border and border radius for the input and textarea elements */
+    border: 2px solid #ccc;
+    border-radius: 5px;
+    /* Set the font size and outline property for the input and textarea elements */
+    font-size: 16px;
+    outline: none;
+    /* Set the transition property for the input and textarea elements */
+    transition: border-color 0.3s ease, background-color 0.3s ease;
+    /* Set the background color for the input and textarea elements */
+    background-color: white;
+}
+
+input:focus, textarea:focus {
+    /* Set the border color and background color for the input and textarea elements on focus */
+    border-color: #007BFF;
+    background-color: #f0f8ff;
+    /* Set the box shadow property for the input and textarea elements on focus */
+    box-shadow: 0 0 8px rgba(0, 123, 255, 0.3);
+}
+
+label {
+    /* Set the position property to absolute and top and left properties */
+    position: absolute;
+    top: 0;
+    left: 15px;
+    /* Set the background color and padding for the label */
+    background-color: white;
+    padding: 0 5px;
+    /* Set the font size and color for the label */
+    font-size: 16px;
+    color: #aaa;
+    /* Set the pointer-events property to none */
+    pointer-events: none;
+    /* Set the transition property for the label */
+    transition: all 0.3s;
+}
+
+input:focus + label, input:not(:placeholder-shown) + label,
+textarea:focus + label, textarea:not(:placeholder-shown) + label {
+    /* Set the top and left properties and font size and color for the label on focus or when the input is not empty */
+    top: -10px;
+    left: 10px;
+    font-size: 14px;
+    color: #007BFF;
+}
+
+.error-message {
+    /* Set the color and font size for the error message */
+    color: red;
+    font-size: 14px;
+    /* Set the position property to absolute and bottom and left properties */
+    position: absolute;
+    bottom: -20px;
+    left: 0;
+    /* Set the visibility and opacity properties for the error message */
+    visibility: hidden;
+    opacity: 0;
+    /* Set the transition property for the error message */
+    transition: opacity 0.3s, visibility 0.3s;
+}
+
+input:invalid ~ .error-message, textarea:invalid ~ .error-message {
+    /* Set the visibility and opacity properties for the error message when the input is invalid */
+    visibility: visible;
+    opacity: 1;
+}
+
+button.submit-btn {
+    /* Set the width and padding for the submit button */
+    width: 100%;
+    padding: 12px;
+    /* Set the background color and color for the submit button */
+    background-color: #007BFF;
+    color: white;
+    /* Set the font size and border and border radius for the submit button */
+    font-size: 18px;
+    border: none;
+    border-radius: 5px;
+    /* Set the cursor property to pointer */
+    cursor: pointer;
+    /* Set the position property to relative */
+    position: relative;
+    /* Set the overflow property to hidden */
+    overflow: hidden;
+    /* Set the transition property for the submit button */
+    transition: background-color 0.1s, transform 0.1s ease-out;
+}
+
+button.submit-btn:hover {
+    /* Set the transform property for the submit button on hover */
+    transform: scale(1.05);
+    /* Set the background color for the submit button on hover */
+    background-color: #0056b3;
+}
+
+button.submit-btn:focus {
+    /* Set the outline property for the submit button on focus */
+    outline: 3px solid rgba(0, 123, 255, 0.5);
+}
+
+button:active {
+    /* Set the transform property for the submit button on active */
+    transform: scale(0.95);
+}
+
+button.submit-btn .loading {
+    /* Set the position property to absolute and top and right properties */
+    position: absolute;
+    top: calc(50% - 10px);
+    right: 50%;
+    /* Set the width and height for the loading animation */
+    width: 20px;
+    height: 20px;
+    /* Set the border and border radius for the loading animation */
+    border: 3px solid white;
+    border-top: 3px solid #007BFF;
+    border-radius: 50%;
+    /* Set the animation property for the loading animation */
+    animation: spin 1s linear infinite;
+    /* Set the transform and opacity properties for the loading animation */
+    transform: translateX(100px);
+    opacity: 0;
+    /* Set the transition property for the loading animation */
+    transition: opacity 0.3s, transform 0.3s;
+}
+
+button.loading .loading {
+    /* Set the transform and opacity properties for the loading animation when the button is loading */
+    transform: translateX(0);
+    opacity: 1;
+}
+
+button.loading span {
+    /* Set the visibility property for the button text when the button is loading */
+    visibility: hidden;
+}
+
+@keyframes spin {
+    /* Define the animation for the loading animation */
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes fadeIn {
+    /* Define the animation for the form container */
+    0% {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.captcha-container {
+    /* Set display to flex to align the captcha image and refresh button */
+    display: flex;
+    /* Align items vertically center */
+    align-items: center;
+    /* Add space between the captcha image and button */
+    gap: 10px;
+    /* Optional: Set a specific width to the container */
+    width: 100%;
+}
+
+button#refreshCaptcha {
+    /* Set the background color to green */
+    background-color: #34C759;
+    /* Remove the border */
+    border: none;
+    /* Set the border radius */
+    border-radius: 5px;
+    /* Set the padding */
+    padding: 10px 20px;
+    /* Set the font size */
+    font-size: 16px;
+    /* Set the text color to white */
+    color: white;
+    /* Set the cursor to pointer */
+    cursor: pointer;
+    /* Set the outline to red */
+    outline: 2px solid #FF3737;
+    /* Set the transition for smooth background and transform changes */
+    transition: background-color 0.1s, transform 0.1s ease-out;
+    /* Align the button with the captcha image */
+    margin-left: auto;
+    /* Ensure the button does not take full width */
+    width: auto;
+}
+
+button#refreshCaptcha:hover {
+    /* Darken the green background on hover */
+    background-color: #2E865F;
+    /* Slightly increase the size on hover */
+    transform: scale(1.05);
+}
+
+button#refreshCaptcha:focus {
+    /* Thicken the red outline on focus */
+    outline: 3px solid #FF3737;
+}
+
+button#refreshCaptcha:active {
+    /* Slightly decrease the size when the button is active (clicked) */
+    transform: scale(0.95);
+}

@@ -1,0 +1,183 @@
+<!-- index.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Todo List</title>
+  </head>
+
+  <body>
+    <!-- index.html -->
+
+    <!-- Container element -->
+    <div class="container">
+      <!-- Header -->
+      <h1>Todo List</h1>
+      <button class="btn" id="add-task">Add Task</button>
+
+      <!-- Task list -->
+      <div id="task-container">
+        <!-- Work section -->
+        <button class="collapsible">Work</button>
+        <div class="content">
+          <ul class="task-list" id="work-tasks"></ul>
+        </div>
+
+        <!-- Personal section -->
+        <button class="collapsible">Personal</button>
+        <div class="content">
+          <ul class="task-list" id="personal-tasks"></ul>
+        </div>
+      </div>
+    </div>
+    <script>
+      <!-- script.js -->
+
+      /**
+       * Task object constructor
+       * @param {number} id - Task ID
+       * @param {string} name - Task name
+       * @param {string} category - Task category
+       * @param {boolean} priority - Task priority
+       */
+      function Task(id, name, category, priority) {
+        this.id = id;
+        this.name = name;
+        this.category = category;
+        this.priority = priority;
+      }
+
+      // Task list
+      let tasks = [];
+
+      /**
+       * Add task to task list
+       * @param {Task} task - Task object
+       */
+      function addTask(task) {
+        tasks.push(task);
+      }
+
+      /**
+       * Edit task in task list
+       * @param {number} id - Task ID
+       * @param {string} name - New task name
+       * @param {string} category - New task category
+       * @param {boolean} priority - New task priority
+       */
+      function editTask(id, name, category, priority) {
+        const task = tasks.find((task) => task.id === id);
+        task.name = name;
+        task.category = category;
+        task.priority = priority;
+      }
+
+      /**
+       * Delete task from task list
+       * @param {number} id - Task ID
+       */
+      function deleteTask(id) {
+        tasks = tasks.filter((task) => task.id !== id);
+      }
+
+      // Event listeners
+      document
+        .getElementById("add-task")
+        .addEventListener("click", function () {
+          // Add task prompt
+          const taskName = prompt("Enter task:");
+          const category = prompt("Enter category (Work/Personal):");
+          const priority = confirm("Is this a high-priority task?");
+
+          // Create task object
+          const task = new Task(tasks.length + 1, taskName, category, priority);
+
+          // Add task to task list
+          addTask(task);
+
+          // Render task list
+          renderTasks();
+        });
+
+      // Collapsible section event listeners
+      const collapsibleButtons = document.getElementsByClassName("collapsible");
+      for (let i = 0; i < collapsibleButtons.length; i++) {
+        collapsibleButtons[i].addEventListener("click", function () {
+          // Toggle section content
+          this.classList.toggle("active");
+          const content = this.nextElementSibling;
+          if (content.style.display === "block") {
+            content.style.display = "none";
+          } else {
+            content.style.display = "block";
+          }
+        });
+      }
+
+      /**
+       * Render task list
+       */
+      function renderTasks() {
+        // Clear task lists
+        const workTasksList = document.getElementById("work-tasks");
+        const personalTasksList = document.getElementById("personal-tasks");
+        workTasksList.innerHTML = "";
+        personalTasksList.innerHTML = "";
+
+        // Render tasks
+        tasks.forEach((task) => {
+          // Create task element
+          const taskElement = document.createElement("li");
+          taskElement.textContent = task.name;
+
+          // Add edit and delete buttons
+          const editButton = document.createElement("button");
+          editButton.textContent = "Edit";
+          editButton.addEventListener("click", function () {
+            // Edit task prompt
+            const newName = prompt("Enter new task name:");
+            const newCategory = prompt("Enter new category (Work/Personal):");
+            const newPriority = confirm("Is this a high-priority task?");
+
+            // Edit task
+            editTask(task.id, newName, newCategory, newPriority);
+
+            // Render task list
+            renderTasks();
+          });
+          taskElement.appendChild(editButton);
+
+          const deleteButton = document.createElement("button");
+          deleteButton.textContent = "Delete";
+          deleteButton.addEventListener("click", function () {
+            // Delete task confirmation
+            const confirmDelete = confirm(
+              "Are you sure you want to delete this task?"
+            );
+
+            if (confirmDelete) {
+              // Delete task
+              deleteTask(task.id);
+
+              // Render task list
+              renderTasks();
+            }
+          });
+          taskElement.appendChild(deleteButton);
+
+          // Add task to task list
+          if (task.category === "Work") {
+            workTasksList.appendChild(taskElement);
+          } else {
+            personalTasksList.appendChild(taskElement);
+          }
+        });
+      }
+
+      // Initial render
+      renderTasks();
+    </script>
+  </body>
+</html>

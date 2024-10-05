@@ -1,0 +1,12 @@
+Account Name,John Doe,
+Document,123456789,
+Account Number,123456,
+Agency,1234,
+,,
+Date,Type,Amount
+Balance on 2023-02-16:,60002.09,
+2023-02-16T18:44:26.871Z,credit,10
+2023-02-16T18:45:26.871Z,credit,5
+Balance on 2023-02-17:,60002.15,
+2023-02-17T18:44:26.871Z,debit,20
+2023-02-17T18:45:26.871Z,credit,10

@@ -1,0 +1,30 @@
+<!-- index.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Todo List</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+
+  <body>
+    <div class="container">
+      <h1>Todo List</h1>
+      <button class="btn" id="add-task">Add Task</button>
+      <div id="task-container">
+        <button class="collapsible">Work</button>
+        <div class="content">
+          <ul class="task-list" id="work-tasks"></ul>
+        </div>
+        <button class="collapsible">Personal</button>
+        <div class="content">
+          <ul class="task-list" id="personal-tasks"></ul>
+        </div>
+      </div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>

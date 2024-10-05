@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+      :root {
+        height: 100vh;
+        width: 100vw;
+        overflow: hidden;
+      }
+      body {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: black;
+      }
+
+      .container {
+        height: 150px;
+        overflow: hidden;
+        font-size: 35px;
+        line-height: 43px;
+        color: white;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .bracket {
+        font-size: 1.8em;
+        font-weight: bold;
+        color: red;
+        animation: blink 3s infinite;
+      }
+
+      .message {
+        font-weight: 600;
+        overflow: hidden;
+        height: 40px;
+        padding: 0 40px;
+        display: flex;
+        align-items: center;
+      }
+      .text {
+        display: inline;
+        float: left;
+        margin: 0;
+      }
+
+      .scroll-up {
+        margin-top: 0;
+        padding-left: 10px;
+        text-align: left;
+        list-style: none;
+        position: relative;
+      }
+      .list-item {
+        line-height: 40px;
+        margin: 0;
+        position: absolute;
+        opacity: 0;
+      }
+
+      .list-item:nth-child(1) {
+        animation: scroll-1 10s infinite;
+      }
+      .list-item:nth-child(2) {
+        animation: scroll-2 10s infinite;
+      }
+      .list-item:nth-child(3) {
+        animation: scroll-3 10s infinite;
+      }
+      .list-item:nth-child(4) {
+        animation: scroll-4 10s infinite;
+      }
+      .list-item:nth-child(5) {
+        animation: scroll-5 10s infinite;
+      }
+
+      @keyframes blink {
+        0%,
+        100% {
+          opacity: 1;
+        }
+        50% {
+          opacity: 0;
+        }
+      }
+
+      @keyframes scroll-1 {
+        0%,
+        12%,
+        100% {
+          opacity: 1;
+        }
+        16%,
+        100% {
+          opacity: 0;
+        }
+      }
+
+      @keyframes scroll-2 {
+        0%,
+        16% {
+          opacity: 0;
+        }
+        20%,
+        29% {
+          opacity: 1;
+        }
+        33%,
+        100% {
+          opacity: 0;
+        }
+      }
+
+      @keyframes scroll-3 {
+        0%,
+        29% {
+          opacity: 0;
+        }
+        33%,
+        45% {
+          opacity: 1;
+        }
+        49%,
+        100% {
+          opacity: 0;
+        }
+      }
+
+      @keyframes scroll-4 {
+        0%,
+        45% {
+          opacity: 0;
+        }
+        49%,
+        62% {
+          opacity: 1;
+        }
+        66%,
+        100% {
+          opacity: 0;
+        }
+      }
+
+      @keyframes scroll-5 {
+        0%,
+        62% {
+          opacity: 0;
+        }
+        66%,
+        79% {
+          opacity: 1;
+        }
+        83%,
+        100% {
+          opacity: 0;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <span class="bracket">[</span>
+      <div class="message">
+        <p class="text">Welcome</p>
+
+        <ul class="scroll-up">
+          <li class="list-item">users</li>
+          <li class="list-item">everyone</li>
+          <li class="list-item">visitors</li>
+          <li class="list-item">friends</li>
+          <li class="list-item">people</li>
+        </ul>
+      </div>
+      <span class="bracket">]</span>
+    </div>
+  </body>
+</html>

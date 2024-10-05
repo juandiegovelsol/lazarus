@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>My Chat</title>
+    <style>
+      body {
+        margin: 0;
+        font-family: sans-serif;
+        background-color: #e8f5e9;
+      }
+
+      .wrapper {
+        display: flex;
+        flex-direction: column;
+        height: 100vh;
+      }
+
+      nav {
+        background-color: #43a047;
+        padding: 10px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      nav h1 {
+        color: white;
+        font-size: 24px;
+        margin: 0;
+      }
+
+      .container {
+        flex-grow: 1;
+        display: flex;
+      }
+
+      .sidebar {
+        width: 20%;
+        background-color: #a5d6a7;
+        padding: 10px;
+        box-sizing: border-box;
+        border-top-right-radius: 10px;
+        border-bottom-right-radius: 10px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .sidebar h2 {
+        margin: 0;
+        color: #2e7d32;
+        text-align: center;
+      }
+
+      .contact {
+        background-color: #c8e6c9;
+        padding: 10px;
+        margin: 10px 0;
+        border-radius: 10px;
+        width: 100%;
+        text-align: center;
+        cursor: pointer;
+        transition: background-color 0.3s;
+      }
+
+      .contact:hover {
+        background-color: #81c784;
+      }
+
+      .main {
+        width: 80%;
+        padding: 10px;
+        box-sizing: border-box;
+      }
+
+      .chat-area {
+        height: 80%;
+        width: 100%;
+        border: 1px solid #ccc;
+        border-radius: 10px;
+        padding: 10px;
+        box-sizing: border-box;
+        resize: none;
+        overflow-y: auto;
+        background-color: #fff;
+      }
+
+      .input-area {
+        display: flex;
+        height: 10%;
+        margin-top: 10px;
+      }
+
+      .input-area input[type="text"] {
+        flex: 1;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 10px 0 0 10px;
+        box-sizing: border-box;
+      }
+
+      .input-area button {
+        padding: 10px;
+        background-color: #388e3c;
+        color: white;
+        border: none;
+        border-radius: 0 10px 10px 0;
+        cursor: pointer;
+      }
+
+      .input-area button:hover {
+        background-color: #2e7d32;
+      }
+
+      .settings-button {
+        position: absolute;
+        right: 10px;
+        background-color: #388e3c;
+        color: white;
+        padding: 10px;
+        border: none;
+        border-radius: 10px;
+        cursor: pointer;
+      }
+
+      .settings-button:hover {
+        background-color: #2e7d32;
+      }
+
+      /* Media query for smaller screens */
+      @media (max-width: 768px) {
+        .container {
+          flex-direction: column;
+        }
+
+        .sidebar {
+          width: 100%;
+          margin-top: 0;
+        }
+
+        .sidebar h2 {
+          display: none;
+        }
+
+        .main {
+          width: 100%;
+        }
+
+        .chat-area {
+          height: 70%;
+        }
+
+        .input-area {
+          height: 15%;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrapper">
+      <nav>
+        <h1>My Chat</h1>
+        <button class="settings-button">Settings</button>
+      </nav>
+
+      <div class="container">
+        <div class="main">
+          <textarea class="chat-area" readonly></textarea>
+          <div class="input-area">
+            <input type="text" placeholder="Type your message..." />
+            <button>Send</button>
+          </div>
+        </div>
+
+        <div class="sidebar">
+          <h2>Contacts</h2>
+          <div class="contact">Alice</div>
+          <div class="contact">Bob</div>
+          <div class="contact">Charlie</div>
+          <div class="contact">David</div>
+          <div class="contact">Eve</div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

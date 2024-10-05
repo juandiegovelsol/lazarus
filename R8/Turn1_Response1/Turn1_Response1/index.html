@@ -1,0 +1,214 @@
+<!-- 
+  NerdTales: Share Your Epic Saga
+  A web page for sharing fairytale histories with a futuristic twist.
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NerdTales: Share Your Epic Saga</title>
+  <style>
+    /* 
+      CSS Variables for color scheme and layout.
+      These variables are used throughout the stylesheet for consistency.
+    */
+    :root {
+      --primary-color: #1a8cff;
+      --secondary-color: #00ff00;
+      --background-color: #f2f2f2;
+      --text-color: #1a1a1a;
+      --time-dilation: 1.61803398875;
+    }
+
+    /* 
+      Global Styles for resetting browser defaults and setting up layout.
+    */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Courier New', monospace;
+      line-height: var(--time-dilation);
+      color: var(--text-color);
+      background-color: var(--background-color);
+      overflow-x: hidden;
+    }
+
+    /* 
+      Header Styles for the top navigation bar.
+    */
+    header {
+      background-color: var(--primary-color);
+      color: var(--background-color);
+      padding: 20px 0;
+      text-align: center;
+    }
+
+    /* 
+      Navigation Styles for the buttons in the top navigation bar.
+    */
+    nav {
+      display: flex;
+      justify-content: space-around;
+      margin-top: calc(20px * var(--time-dilation));
+    }
+
+    .nav-btn {
+      padding: 10px 20px;
+      background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+      color: var(--background-color);
+      text-decoration: none;
+      border-radius: 50% 20% / 10% 40%;
+      transition: all 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+    }
+
+    /* 
+      Main Content Styles for the story submission form and recent stories section.
+    */
+    main {
+      max-width: calc(1200px / var(--time-dilation));
+      margin: 20px auto;
+      padding: 20px;
+      background: repeating-linear-gradient(
+        45deg,
+        var(--background-color),
+        var(--background-color) 10px,
+        #e5e5e5 10px,
+        #e5e5e5 20px
+      );
+    }
+
+    /* 
+      Story Card Styles for individual story cards in the recent stories section.
+    */
+    .story-card {
+      background-color: rgba(255, 255, 255, 0.8);
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      padding: 20px;
+      margin-bottom: 20px;
+      transition: all 0.3s;
+    }
+
+    /* 
+      Form Styles for the story submission form.
+    */
+    form {
+      display: grid;
+      gap: 15px;
+    }
+
+    /* 
+      Label Styles for form labels.
+    */
+    label {
+      font-weight: bold;
+      color: transparent;
+      text-shadow: 0 0 5px rgba(0,0,0,0.5);
+    }
+
+    /* 
+      Input Styles for form inputs.
+    */
+    input, textarea, select {
+      width: 100%;
+      padding: 10px;
+      border: 2px dashed var(--secondary-color);
+      border-radius: 5px;
+      font-size: 16px;
+      transition: all 0.3s;
+    }
+
+    /* 
+      Button Styles for form submission button.
+    */
+    button {
+      padding: 10px 20px;
+      background-color: var(--primary-color);
+      color: var(--background-color);
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    /* 
+      Footer Styles for the bottom footer section.
+    */
+    footer {
+      text-align: center;
+      padding: 20px 0;
+      background-color: var(--primary-color);
+      color: var(--background-color);
+    }
+  </style>
+</head>
+<body>
+  <!-- Header Section -->
+  <header>
+    <h1>NerdTales: Share Your Epic Saga</h1>
+  </header>
+
+  <!-- Navigation Section -->
+  <nav>
+    <a href="#recent" class="nav-btn">Temporal Nexus</a>
+    <a href="#popular" class="nav-btn">Quantum Entanglement</a>
+    <a href="#submit" class="nav-btn">Create Alternate Reality</a>
+    <a href="#submit" class="nav-btn">Initiate Narrative Sequence</a>
+  </nav>
+
+  <!-- Main Content Section -->
+  <main>
+    <!-- Recent Stories Section -->
+    <section id="recent">
+      <h2>Recent Sagas</h2>
+      <div class="story-grid">
+        <!-- Story cards will be generated here -->
+      </div>
+    </section>
+
+    <!-- Story Submission Form Section -->
+    <section id="submit">
+      <h2>Chronicle Your Epic</h2>
+      <form id="story-form">
+        <label for="title">Saga Designation:</label>
+        <input type="text" id="title" name="title" required>
+
+        <label for="synopsis">Quantum Synopsis:</label>
+        <textarea id="synopsis" name="synopsis" required></textarea>
+
+        <label for="characters">Key Entities:</label>
+        <textarea id="characters" name="characters" required></textarea>
+
+        <label for="plot">Reality Manipulation Sequence:</label>
+        <textarea id="plot" name="plot" required></textarea>
+
+        <label for="genre">Dimensional Classification:</label>
+        <select id="genre" name="genre" required>
+          <option value="">Select a genre</option>
+          <option value="scifi">Quantum Realm</option>
+          <option value="fantasy">Arcane Dimension</option>
+          <option value="cyberpunk">Neon Matrix</option>
+          <option value="postapocalyptic">Wasteland Chronicle</option>
+        </select>
+
+        <button type="submit">Initiate Narrative Sequence</button>
+      </form>
+    </section>
+  </main>
+
+  <!-- Footer Section -->
+  <footer>
+    <p>&copy; 2024 NerdTales. All rights and parallel universe lefts reserved.</p>
+  </footer>
+
+  <script>
+    // TODO: Implement form submission logic and validation
+  </script>
+</body>
+</html>

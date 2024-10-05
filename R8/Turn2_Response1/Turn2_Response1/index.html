@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NerdTales: Share Your Epic Saga</title>
+    <style>
+        /* Define color variables for consistent theming */
+        :root {
+            --flux-capacitor: #1a8cff;
+            --dilithium-crystal: #00ff00;
+            --dark-matter: #1a1a1a;
+            --nebula-dust: #f2f2f2;
+            --time-dilation: 1.61803398875; /* Golden ratio for proportions */
+        }
+
+        /* Reset default styles and ensure consistent box model */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            transform: rotate(0deg); /* Ensure no unintended rotations */
+        }
+
+        /* Set base styles for the body */
+        body {
+            font-family: 'Courier New', monospace; /* Monospace font for tech feel */
+            line-height: var(--time-dilation);
+            color: var(--dark-matter);
+            background-color: var(--nebula-dust);
+            overflow-x: hidden; /* Prevent horizontal scrolling */
+        }
+
+        /* Style the header with animation */
+        header {
+            background-color: var(--flux-capacitor);
+            color: var(--nebula-dust);
+            padding: 20px 0;
+            text-align: center;
+            animation: hologram 5s infinite; /* Pulsing effect */
+        }
+
+        /* Define the header animation */
+        @keyframes hologram {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+
+        /* Style the navigation menu */
+        nav {
+            display: flex;
+            justify-content: space-around;
+            margin-top: calc(20px * var(--time-dilation));
+        }
+
+        /* Style navigation buttons */
+        .nav-btn {
+            padding: 10px 20px;
+            background: linear-gradient(45deg, var(--flux-capacitor), var(--dilithium-crystal));
+            color: var(--nebula-dust);
+            text-decoration: none;
+            border-radius: 50% 20% / 10% 40%;
+            transition: all 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+        }
+
+        /* Add hover effect to navigation buttons */
+        .nav-btn:hover {
+            transform: rotate(360deg) scale(1.1);
+        }
+
+        /* Style the main content area */
+        main {
+            max-width: calc(1200px / var(--time-dilation));
+            margin: 20px auto;
+            padding: 20px;
+            background: repeating-linear-gradient(
+                45deg,
+                var(--nebula-dust),
+                var(--nebula-dust) 10px,
+                #e5e5e5 10px,
+                #e5e5e5 20px
+            );
+        }
+
+        /* Style individual story cards */
+        .story-card {
+            background-color: rgba(255, 255, 255, 0.8);
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            padding: 20px;
+            margin-bottom: 20px;
+            transition: all 0.3s;
+        }
+
+        /* Add hover effect to story cards */
+        .story-card:hover {
+            transform: perspective(500px) rotateX(10deg);
+        }
+
+        /* Style the form layout */
+        form {
+            display: grid;
+            gap: 15px;
+            filter: blur(0px); /* Ensure form is not blurred */
+        }
+
+        /* Style form labels */
+        label {
+            font-weight: bold;
+            color: transparent;
+            text-shadow: 0 0 5px rgba(0,0,0,0.5);
+        }
+
+        /* Add hover effect to labels */
+        label:hover {
+            color: var(--dark-matter);
+        }
+
+        /* Style form input fields */
+        input, textarea, select {
+            width: 100%;
+            padding: 10px;
+            border: 2px dashed var(--dilithium-crystal);
+            border-radius: 5px;
+            font-size: 16px;
+            transition: all 0.3s;
+        }
+
+        /* Add focus effect to input fields */
+        input:focus, textarea:focus, select:focus {
+            outline: none;
+            border-style: solid;
+            transform: scale(1.05);
+        }
+
+        /* Style the submit button */
+        button {
+            padding: 10px 20px;
+            background-color: var(--flux-capacitor);
+            color: var(--nebula-dust);
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        /* Add hover effect to submit button */
+        button:hover {
+            background-color: var(--dilithium-crystal);
+            animation: pulse 1s infinite;
+        }
+
+        /* Define pulse animation for button hover */
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+
+        /* Style the footer */
+        footer {
+            text-align: center;
+            padding: 20px 0;
+            background-color: var(--flux-capacitor);
+            color: var(--nebula-dust);
+            position: relative;
+            z-index: 9999; /* Ensure footer is above other elements */
+        }
+
+            #repository {
+        padding: 20px;
+        background-color: var(--nebula-dust);
+    }
+
+    #repository h2 {
+        color: var(--flux-capacitor);
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    .story-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 20px;
+    }
+
+    .story-card {
+        background-color: rgba(255, 255, 255, 0.8);
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        padding: 20px;
+        transition: all 0.3s;
+    }
+
+    .story-card:hover {
+        transform: perspective(500px) rotateX(10deg);
+    }
+
+    .story-card h3 {
+        color: var(--dark-matter);
+        margin-bottom: 10px;
+    }
+
+    .story-card p {
+        color: var(--dark-matter);
+        font-size: 14px;
+        margin-bottom: 20px;
+    }
+
+    .read-more {
+        padding: 10px 20px;
+        background-color: var(--flux-capacitor);
+        color: var(--nebula-dust);
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: all 0.3s;
+    }
+
+    .read-more:hover {
+        background-color: var(--dilithium-crystal);
+        animation: pulse 1s infinite;
+    }
+
+    @keyframes pulse {
+        0% { transform: scale(1); }
+        50% { transform: scale(1.1); }
+        100% { transform: scale(1); }
+    }
+    </style>
+</head>
+<body>
+    <!-- Header section with site title -->
+    <header>
+        <h1>NerdTales: Share Your Epic Saga</h1>
+    </header>
+
+    <!-- Navigation menu -->
+    <nav>
+        <a href="#recent" class="nav-btn">Temporal Nexus</a>
+        <a href="#popular" class="nav-btn">Quantum Entanglement</a>
+        <a href="#submit" class="nav-btn">Create Alternate Reality</a>
+    </nav>
+
+    <!-- Main content area -->
+    <main>
+        <!-- Section for displaying recent stories -->
+        <section id="recent">
+            <h2>Recent Sagas</h2>
+            <div class="story-grid">
+                <!-- Story cards will be dynamically inserted here -->
+            </div>
+        </section>
+
+        <!-- Story submission form section -->
+        <section id="submit">
+            <h2>Chronicle Your Epic</h2>
+            <form id="story-form">
+                <label for="title">Saga Designation:</label>
+                <input type="text" id="title" name="title" required>
+
+                <label for="synopsis">Quantum Synopsis:</label>
+                <textarea id="synopsis" name="synopsis" required></textarea>
+
+                <label for="characters">Key Entities:</label>
+                <textarea id="characters" name="characters" required></textarea>
+
+                <label for="plot">Reality Manipulation Sequence:</label>
+                <textarea id="plot" name="plot" required></textarea>
+
+                <label for="genre">Dimensional Classification:</label>
+                <select id="genre" name="genre" required>
+                    <option value="">Select a genre</option>
+                    <option value="scifi">Quantum Realm</option>
+                    <option value="fantasy">Arcane Dimension</option>
+                    <option value="cyberpunk">Neon Matrix</option>
+                    <option value="postapocalyptic">Wasteland Chronicle</option>
+                </select>
+
+                <button type="submit">Initiate Narrative Sequence</button>
+            </form>
+        </section>
+        <section id="repository"></section>
+    <h2>Your Epic Saga</h2>
+    <div class="story-grid">
+        <div class="story-card">
+            <h3>The Quantum Prophecy</h3>
+            <p>In a world where quantum physics reigns supreme, a young hero must navigate the complexities of time and space to prevent a catastrophic future.</p>
+            <button class="read-more">Read More</button>
+        </div>
+        <div class="story-card">
+            <h3>The Lost City of Echoes</h3>
+            <p>Deep within the heart of a mystical forest, an ancient city holds secrets of the past. A group of adventurers must unravel the mysteries of the city before it's lost forever.</p>
+            <button class="read-more">Read More</button>
+        </div>
+        <div class="story-card">
+            <h3>The Clockwork Uprising</h3>
+            <p>In a world where clockwork machines have replaced human labor, a rogue inventor must join forces with a group of rebels to overthrow the tyrannical government and bring freedom to the people.</p>
+            <button class="read-more">Read More</button>
+        </div>
+    </div>
+</section>
+        
+    </main>
+
+    <!-- Footer section with copyright information -->
+    <footer>
+        <p>&copy; 2024 NerdTales. All rights and parallel universe lefts reserved.</p>
+    </footer>
+
+    <script>
+        // TODO: Implement form submission and dynamic content loading
+        // - Handle form submission and data processing
+        // - Load and display recent stories dynamically
+        // - Add interactive elements to enhance user experience
+        // - Implement proper form validation and error handling
+        // - Consider adding user authentication for story submissions
+    </script>
+</body>
+</html>
+
+
+
+<style>
+
+</style>

@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Whac-a-mole</title>
+    <style>
+      .grid {
+        width: 600px;
+        height: 600px;
+        display: grid;
+        margin: 20px auto;
+        box-sizing: border-box;
+      }
+
+      .square {
+        border: 1px solid black;
+        position: relative;
+        box-sizing: border-box;
+        cursor: pointer;
+        transition: background-color 0.3s;
+      }
+
+      .mole {
+        background-color: brown;
+      }
+
+      .golden {
+        background-color: gold;
+      }
+
+      .poison {
+        background-color: red;
+      }
+
+      .penalty {
+        background-color: green;
+      }
+
+      body {
+        font-family: Arial, sans-serif;
+        text-align: center;
+        padding: 20px;
+        background-color: #f0f0f0;
+      }
+
+      h2 {
+        margin: 10px 0;
+      }
+
+      .controls {
+        margin: 20px 0;
+      }
+
+      .controls label {
+        margin-right: 10px;
+      }
+
+      .controls input {
+        margin-right: 20px;
+        padding: 5px;
+        width: 150px;
+      }
+
+      .controls button {
+        padding: 10px 20px;
+        margin-right: 10px;
+        cursor: pointer;
+      }
+
+      #high-scores {
+        margin-top: 30px;
+      }
+    </style>
+  </head>
+  <body>
+    <h2>Your score:</h2>
+    <h2 id="score">0</h2>
+
+    <h2>Time Left:</h2>
+    <h2 id="time-left">60</h2>
+
+    <div class="controls">
+      <label for="square-count">Initial Number of Squares:</label>
+      <input type="number" id="square-count" value="9" min="1" max="25" />
+
+      <label for="player-name">Player Name:</label>
+      <input type="text" id="player-name" />
+
+      <button id="start-button">Start New Game</button>
+      <button id="add-square-button">Add More Squares</button>
+      <button id="pause-button">Pause Game</button>
+    </div>
+
+    <div id="grid" class="grid"></div>
+    <div id="high-scores"></div>
+
+    <script>
+      class WhacAMoleGame {
+        constructor() {
+          this.grid = document.querySelector("#grid");
+          this.timeLeft = document.querySelector("#time-left");
+          this.scoreDisplay = document.querySelector("#score");
+          this.startButton = document.querySelector("#start-button");
+          this.squareCountInput = document.querySelector("#square-count");
+          this.addSquareButton = document.querySelector("#add-square-button");
+          this.pauseButton = document.querySelector("#pause-button");
+          this.levelDisplay = document.querySelector("#level");
+
+          this.result = 0;
+          this.hitPositions = [];
+          this.currentTime = 60;
+          this.timerId = null;
+          this.countDownTimerId = null;
+          this.level = 1;
+          this.lives = 3;
+          this.squareCount = 9;
+          this.isPaused = false;
+          this.pauseTime = 0;
+          this.slowDownTime = 0;
+
+          this.startButton.addEventListener("click", () => this.startGame());
+          this.addSquareButton.addEventListener("click", () =>
+            this.addSquares()
+          );
+          this.pauseButton.addEventListener("click", () => this.pauseGame());
+        }
+
+        initializeGrid(squareCount) {
+          this.grid.innerHTML = "";
+
+          const gridSize = Math.ceil(Math.sqrt(squareCount));
+          const squareSize = Math.floor(this.grid.clientWidth / gridSize);
+
+          this.grid.style.gridTemplateColumns = `repeat(${gridSize}, ${squareSize}px)`;
+          this.grid.style.gridTemplateRows = `repeat(${gridSize}, ${squareSize}px)`;
+
+          for (let i = 1; i <= squareCount; i++) {
+            const square = document.createElement("div");
+            square.classList.add("square");
+            square.dataset.id = i;
+            square.style.width = `${squareSize}px`;
+            square.style.height = `${squareSize}px`;
+            this.grid.appendChild(square);
+          }
+
+          this.squares = document.querySelectorAll(".square");
+          this.initializeEventListeners();
+        }
+
+        initializeEventListeners() {
+          this.squares.forEach((square) => {
+            square.replaceWith(square.cloneNode(true));
+          });
+
+          this.squares = document.querySelectorAll(".square");
+
+          this.squares.forEach((square) => {
+            square.addEventListener("mousedown", () =>
+              this.handleSquareClick(square)
+            );
+          });
+        }
+
+        handleSquareClick(square) {
+          if (this.isPaused) {
+            return;
+          }
+
+          const hitIndex = this.hitPositions.findIndex(
+            (pos) => pos.id === parseInt(square.dataset.id)
+          );
+          if (hitIndex !== -1) {
+            const moleType = this.hitPositions[hitIndex].type;
+            if (moleType === "golden") {
+              this.result += 5;
+            } else if (moleType === "poison") {
+              this.lives--;
+              if (this.lives <= 0) {
+                this.endGame();
+                return;
+              }
+            } else if (moleType === "penalty") {
+              this.result -= 2;
+              if (this.result < 0) {
+                this.result = 0;
+              }
+            } else {
+              this.result++;
+            }
+            this.updateScore();
+            square.classList.remove("mole", "golden", "poison", "penalty");
+            this.hitPositions.splice(hitIndex, 1);
+          }
+        }
+
+        updateScore() {
+          this.scoreDisplay.textContent = `Score: ${this.result}, Lives: ${this.lives}`;
+          if (this.result > this.level * 15) {
+            this.levelUp();
+          }
+        }
+
+        randomSquares() {
+          if (this.isPaused) {
+            return;
+          }
+
+          this.squares.forEach((square) => {
+            square.classList.remove("mole", "golden", "poison", "penalty");
+          });
+
+          this.hitPositions = [];
+          const moleCount = Math.min(5, this.squares.length);
+          for (let i = 0; i < moleCount; i++) {
+            let randomSquare =
+              this.squares[Math.floor(Math.random() * this.squares.length)];
+
+            while (
+              this.hitPositions.some(
+                (pos) => pos.id === parseInt(randomSquare.dataset.id)
+              )
+            ) {
+              randomSquare =
+                this.squares[Math.floor(Math.random() * this.squares.length)];
+            }
+
+            const moleTypeChance = Math.random();
+            if (moleTypeChance > 0.9) {
+              randomSquare.classList.add("golden");
+              this.hitPositions.push({
+                id: parseInt(randomSquare.dataset.id),
+                type: "golden",
+              });
+            } else if (moleTypeChance > 0.8) {
+              randomSquare.classList.add("poison");
+              this.hitPositions.push({
+                id: parseInt(randomSquare.dataset.id),
+                type: "poison",
+              });
+            } else if (moleTypeChance > 0.6) {
+              randomSquare.classList.add("penalty");
+              this.hitPositions.push({
+                id: parseInt(randomSquare.dataset.id),
+                type: "penalty",
+              });
+            } else {
+              randomSquare.classList.add("mole");
+              this.hitPositions.push({
+                id: parseInt(randomSquare.dataset.id),
+                type: "normal",
+              });
+            }
+          }
+        }
+
+        moveMoles(interval = 500) {
+          if (this.timerId) clearInterval(this.timerId);
+          this.timerId = setInterval(() => this.randomSquares(), interval);
+        }
+
+        adjustDifficulty() {
+          if (this.currentTime % 15 === 0 && this.currentTime !== 60) {
+            let newInterval = Math.max(200, 500 - (60 - this.currentTime) * 10);
+            this.moveMoles(newInterval);
+          }
+        }
+
+        countDown() {
+          if (this.isPaused) {
+            return;
+          }
+
+          this.currentTime--;
+          this.timeLeft.textContent = this.currentTime;
+
+          this.adjustDifficulty();
+
+          if (this.currentTime === 0) {
+            this.endGame();
+          }
+
+          if (this.slowDownTime > 0) {
+            this.slowDownTime--;
+            this.moveMoles(Math.max(200, 500 - this.level * 50 + 2));
+          }
+        }
+
+        startGame() {
+          this.squareCount = parseInt(this.squareCountInput.value) || 9;
+          this.initializeGrid(this.squareCount);
+
+          this.result = 0;
+          this.currentTime = 60;
+          this.level = 1;
+          this.lives = 3;
+          this.isPaused = false;
+          this.pauseTime = 0;
+          this.slowDownTime = 0;
+
+          this.updateScore();
+          this.timeLeft.textContent = this.currentTime;
+
+          this.startButton.disabled = true;
+          this.moveMoles();
+          this.countDownTimerId = setInterval(() => this.countDown(), 1000);
+        }
+
+        addSquares() {
+          if (this.squareCount < 25) {
+            this.squareCount++;
+            this.initializeGrid(this.squareCount);
+            this.moveMoles();
+          }
+        }
+
+        pauseGame() {
+          if (this.isPaused) {
+            this.isPaused = false;
+            this.pauseTime = 0;
+            this.moveMoles();
+            this.countDownTimerId = setInterval(() => this.countDown(), 1000);
+          } else {
+            this.isPaused = true;
+            clearInterval(this.countDownTimerId);
+            clearInterval(this.timerId);
+            this.pauseTime = 5;
+            this.slowDownTime = 5;
+          }
+        }
+
+        levelUp() {
+          this.level++;
+          this.updateScore();
+          this.moveMoles(Math.max(200, 500 - this.level * 50));
+          alert(`Level Up! You are now at Level ${this.level}.`);
+        }
+
+        endGame() {
+          clearInterval(this.countDownTimerId);
+          clearInterval(this.timerId);
+          alert(`GAME OVER! Your final score is ${this.result}.`);
+          this.startButton.disabled = false;
+          this.grid.innerHTML = "";
+          this.squareCountInput.value = 9;
+          this.scoreDisplay.textContent = "0";
+          this.timeLeft.textContent = "60";
+        }
+      }
+
+      document.addEventListener("DOMContentLoaded", () => {
+        new WhacAMoleGame();
+      });
+    </script>
+  </body>
+</html>

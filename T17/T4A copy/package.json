@@ -1,0 +1,17 @@
+{
+  "name": "tech-store",
+  "version": "1.0.0",
+  "description": "",
+  "main": "",
+  "scripts": {
+    "start": "concurrently \"npm start --prefix tech-store-backend\" \"npm start --prefix tech-store-frontend\"",
+    "backend": "npm start --prefix tech-store-backend",
+    "frontend": "npm start --prefix tech-store-frontend"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "concurrently": "^9.0.1"
+  }
+}

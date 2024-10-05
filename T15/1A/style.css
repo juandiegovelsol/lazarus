@@ -1,0 +1,102 @@
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+}
+
+.pendulum {
+  position: relative;
+  width: 200px;
+  height: 300px;
+  margin: 50px auto;
+}
+
+.structure {
+  position: absolute;
+  top: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 200px;
+  height: 10px;
+  background-color: #333;
+}
+
+.rope {
+  width: 2px;
+  height: 150px;
+  background-color: #333;
+  position: absolute;
+  top: 10px;
+  left: 50%;
+}
+
+.ball {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  position: absolute;
+  bottom: -20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #333;
+}
+
+.rope-1 {
+  top: 0;
+  left: 10%;
+  transform-origin: top center;
+  animation: swing-left 2s ease-in-out infinite alternate;
+}
+
+.rope-2 {
+  top: 0;
+  left: 30%;
+}
+
+.rope-3 {
+  top: 0;
+  left: 50%;
+}
+
+.rope-4 {
+  top: 0;
+  left: 70%;
+}
+
+.rope-5 {
+  top: 0;
+  left: 90%;
+  transform-origin: top center;
+  animation: swing-right 2s ease-in-out infinite alternate;
+}
+
+/* Animation that rotates the left rope and ball starting at 90 degrees left */
+@keyframes swing-left {
+  0% {
+    transform: rotate(90deg);
+  }
+  25% {
+    transform: rotate(0deg);
+  }
+  75% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(90deg);
+  }
+}
+
+/* Animation that rotates the left rope and ball starting at 0 degrees */
+@keyframes swing-right {
+  25% {
+    transform: rotate(0deg);
+  }
+  50% {
+    transform: rotate(-90deg);
+  }
+  75% {
+    transform: rotate(0deg);
+  }
+}

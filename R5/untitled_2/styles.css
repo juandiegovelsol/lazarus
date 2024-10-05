@@ -1,0 +1,174 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f9;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.form-container {
+    background-color: white;
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    width: 400px;
+    position: relative;
+    z-index: 5;
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.form-group {
+    position: relative;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.form-group::after {
+    content: '';
+    display: block;
+    clear: both;
+}
+
+input, textarea {
+    width: 100%;
+    padding: 12px 15px;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    outline: none;
+    transition: border-color 0.3s;
+    background-color: yellow;
+}
+
+input::before {
+    content: '*';
+    color: red;
+    position: absolute;
+    left: 0;
+    top: -10px;
+}
+
+input:focus, textarea:focus {
+    border-color: #007BFF;
+}
+
+label {
+    position: absolute;
+    top: calc(1px / 2);
+    left: calc(100% / 10);
+    background-color: white;
+    padding: 0 5px;
+    font-size: 16px;
+    color: #aaa;
+    pointer-events: none;
+    transition: all 0.3s;
+    margin-bottom: 20px;
+}
+
+input:focus + label, input:not(:placeholder-shown) + label,
+textarea:focus + label, textarea:not(:placeholder-shown) + label {
+    top: -10px;
+    left: 10px;
+    font-size: 14px;
+    color: #007BFF;
+}
+
+.error-message {
+    color: red;
+    font-size: 14px;
+    position: absolute;
+    bottom: -40px;
+    left: 0;
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 0.3s, visibility 0.3s;
+}
+
+input:invalid ~ .error-message, textarea:invalid ~ .error-message {
+    visibility: visible;
+    opacity: 1;
+}
+
+button.submit-btn {
+    width: 100%;
+    padding: 12px;
+    background-color: #007BFF;
+    color: white;
+    font-size: 18px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+    transition: background-color 0.1s, transform 0.1s ease-out;
+    z-index: 10;
+    transform: scale(1);
+}
+
+button.submit-btn:hover {
+    transform: scale(1.05);
+    background-color: #0056b3;
+    transition: transform 0.1s ease-in;
+}
+
+button:active {
+    transition: none;
+    transform: scale(0.95);
+}
+
+button.submit-btn span {
+    position: relative;
+    z-index: 1;
+}
+
+button.submit-btn .loading {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    border: 3px solid white;
+    border-top: 3px solid #007BFF;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    top: calc(50% - 10px);
+    right: 50%;
+    transform: translateX(100px);
+    opacity: 0;
+    transition: opacity 0.3s, transform 0.3s;
+}
+
+button.loading .loading {
+    transform: translateX(0);
+    opacity: 1;
+}
+
+button.loading span {
+    visibility: hidden;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+form {
+    width: 100%;
+    padding: 20px;
+}

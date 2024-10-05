@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+      /* Body of the dog */
+      .dog-body {
+        position: relative;
+        width: 220px;
+        height: 5px;
+        background-color: black;
+        margin: 100px auto;
+      }
+
+      /* Legs */
+      .leg {
+        position: absolute;
+        width: 5px;
+        height: 40px;
+        background-color: black;
+      }
+
+      /* Back legs connected to the end */
+      .back-leg1 {
+        bottom: -40px;
+        left: 0;
+      }
+
+      .back-leg2 {
+        bottom: -40px;
+        left: 20px;
+      }
+
+      /* Front legs */
+      .front-leg1 {
+        bottom: -40px;
+        right: 60px;
+      }
+
+      .front-leg2 {
+        bottom: -40px;
+        right: 40px;
+      }
+
+      /* Heads */
+      .dog-head {
+        position: absolute;
+        top: -30px;
+        right: -15px;
+      }
+
+      .red-triangle-head {
+        width: 0;
+        height: 0;
+        border-left: 15px solid transparent;
+        border-right: 15px solid transparent;
+        border-bottom: 30px solid red;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .green-square-head {
+        width: 30px;
+        height: 30px;
+        background-color: green;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .orange-circle-head {
+        width: 30px;
+        height: 30px;
+        background-color: orange;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      /* Face */
+      .face {
+        position: absolute;
+        top: 13px;
+        text-align: center;
+        color: black;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      /* Eyes */
+      .eyes {
+        display: flex;
+        justify-content: center;
+        gap: 4px;
+      }
+
+      .eye {
+        display: inline-block;
+        width: 3px;
+        height: 3px;
+        background-color: black;
+        border-radius: 50%;
+      }
+
+      /* Mouth */
+      .mouth {
+        width: 10px;
+        height: 2px;
+        background-color: black;
+        border-radius: 50%;
+        margin-top: 8px;
+      }
+
+      /* Rider */
+      .rider {
+        position: absolute;
+        top: -60px;
+        right: -10px;
+      }
+
+      .rider-head {
+        width: 20px;
+        height: 20px;
+        background-color: black;
+        border-radius: 50%;
+        position: relative;
+      }
+
+      .rider-body {
+        position: absolute;
+        top: 20px;
+        left: 10px;
+        width: 2px;
+        height: 30px;
+        background-color: black;
+      }
+
+      .rider-arm1 {
+        position: absolute;
+        top: 25px;
+        left: 5px;
+        width: 20px;
+        height: 2px;
+        background-color: black;
+        transform: rotate(45deg);
+      }
+
+      .rider-arm2 {
+        position: absolute;
+        top: 25px;
+        right: 5px;
+        width: 20px;
+        height: 2px;
+        background-color: black;
+        transform: rotate(-45deg);
+      }
+
+      .rider-leg1 {
+        position: absolute;
+        bottom: 0;
+        left: 5px;
+        width: 20px;
+        height: 2px;
+        background-color: black;
+        transform: rotate(45deg);
+      }
+
+      .rider-leg2 {
+        position: absolute;
+        bottom: 0;
+        right: 5px;
+        width: 20px;
+        height: 2px;
+        background-color: black;
+        transform: rotate(-45deg);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="dog-body">
+      <div class="leg back-leg1"></div>
+      <div class="leg back-leg2"></div>
+      <div class="leg front-leg1"></div>
+      <div class="leg front-leg2"></div>
+      <div class="dog-head">
+        <div class="red-triangle-head">
+          <div class="face">
+            <div class="eyes">
+              <div class="eye"></div>
+              <div class="eye"></div>
+            </div>
+            <div class="mouth"></div>
+          </div>
+        </div>
+      </div>
+      <div class="rider">
+        <div class="rider-head">
+          <div class="rider-body"></div>
+          <div class="rider-arm1"></div>
+          <div class="rider-arm2"></div>
+          <div class="rider-leg1"></div>
+          <div class="rider-leg2"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="dog-body" style="margin-top: 150px">
+      <div class="leg back-leg1"></div>
+      <div class="leg back-leg2"></div>
+      <div class="leg front-leg1"></div>
+      <div class="leg front-leg2"></div>
+      <div class="dog-head">
+        <div class="green-square-head">
+          <div class="face">
+            <div class="eyes">
+              <div class="eye"></div>
+              <div class="eye"></div>
+            </div>
+            <div class="mouth"></div>
+          </div>
+        </div>
+      </div>
+      <div class="rider">
+        <div class="rider-head">
+          <div class="rider-body"></div>
+          <div class="rider-arm1"></div>
+          <div class="rider-arm2"></div>
+          <div class="rider-leg1"></div>
+          <div class="rider-leg2"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="dog-body" style="margin-top: 150px">
+      <div class="leg back-leg1"></div>
+      <div class="leg back-leg2"></div>
+      <div class="leg front-leg1"></div>
+      <div class="leg front-leg2"></div>
+      <div class="dog-head">
+        <div class="orange-circle-head">
+          <div class="face">
+            <div class="eyes">
+              <div class="eye"></div>
+              <div class="eye"></div>
+            </div>
+            <div class="mouth"></div>
+          </div>
+        </div>
+      </div>
+      <div class="rider">
+        <div class="rider-head">
+          <div class="rider-body"></div>
+          <div class="rider-arm1"></div>
+          <div class="rider-arm2"></div>
+          <div class="rider-leg1"></div>
+          <div class="rider-leg2"></div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

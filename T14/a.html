@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+      .sound-effect {
+        display: flex;
+        justify-content: space-between;
+        width: 200px;
+        height: 20px;
+      }
+
+      .bar {
+        width: 10px;
+        height: 0%;
+        background-color: #ccc;
+        animation: sound-animation 1s infinite linear;
+        transition: height 0.1s, background-color 0.1s;
+      }
+
+      .bar:nth-child(1) {
+        animation-delay: 0.1s;
+      }
+
+      .bar:nth-child(2) {
+        animation-delay: 0.2s;
+      }
+
+      .bar:nth-child(3) {
+        animation-delay: 0.3s;
+      }
+
+      .bar:nth-child(4) {
+        animation-delay: 0.4s;
+      }
+
+      .bar:nth-child(5) {
+        animation-delay: 0.5s;
+      }
+
+      .bar:nth-child(6) {
+        animation-delay: 0.6s;
+      }
+
+      .bar:nth-child(7) {
+        animation-delay: 0.7s;
+      }
+
+      .bar:nth-child(8) {
+        animation-delay: 0.8s;
+      }
+
+      .bar:nth-child(9) {
+        animation-delay: 0.9s;
+      }
+
+      @keyframes sound-animation {
+        0% {
+          height: 20%;
+        }
+        50% {
+          height: 100%;
+        }
+        100% {
+          height: 20%;
+        }
+      }
+
+      .active {
+        background-color: #0f0;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="sound-effect">
+      <div class="bar" style="height: 10%"></div>
+      <div class="bar" style="height: 20%"></div>
+      <div class="bar" style="height: 30%"></div>
+      <div class="bar" style="height: 40%"></div>
+      <div class="bar" style="height: 50%"></div>
+      <div class="bar" style="height: 40%"></div>
+      <div class="bar" style="height: 30%"></div>
+      <div class="bar" style="height: 20%"></div>
+      <div class="bar" style="height: 10%"></div>
+    </div>
+
+    <script>
+      // Get the bars
+      const bars = document.querySelectorAll(".bar");
+
+      // Function to change the color of the bars
+      function changeColor(active) {
+        bars.forEach((bar) => {
+          if (active) {
+            bar.classList.add("active");
+          } else {
+            bar.classList.remove("active");
+          }
+        });
+      }
+
+      // Function to detect audio
+      async function detectAudio() {
+        // Check if the browser supports the Web Audio API
+        if (navigator.mediaDevices.getUserMedia) {
+          // Get access to the user's microphone
+          const stream = await navigator.mediaDevices.getUserMedia({
+            audio: true,
+          });
+          const audioContext = new AudioContext();
+          const analyser = audioContext.createAnalyser();
+          const microphone = audioContext.createMediaStreamSource(stream);
+          microphone.connect(analyser);
+          analyser.fftSize = 256;
+          const frequencyData = new Uint8Array(analyser.frequencyBinCount);
+
+          // Continuously check the audio levels
+          function checkAudioLevels() {
+            requestAnimationFrame(checkAudioLevels);
+            analyser.getByteFrequencyData(frequencyData);
+            const average =
+              frequencyData.reduce((a, b) => a + b, 0) / frequencyData.length;
+            if (average > 50) {
+              changeColor(true);
+            } else {
+              changeColor(false);
+            }
+          }
+
+          checkAudioLevels();
+        }
+      }
+
+      detectAudio();
+    </script>
+  </body>
+</html>

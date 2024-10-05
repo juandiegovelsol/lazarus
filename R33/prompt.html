@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Parallax Page</title>
+    <style>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        font-family: Arial, sans-serif;
+        height: 100vh;
+        overflow: hidden;
+      }
+
+      header {
+        position: fixed; /* Fix the navbar at the top */
+        top: 0;
+        left: 0;
+        right: 0;
+        background-color: rgba(0, 0, 0, 0.7); /* Semi-transparent background */
+        padding: 10px 20px; /* Padding around the navbar */
+        z-index: 1000; /* Ensure navbar is on top */
+      }
+
+      nav ul {
+        list-style-type: none; /* Remove bullet points */
+        display: flex; /* Display list items in a row */
+        justify-content: space-around; /* Space items evenly */
+        align-items: center; /* Center items vertically */
+      }
+
+      nav ul li {
+        margin: 0 15px; /* Spacing between list items */
+      }
+
+      nav ul li a {
+        text-decoration: none; /* Remove underline */
+        color: white; /* Text color */
+        font-size: 1.2rem; /* Font size */
+        transition: color 0.3s; /* Smooth transition for hover effect */
+      }
+
+      nav ul li a:hover {
+        color: #ff6347; /* Change color on hover */
+      }
+
+      .container {
+        scroll-snap-type: y proximity; /* Enable scroll snapping */
+        height: 100vh;
+        overflow-y: scroll;
+      }
+
+      section {
+        height: 100vh;
+        scroll-snap-align: start; /* Align sections to start on snap */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 2.5rem;
+        color: white;
+      }
+
+      .section1 {
+        background-color: #ff6347; /* Tomato */
+      }
+
+      .section2 {
+        background-color: #4682b4; /* SteelBlue */
+      }
+
+      .section3 {
+        background-color: #32cd32; /* LimeGreen */
+      }
+
+      .fade-in {
+        opacity: 0;
+        transform: translateY(50px);
+        transition: opacity 1s ease, transform 1s ease;
+      }
+
+      .visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <nav>
+        <ul>
+          <li><a href="#section1">Section 1</a></li>
+          <li><a href="#section2">Section 2</a></li>
+          <li><a href="#section3">Section 3</a></li>
+        </ul>
+      </nav>
+    </header>
+    <div class="container">
+      <section class="fade-in section1" id="section1">
+        <h1>Welcome to Our Parallax Page</h1>
+      </section>
+
+      <section class="fade-in section2" id="section2">
+        <h1>Explore the Beauty of Design</h1>
+      </section>
+
+      <section class="fade-in section3" id="section3">
+        <h1>Join Us in This Journey</h1>
+      </section>
+    </div>
+
+    <script>
+      // Function to check if the element is in the viewport
+      const isInViewport = (element) => {
+        const rect = element.getBoundingClientRect();
+        return (
+          rect.top >= 0 &&
+          rect.left >= 0 &&
+          rect.bottom <=
+            (window.innerHeight || document.documentElement.clientHeight) &&
+          rect.right <=
+            (window.innerWidth || document.documentElement.clientWidth)
+        );
+      };
+
+      const sections = document.querySelectorAll(".fade-in");
+      const container = document.querySelector(".container");
+
+      const handleScroll = () => {
+        sections.forEach((section) => {
+          if (isInViewport(section)) {
+            section.classList.add("visible");
+          }
+        });
+      };
+
+      // Listen to scroll events
+      container.addEventListener("scroll", handleScroll);
+
+      // Trigger scroll event on page load
+      handleScroll();
+    </script>
+  </body>
+</html>

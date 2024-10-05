@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <style>
+      body {
+        margin: 0;
+
+        font-family: Arial, sans-serif;
+
+        transition: margin-left 0.3s ease-in-out;
+      }
+
+      .header {
+        background-color: #f1f1f1;
+
+        padding: 20px;
+
+        text-align: left;
+      }
+
+      .menu-button {
+        cursor: pointer;
+
+        padding: 10px 15px;
+
+        background-color: #ddd;
+
+        border: none;
+
+        border-radius: 5px;
+      }
+
+      .menu {
+        position: fixed;
+
+        top: 0;
+
+        left: 0;
+
+        width: 100%;
+
+        height: 0;
+
+        background-color: #fff;
+
+        overflow: hidden;
+
+        transition: height 0.3s ease-in-out, width 0.3s ease-in-out;
+
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+
+        z-index: 1;
+      }
+
+      .menu.open {
+        height: 200px;
+      }
+
+      .menu ul {
+        list-style: none;
+
+        padding: 0;
+
+        margin-top: 20px;
+      }
+
+      .menu li {
+        padding: 10px 20px;
+      }
+
+      .menu li:hover {
+        background-color: #f1f1f1;
+      }
+
+      .close-button {
+        position: absolute;
+
+        bottom: 20px;
+
+        left: 50%;
+
+        transform: translateX(-50%);
+
+        cursor: pointer;
+
+        padding: 10px 15px;
+
+        background-color: none;
+
+        border: none;
+
+        border-radius: 5px;
+
+        height: 20px;
+
+        width: 20px;
+
+        font-size: 18px;
+      }
+
+      .content {
+        padding: 20px;
+
+        transition: margin-top 0.3s ease-in-out, margin-left 0.3s ease-in-out;
+      }
+
+      @media (min-width: 700px) {
+        .menu {
+          position: fixed;
+
+          top: 0;
+
+          left: 0;
+
+          width: 200px;
+
+          height: 100%;
+
+          transform: translateX(-100%);
+
+          transition: transform 0.3s ease-in-out;
+        }
+
+        .menu.open {
+          transform: translateX(0);
+        }
+
+        .close-button {
+          position: absolute;
+
+          bottom: 20px;
+
+          left: 50%;
+
+          transform: translateX(-50%);
+        }
+
+        .content {
+          margin-left: 0;
+        }
+
+        .menu.open + .content {
+          margin-left: 200px;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="header">
+      <button class="menu-button">Menu</button>
+    </div>
+
+    <div class="menu">
+      <ul>
+        <li><a href="#section1">Section 1</a></li>
+
+        <li><a href="#section2">Section 2</a></li>
+
+        <li><a href="#section3">Section 3</a></li>
+      </ul>
+
+      <button class="close-button">&#8597;</button>
+    </div>
+
+    <div class="content">
+      <div id="section1">
+        <h1>Section 1</h1>
+
+        <p>Content for section 1.</p>
+
+        <p>Content for section 1.</p>
+
+        <p>Content for section 1.</p>
+
+        <p>Content for section 1.</p>
+
+        <p>Content for section 1.</p>
+      </div>
+
+      <div id="section2">
+        <h1>Section 2</h1>
+
+        <p>Content for section 2.</p>
+
+        <p>Content for section 2.</p>
+
+        <p>Content for section 2.</p>
+
+        <p>Content for section 2.</p>
+
+        <p>Content for section 2.</p>
+      </div>
+
+      <div id="section3">
+        <h1>Section 3</h1>
+
+        <p>Content for section 3.</p>
+
+        <p>Content for section 3.</p>
+
+        <p>Content for section 3.</p>
+
+        <p>Content for section 3.</p>
+
+        <p>Content for section 3.</p>
+      </div>
+    </div>
+
+    <script>
+      const menuButton = document.querySelector(".menu-button");
+
+      const menu = document.querySelector(".menu");
+
+      const closeButton = document.querySelector(".close-button");
+
+      const content = document.querySelector(".content");
+
+      menuButton.addEventListener("click", () => {
+        menu.classList.toggle("open");
+
+        if (window.innerWidth >= 700) {
+          content.style.marginLeft = menu.classList.contains("open")
+            ? "200px"
+            : "0";
+        } else {
+          content.style.marginTop = menu.classList.contains("open")
+            ? "200px"
+            : "0";
+        }
+      });
+
+      closeButton.addEventListener("click", () => {
+        menu.classList.remove("open");
+
+        if (window.innerWidth >= 700) {
+          content.style.marginLeft = "0";
+        } else {
+          content.style.marginTop = "0";
+        }
+      });
+
+      window.addEventListener("resize", () => {
+        if (menu.classList.contains("open")) {
+          if (window.innerWidth >= 700) {
+            content.style.marginLeft = "200px";
+
+            content.style.marginTop = "0";
+          } else {
+            content.style.marginLeft = "0";
+
+            content.style.marginTop = "200px";
+          }
+        } else {
+          content.style.marginLeft = "0";
+
+          content.style.marginTop = "0";
+        }
+      });
+    </script>
+  </body>
+</html>

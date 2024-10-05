@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Landing Page</title>
+    <link rel="stylesheet" href="styles.css" />
+    <script
+      src="https://kit.fontawesome.com/f93fb3148a.js"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body>
+    <!-- Navigation Bar -->
+    <header>
+      <nav>
+        <div class="nav-brand">Landing Page</div>
+        <div class="hamburger-menu" onclick="toggleMenu()">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+        <ul class="nav-list" id="nav-list">
+          <li><a href="#home">Home</a></li>
+          <li><a href="#features">Features</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="hero">
+      <div class="hero-background"></div>
+      <h1>Welcome to Our Website</h1>
+      <p>Your gateway to innovation.</p>
+      <button class="cta-button" onclick="scrollToFeatures()">
+        Explore Our Features
+      </button>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features">
+      <h2>Our Features</h2>
+      <div class="feature-grid">
+        <div class="feature-card">
+          <i class="fa-solid fa-lock"></i>
+          <h3>Security</h3>
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sit
+            amet nulla auctor, vestibulum magna sed, convallis ex.
+          </p>
+        </div>
+        <div class="feature-card">
+          <i class="fa-solid fa-cog"></i>
+          <h3>Customization</h3>
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sit
+            amet nulla auctor, vestibulum magna sed, convallis ex.
+          </p>
+        </div>
+        <div class="feature-card">
+          <i class="fa-solid fa-cloud"></i>
+          <h3>Cloud Support</h3>
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sit
+            amet nulla auctor, vestibulum magna sed, convallis ex.
+          </p>
+        </div>
+        <div class="feature-card">
+          <i class="fa-solid fa-file-import"></i>
+          <h3>Data Import/Export</h3>
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sit
+            amet nulla auctor, vestibulum magna sed, convallis ex.
+          </p>
+        </div>
+        <div class="feature-card">
+          <i class="fa-solid fa-users"></i>
+          <h3>Team Collaboration</h3>
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sit
+            amet nulla auctor, vestibulum magna sed, convallis ex.
+          </p>
+        </div>
+        <div class="feature-card">
+          <i class="fa-solid fa-chart-line"></i>
+          <h3>Analytics</h3>
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sit
+            amet nulla auctor, vestibulum magna sed, convallis ex.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer Section -->
+    <footer>
+      <div class="social-media-links">
+        <a href="#" target="_blank"><i class="fa-brands fa-facebook-f"></i></a>
+        <a href="#" target="_blank"><i class="fa-brands fa-youtube"></i></a>
+        <a href="#" target="_blank"><i class="fa-brands fa-x"></i></a>
+        <a href="#" target="_blank"><i class="fa-brands fa-linkedin-in"></i></a>
+        <a href="#" target="_blank"><i class="fa-brands fa-tiktok"></i></a>
+        <a href="#" target="_blank"><i class="fa-brands fa-instagram"></i></a>
+      </div>
+    </footer>
+
+    <script src="script.js"></script>
+  </body>
+</html>

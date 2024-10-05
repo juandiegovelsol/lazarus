@@ -1,0 +1,21 @@
+/* styles.css */
+body {
+    font-family: Arial, sans-serif;
+  }
+  
+  .task-panels {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .panel {
+    border: 1px solid #ccc;
+    padding: 10px;
+    width: 30%;
+  }
+  
+  .panel div {
+    background-color: #f0f0f0;
+    padding: 10px;
+    margin-bottom: 10px;
+  }

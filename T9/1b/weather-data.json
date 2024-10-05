@@ -1,0 +1,32 @@
+{
+  "hot": [
+    {
+      "city": "Miami",
+      "temperature": 25.8,
+      "windSpeed": 5.5
+    },
+    {
+      "city": "Austin",
+      "temperature": 29.3,
+      "windSpeed": 14.8
+    }
+  ],
+  "medium": [
+    {
+      "city": "New York",
+      "temperature": 18.7,
+      "windSpeed": 12.6
+    },
+    {
+      "city": "Los Angeles",
+      "temperature": 16.4,
+      "windSpeed": 6
+    },
+    {
+      "city": "Chicago",
+      "temperature": 19.4,
+      "windSpeed": 8.1
+    }
+  ],
+  "cold": []
+}

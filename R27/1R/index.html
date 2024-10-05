@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Landing Page</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <header>
+        <nav>
+            <div class="nav-brand">Our Website</div>
+            <div class="hamburger-menu" id="hamburger-menu">
+                <i class="fa-solid fa-bars"></i>
+            </div>
+            <ul id="nav-list">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#features">Features</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="hero">
+        <div class="hero-content">
+            <h1>Welcome to Our Website</h1>
+            <p>Your gateway to innovation.</p>
+            <button class="cta-button" onclick="scrollToFeatures()">Explore Features</button>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features">
+        <h2>Our Features</h2>
+        <div class="feature-grid">
+            <div class="feature-card">
+                <i class="fa-solid fa-lock"></i>
+                <h3>Security</h3>
+                <p>Our top priority is the security of our users' data.</p>
+            </div>
+            <div class="feature-card">
+                <i class="fa-solid fa-rocket"></i>
+                <h3>Speed</h3>
+                <p>Our platform is optimized for speed and performance.</p>
+            </div>
+            <div class="feature-card">
+                <i class="fa-solid fa-cog"></i>
+                <h3>Customization</h3>
+                <p>Our platform allows for customization to meet your needs.</p>
+            </div>
+            <div class="feature-card">
+                <i class="fa-solid fa-chart-line"></i>
+                <h3>Analytics</h3>
+                <p>Our platform provides detailed analytics and insights.</p>
+            </div>
+            <div class="feature-card">
+                <i class="fa-solid fa-headphones"></i>
+                <h3>Support</h3>
+                <p>Our support team is available 24/7 to help you.</p>
+            </div>
+            <div class="feature-card">
+                <i class="fa-solid fa-cloud"></i>
+                <h3>Scalability</h3>
+                <p>Our platform is designed to scale with your business.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer Section -->
+    <footer>
+        <div class="social-media-links">
+            <a href="#" target="_blank"><i class="fa-brands fa-facebook"></i></a>
+            <a href="#" target="_blank"><i class="fa-brands fa-youtube"></i></a>
+            <a href="#" target="_blank"><i class="fa-brands fa-x"></i></a>
+            <a href="#" target="_blank"><i class="fa-brands fa-linkedin"></i></a>
+            <a href="#" target="_blank"><i class="fa-brands fa-tiktok"></i></a>
+            <a href="#" target="_blank"><i class="fa-brands fa-instagram"></i></a>
+        </div>
+        <p>&copy; 2023 Our Website. All rights reserved.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Animated Light Bulb Button</title>
+    <style>
+      body {
+        background-color: #fff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        width: 100vw;
+        overflow: hidden;
+      }
+
+      .button {
+        width: 50px;
+        height: 50px;
+        border-radius: 10px;
+        background-color: #222;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+      }
+
+      .light-bulb {
+        width: 100px;
+        height: 300px;
+        position: relative;
+        transform: scale(0.2);
+      }
+
+      .bulb,
+      .rays {
+        position: absolute;
+      }
+      .bulb {
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 100px;
+        height: 200px;
+      }
+      .rays {
+        width: 150px;
+        height: 1px;
+        top: 45%;
+        left: -50%;
+        transform: translate(-28%, -50%);
+      }
+
+      .bulb-outline {
+        stroke: yellow;
+        stroke-width: 2;
+        fill: transparent;
+        transition: fill 0.5s ease-in-out;
+      }
+
+      .light-bulb:hover .bulb-outline {
+        fill: yellow;
+        transition: fill 0.5s ease-in-out;
+      }
+
+      .ray {
+        width: 150px;
+        height: 2px;
+        background-color: #222;
+        position: absolute;
+        opacity: 0;
+        transition: opacity 0.5s ease-in-out, background-color 0.5s ease-in-out;
+      }
+
+      .light-bulb:hover .ray {
+        opacity: 1;
+        background-color: yellow;
+        transition: opacity 0.5s ease-in-out, background-color 0.5s ease-in-out;
+      }
+
+      .ray:nth-child(1) {
+        transform: rotate(0deg);
+      }
+
+      .ray:nth-child(2) {
+        transform: rotate(45deg);
+      }
+
+      .ray:nth-child(3) {
+        transform: rotate(90deg);
+      }
+
+      .ray:nth-child(4) {
+        transform: rotate(135deg);
+      }
+
+      .ray:nth-child(5) {
+        transform: rotate(180deg);
+      }
+
+      .ray:nth-child(6) {
+        transform: rotate(225deg);
+      }
+
+      .ray:nth-child(7) {
+        transform: rotate(270deg);
+      }
+
+      .ray:nth-child(8) {
+        transform: rotate(315deg);
+      }
+    </style>
+  </head>
+
+  <body>
+    <button class="button">
+      <div class="light-bulb">
+        <div class="bulb">
+          <svg viewBox="0 -38 100 150">
+            <path
+              class="bulb-outline"
+              d="M50 10 C20 10 10 30 10 60 C10 90 20 110 50 140 C80 110 90 90 90 60 C90 30 80 10 50 10 Z"
+            />
+          </svg>
+          <svg viewBox="0 100 100 150">
+            <path
+              class="bulb-outline"
+              d="M50 100 C35 10 200 35 20 70 L30 80 C20 115 35 140 50 140 C65 140 80 115 70 80 L80 70 C80 35 65 10 50 10 Z"
+            />
+          </svg>
+        </div>
+
+        <div class="rays">
+          <div class="ray"></div>
+          <div class="ray"></div>
+          <div class="ray"></div>
+          <div class="ray"></div>
+          <div class="ray"></div>
+          <div class="ray"></div>
+          <div class="ray"></div>
+          <div class="ray"></div>
+        </div>
+      </div>
+    </button>
+  </body>
+</html>

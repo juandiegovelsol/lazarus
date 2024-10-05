@@ -1,0 +1,139 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f0f0f0;
+}
+
+header {
+    text-align: center;
+    padding: 2rem 0;
+    background: linear-gradient(135deg, #123456, #654321);
+    color: white;
+    position: relative;
+    z-index: 10;
+}
+
+.gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 1.5rem;
+    padding: 2rem;
+    perspective: 1000px;
+}
+
+.artwork {
+    position: relative;
+    transform-style: preserve-3d;
+    transform: rotateX(0) rotateY(0);
+    transition: transform 0.8s ease-in-out;
+    overflow: hidden;
+    border-radius: 10px;
+    animation: tilt 10s infinite;
+}
+
+.artwork img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.artwork-info {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 1rem;
+    background-color: rgba(0, 0, 0, 0.4);
+    color: white;
+    font-size: 0.8rem;
+    opacity: 0;
+    transition: opacity 0.4s ease-in-out;
+}
+
+.artwork:hover .artwork-info {
+    opacity: 1;
+}
+
+.artwork:hover {
+    transform: scale(1.2) rotateX(0) rotateY(0);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+    z-index: 1;
+}
+
+.artwork .overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4);
+    opacity: 0;
+    transition: opacity 0.4s ease-in-out;
+}
+
+.artwork:hover .overlay {
+    opacity: 0.7;
+}
+
+@keyframes tilt {
+    0% {
+        transform: rotateX(0) rotateY(0);
+    }
+    25% {
+        transform: rotateX(0) rotateY(10deg);
+    }
+    50% {
+        transform: rotateX(0) rotateY(-10deg);
+    }
+    75% {
+        transform: rotateX(0) rotateY(10deg);
+    }
+    100% {
+        transform: rotateX(0) rotateY(0);
+    }
+}
+
+footer {
+    text-align: center;
+    padding: 1rem;
+    background-color: #333;
+    color: white;
+    animation: gradientFooter 8s infinite linear;
+}
+
+@keyframes gradientFooter {
+    0% {
+        background-color: #333;
+    }
+    50% {
+        background-color: #123456;
+    }
+    100% {
+        background-color: #333;
+    }
+}
+
+@media (max-width: 768px) {
+    .gallery {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .artwork {
+        transform: rotateX(0) rotateY(0);
+    }
+}
+
+@media (max-width: 480px) {
+    .gallery {
+        grid-template-columns: 1fr;
+    }
+
+    header {
+        background: linear-gradient(45deg, #654321, #123456);
+    }
+}

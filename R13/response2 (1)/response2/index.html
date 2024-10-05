@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Duck Shooting Game</title>
+  <style>
+    canvas {
+      background-color: lightblue; /* Sky background */
+      display: block;
+      margin: 20px auto;
+    }
+    #game-settings {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+  </style>
+</head>
+<body>
+  <div id="game-settings">
+    <label for="num-ducks">Number of Ducks:</label>
+    <input type="number" id="num-ducks" value="25" min="1">
+    <br>
+    <label for="min-escape">Minimum Ducks to Escape:</label>
+    <input type="number" id="min-escape" value="5" min="1">
+    <br>
+    <button id="playButton">Play</button>
+  </div>
+  <canvas id="gameCanvas" width="800" height="600"></canvas>
+  
+  <script src="game.js"></script>
+</body>
+</html>

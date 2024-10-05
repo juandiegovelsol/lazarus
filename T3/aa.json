@@ -1,0 +1,39 @@
+{
+  "programming_language": ["JavaScript"],
+  "install_commands": ["npm i"],
+  "run_commands": ["npm run dev"],
+  "output": "[vite] warning: This assignment will throw because \"cart\" is a constant\n45 |\n46 |    const removeFromCart = (id) => {\n47 |      cart = cart.filter((p) => p.id !== id);\n   |      ^\n48 |      setCart([...cart]);\n49 |      updateRecommendedItems();\n\n  Plugin: vite:esbuild\n  File: C:/Users/Juan Diego/Desktop/Documentos Escritorio/Outlier2/LAZARUS/Task4/4bn/src/App.jsx",
+  "output_expected": "no",
+  "output_mime_type": "application/octet-stream",
+  "stream_source": "stderr",
+  "code": [
+    {
+      "name": "App.jsx",
+      "content": "import React, { useState } from \"react\";\nimport ProductList from \"./ProductList\";\nimport Cart from \"./Cart\";\nimport RecommendedItems from \"./RecommendedItems\";\nimport ProductForm from \"./ProductForm\";\n\nfunction App() {\n  const [products, setProducts] = useState([\n    { id: 1, name: \"Smartphone\", price: 599.99, category: \"electronics\" },\n    { id: 2, name: \"Laptop\", price: 999.99, category: \"electronics\" },\n    { id: 3, name: \"T-shirt\", price: 19.99, category: \"clothing\" },\n    { id: 4, name: \"Jeans\", price: 49.99, category: \"clothing\" },\n    { id: 5, name: \"JavaScript Book\", price: 29.99, category: \"books\" },\n    { id: 6, name: \"Python Book\", price: 34.99, category: \"books\" },\n  ]);\n\n  const [cart, setCart] = useState([]);\n  const [recommendedItems, setRecommendedItems] = useState([]);\n\n  const addToCart = (id) => {\n    const product = products.find((p) => p.id === id);\n    if (product) {\n      const existingProduct = cart.find((p) => p.id === id);\n      if (existingProduct) {\n        existingProduct.quantity = (existingProduct.quantity || 1) + 1;\n      } else {\n        cart.push({ ...product, quantity: 1 });\n      }\n      setCart([...cart]);\n      updateRecommendedItems();\n    }\n  };\n\n  const updateQuantity = (id, quantity) => {\n    const product = cart.find((p) => p.id === id);\n    if (product) {\n      product.quantity = parseInt(quantity);\n      if (product.quantity <= 0) {\n        cart = cart.filter((p) => p.id !== id);\n      }\n      setCart([...cart]);\n      updateRecommendedItems();\n    }\n  };\n\n  const removeFromCart = (id) => {\n    cart = cart.filter((p) => p.id !== id);\n    setCart([...cart]);\n    updateRecommendedItems();\n  };\n\n  const updateRecommendedItems = () => {\n    const categories = {};\n    cart.forEach((item) => {\n      categories[item.category] = (categories[item.category] || 0) + 1;\n    });\n    const leastPopularCategory = Object.keys(categories).reduce((a, b) => {\n      return categories[a] < categories[b] ? a : b;\n    });\n    const recommendedItems = products.filter(\n      (p) =>\n        p.category === leastPopularCategory && !cart.find((c) => c.id === p.id)\n    );\n    setRecommendedItems(recommendedItems.slice(0, 3));\n  };\n\n  const addProduct = (product) => {\n    const normalizedName = product.name\n      .toLowerCase()\n      .replace(/\\s+/g, \" \")\n      .trim()\n      .split(\" \")\n      .sort()\n      .join(\" \");\n    const productExists = products.some((p) => {\n      const normalizedPName = p.name\n        .toLowerCase()\n        .replace(/\\s+/g, \" \")\n        .trim()\n        .split(\" \")\n        .sort()\n        .join(\" \");\n      return normalizedPName === normalizedName;\n    });\n    if (!productExists) {\n      product.id = products.length + 1;\n      setProducts([...products, product]);\n    }\n  };\n\n  return (\n    <div>\n      <ProductList products={products} addToCart={addToCart} />\n      <Cart\n        cart={cart}\n        updateQuantity={updateQuantity}\n        removeFromCart={removeFromCart}\n      />\n      <RecommendedItems recommendedItems={recommendedItems} />\n      <ProductForm addProduct={addProduct} />\n    </div>\n  );\n}\n\nexport default App;"
+    },
+    {
+      "name": "main.jsx",
+      "content": "import React from \"react\";\nimport ReactDOM from \"react-dom\";\nimport App from \"./App\";\n\nReactDOM.render(\n  <React.StrictMode>\n    <App />\n  </React.StrictMode>,\n  document.getElementById(\"root\")\n);"
+    },
+    {
+      "name": "Product.jsx",
+      "content": "import React from \"react\";\n\nconst Product = ({ product, addToCart }) => {\n  return (\n    <div className=\"product\">\n      <h3>{product.name}</h3>\n      <p>Price: ${product.price}</p>\n      <p>Category: {product.category}</p>\n      <button onClick={() => addToCart(product.id)}>Add to Cart</button>\n    </div>\n  );\n};\n\nexport default Product;"
+    },
+    {
+      "name": "ProductList.jsx",
+      "content": "import React from \"react\";\nimport Product from \"./Product\";\n\nconst ProductList = ({ products, addToCart }) => {\n  return (\n    <div>\n      {products.map((product) => (\n        <Product key={product.id} product={product} addToCart={addToCart} />\n      ))}\n    </div>\n  );\n};\n\nexport default ProductList;"
+    },
+    {
+      "name": "Cart.jsx",
+      "content": "import React from \"react\";\n\nconst Cart = ({ cart, updateQuantity, removeFromCart }) => {\n  return (\n    <div>\n      <h2>Cart</h2>\n      <ul>\n        {cart.map((item) => (\n          <li key={item.id}>\n            {item.name} x{\" \"}\n            <input\n              type=\"number\"\n              value={item.quantity}\n              onChange={(e) => updateQuantity(item.id, e.target.value)}\n            />{\" \"}\n            - ${item.price * item.quantity}\n            <button onClick={() => removeFromCart(item.id)}>Remove</button>\n          </li>\n        ))}\n      </ul>\n      <p>\n        Total: $\n        {cart\n          .reduce((acc, item) => acc + item.price * item.quantity, 0)\n          .toFixed(2)}\n      </p>\n    </div>\n  );\n};\n\nexport default Cart;"
+    },
+    {
+      "name": "RecommendedItems.jsx",
+      "content": "import React from \"react\";\n\nconst RecommendedItems = ({ recommendedItems }) => {\n  return (\n    <div>\n      <h2>Recommended Items</h2>\n      <ul>\n        {recommendedItems.map((item) => (\n          <li key={item.id}>{item.name}</li>\n        ))}\n      </ul>\n    </div>\n  );\n};\n\nexport default RecommendedItems;\n"
+    },
+    {
+      "name": "ProductForm.jsx",
+      "content": "import React, { useState } from \"react\";\n\nconst ProductForm = ({ addProduct }) => {\n  const [name, setName] = useState(\"\");\n  const [price, setPrice] = useState(\"\");\n  const [category, setCategory] = useState(\"\");\n  const [error, setError] = useState(\"\");\n\n  const handleSubmit = (e) => {\n    e.preventDefault();\n    if (name && price && category) {\n      addProduct({ name, price, category });\n      setName(\"\");\n      setPrice(\"\");\n      setCategory(\"\");\n      setError(\"\");\n    } else {\n      setError(\"Please fill in all fields\");\n    }\n  };\n\n  return (\n    <form onSubmit={handleSubmit}>\n      <label>\n        Name:\n        <input\n          type=\"text\"\n          value={name}\n          onChange={(e) => setName(e.target.value)}\n        />\n      </label>\n      <br />\n      <label>\n        Price:\n        <input\n          type=\"number\"\n          value={price}\n          onChange={(e) => setPrice(e.target.value)}\n        />\n      </label>\n      <br />\n      <label>\n        Category:\n        <select value={category} onChange={(e) => setCategory(e.target.value)}>\n          <option value=\"\">Select a category</option>\n          <option value=\"electronics\">Electronics</option>\n          <option value=\"clothing\">Clothing</option>\n          <option value=\"books\">Books</option>\n        </select>\n      </label>\n      <br />\n      <button type=\"submit\">Add Product</button>\n      {error && <p style={{ color: \"red\" }}>{error}</p>}\n    </form>\n  );\n};\n\nexport default ProductForm;"
+    }
+  ]
+}

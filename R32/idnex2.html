@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Recipe Recommendation Engine</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> <!-- Chart.js for interactive charts -->
+  <style>
+    :root {
+      --main-bg-color: #f8f9fa;
+      --main-accent-color: #ff6347; /* Tomato for food theme */
+      --header-bg-color: #343a40;
+      --card-bg-color: #ffffff;
+      --text-color: #333;
+      --alert-bg-color: #ff5722;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: var(--main-bg-color);
+      color: var(--text-color);
+    }
+
+    .dashboard {
+      display: grid;
+      grid-template-columns: 1fr 3fr;
+      grid-template-rows: auto 1fr;
+      grid-template-areas: 
+        "sidebar header"
+        "sidebar content";
+      height: 100vh;
+    }
+
+    .header {
+      grid-area: header;
+      background-color: var(--header-bg-color);
+      padding: 1rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: white;
+    }
+
+    .sidebar {
+      grid-area: sidebar;
+      background-color: var(--header-bg-color);
+      padding: 1rem;
+      display: flex;
+      flex-direction: column;
+      color: white;
+    }
+
+    .sidebar a {
+      color: white;
+      text-decoration: none;
+      margin-bottom: 1rem;
+    }
+
+    .content {
+      grid-area: content;
+      padding: 2rem;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1rem;
+    }
+
+    .card {
+      background-color: var(--card-bg-color);
+      border-radius: 8px;
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      height: 250px;
+      transition: transform 0.3s;
+    }
+
+    .card:hover {
+      transform: translateY(-10px);
+    }
+
+    .card h2 {
+      margin: 0;
+      font-size: 1.2rem;
+    }
+
+    canvas {
+      max-height: 150px;
+    }
+
+    .alert {
+      background-color: var(--alert-bg-color);
+      padding: 1rem;
+      border-radius: 5px;
+      margin-bottom: 1rem;
+      color: #000;
+      display: none; /* Initially hidden, shown via JS */
+    }
+
+    .alert h3 {
+      margin: 0;
+    }
+
+    @media (max-width: 768px) {
+      .dashboard {
+        grid-template-columns: 1fr;
+        grid-template-areas:
+          "header"
+          "content";
+      }
+
+      .sidebar {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="dashboard">
+    <div class="sidebar">
+      <a href="#">Home</a>
+      <a href="#">Popular Recipes</a>
+      <a href="#">Your Favorites</a>
+    </div>
+
+    <div class="header">
+      <h1>Recipe Recommendation Engine</h1>
+      <button id="refreshBtn" style="padding: 0.5rem 1rem; background-color: var(--main-accent-color); color: white; border: none; border-radius: 5px;">
+        Refresh Recipes
+      </button>
+    </div>
+
+    <div class="content">
+      <div class="alert" id="alertBox">
+        <h3>Allergen Alert: Contains Peanuts!</h3>
+      </div>
+
+      <div class="card">
+        <h2>Recipe 1: Pasta Primavera</h2>
+        <canvas id="recipe1Chart"></canvas>
+      </div>
+
+      <div class="card">
+        <h2>Recipe 2: Grilled Chicken Salad</h2>
+        <canvas id="recipe2Chart"></canvas>
+      </div>
+
+      <div class="card">
+        <h2>Recipe 3: Chocolate Cake</h2>
+        <canvas id="recipe3Chart"></canvas>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Simulating real-time nutritional data for recipes
+    const randomNutritionData = () => Array.from({length: 3}, () => Math.floor(Math.random() * 300) + 50); // Random calories, carbs, and proteins
+
+    // Recipe 1 Chart
+    const recipe1Chart = new Chart(document.getElementById('recipe1Chart'), {
+      type: 'pie',
+      data: {
+        labels: ['Calories', 'Carbs', 'Proteins'],
+        datasets: [{
+          label: 'Nutrition Breakdown',
+          data: randomNutritionData(),
+          backgroundColor: ['#FF6347', '#FFD700', '#4CAF50'],
+          hoverOffset: 4
+        }]
+      }
+    });
+
+    // Recipe 2 Chart
+    const recipe2Chart = new Chart(document.getElementById('recipe2Chart'), {
+      type: 'pie',
+      data: {
+        labels: ['Calories', 'Carbs', 'Proteins'],
+        datasets: [{
+          label: 'Nutrition Breakdown',
+          data: randomNutritionData(),
+          backgroundColor: ['#FF6347', '#FFD700', '#4CAF50'],
+          hoverOffset: 4
+        }]
+      }
+    });
+
+    // Recipe 3 Chart
+    const recipe3Chart = new Chart(document.getElementById('recipe3Chart'), {
+      type: 'pie',
+      data: {
+        labels: ['Calories', 'Carbs', 'Proteins'],
+        datasets: [{
+          label: 'Nutrition Breakdown',
+          data: randomNutritionData(),
+          backgroundColor: ['#FF6347', '#FFD700', '#4CAF50'],
+          hoverOffset: 4
+        }]
+      }
+    });
+
+    // Function to simulate recipe refresh
+    document.getElementById('refreshBtn').addEventListener('click', function() {
+      recipe1Chart.data.datasets[0].data = randomNutritionData();
+      recipe2Chart.data.datasets[0].data = randomNutritionData();
+      recipe3Chart.data.datasets[0].data = randomNutritionData();
+
+      recipe1Chart.update();
+      recipe2Chart.update();
+      recipe3Chart.update();
+
+      // Trigger an allergen alert
+      const alertBox = document.getElementById('alertBox');
+      alertBox.style.display = 'block';
+      setTimeout(() => alertBox.style.display = 'none', 3000); // Hide the alert after 3 seconds
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,114 @@
+/* Reset margin and padding for all elements */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Styles for the navigation bar */
+.navbar {
+  background-color: #333;
+  color: #fff;
+  position: fixed;
+  width: 100%;
+  top: 0;
+  left: 0;
+  padding: 10px 20px;
+  z-index: 1000;
+}
+
+.navbar .container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.navbar nav a {
+  color: #fff;
+  text-decoration: none;
+  margin: 0 15px;
+}
+
+.navbar nav a:hover {
+  text-decoration: underline;
+}
+
+/* Styles for the main container */
+.container {
+  display: flex;
+  margin-top: 60px; /* Adjust according to the height of the navbar */
+}
+
+/* Styles for the sidebar */
+.sidebar {
+  background-color: #f4f4f4;
+  width: 250px;
+  padding: 15px;
+}
+
+.sidebar h2 {
+  margin-bottom: 10px;
+}
+
+.sidebar ul {
+  list-style: none;
+}
+
+.sidebar ul li {
+  margin-bottom: 10px;
+}
+
+.sidebar ul li a {
+  text-decoration: none;
+  color: #333;
+}
+
+.sidebar ul li a:hover {
+  text-decoration: underline;
+}
+
+/* Styles for the product area */
+.products {
+  flex: 1;
+  padding: 15px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 15px;
+}
+
+/* Styles for each product */
+.product {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  padding: 10px;
+  text-align: center;
+}
+
+.product img {
+  width: 100%;
+  height: auto;
+  margin-bottom: 10px;
+}
+
+/* Responsiveness */
+@media (max-width: 768px) {
+  .navbar {
+    position: relative;
+  }
+
+  body {
+    padding-top: 60px; /* Add padding to the body to avoid overlap */
+  }
+
+  .container {
+    flex-direction: column;
+  }
+
+  .sidebar {
+    display: none; /* Hide the sidebar on small screens */
+  }
+
+  .products {
+    grid-template-columns: 1fr;
+  }
+}

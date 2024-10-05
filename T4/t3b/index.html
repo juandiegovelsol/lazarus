@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>E-commerce App</title>
+    <style>
+      .product {
+        border: 1px solid #ccc;
+        margin: 10px;
+        padding: 10px;
+        width: 200px;
+        float: left;
+      }
+    </style>
+  </head>
+
+  <body>
+    <h1>E-commerce App</h1>
+    <input id="searchInput" type="text" placeholder="Search..." />
+    <select id="categoryFilter">
+      <option value="">All</option>
+      <option value="electronics">Electronics</option>
+      <option value="clothing">Clothing</option>
+      <option value="books">Books</option>
+    </select>
+    <button onclick="applyFilters()">Apply Filters</button>
+    <div id="productList"></div>
+    <h2>Cart</h2>
+    <ul id="cartItems"></ul>
+    <p>Total: $<span id="cartTotal">0.00</span></p>
+    <h2>Recommended Items</h2>
+    <ul id="recommendedItems"></ul>
+    <h2>Add Product</h2>
+    <form>
+      <label for="productName">Name:</label>
+      <input type="text" id="productName" /><br /><br />
+      <label for="productPrice">Price:</label>
+      <input type="number" id="productPrice" step="0.01" /><br /><br />
+      <label for="productCategory">Category:</label>
+      <select id="productCategory">
+        <option value="electronics">Electronics</option>
+        <option value="clothing">Clothing</option>
+        <option value="books">Books</option></select
+      ><br /><br />
+      <button type="button" onclick="addProduct()">Add Product</button>
+      <p id="productError" style="color: red"></p>
+    </form>
+
+    <script src="script.js"></script>
+  </body>
+</html>

@@ -1,0 +1,57 @@
+body {
+  font-family: Arial, sans-serif;
+}
+
+#task-list {
+  margin-top: 20px;
+}
+
+.category {
+  margin-bottom: 20px;
+  border: 1px solid #ddd;
+  padding: 10px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.collapse-button {
+  float: right;
+  background-color: #fff;
+  border: none;
+  padding: 5px 10px;
+  font-size: 18px;
+  cursor: pointer;
+}
+
+.collapse-button:hover {
+  background-color: #f0f0f0;
+}
+
+.task-container {
+  margin-top: 20px;
+  padding: 10px;
+}
+
+.task {
+  background-color: #f9f9f9;
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+}
+
+.task:last-child {
+  border-bottom: none;
+}
+
+.priority {
+  color: red;
+}
+
+.hidden {
+  display: none;
+}
+
+@media only screen and (max-width: 768px) {
+  .category {
+    margin-bottom: 10px;
+  }
+}

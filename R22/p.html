@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <style>
+      /* Body of the dog */
+
+      .dog-body {
+        position: relative;
+
+        width: 220px; /* Extended the body to create the neck */
+
+        height: 5px;
+
+        background-color: black;
+
+        margin: 100px auto;
+      }
+
+      /* Legs */
+
+      .leg {
+        position: absolute;
+
+        width: 5px;
+
+        height: 40px;
+
+        background-color: black;
+      }
+
+      /* Back legs connected to the end */
+
+      .back-leg1 {
+        bottom: -40px;
+
+        left: 0;
+      }
+
+      .back-leg2 {
+        bottom: -40px;
+
+        left: 20px;
+      }
+
+      /* Front legs */
+
+      .front-leg1 {
+        bottom: -40px;
+
+        right: 60px; /* Adjusted to fit the extended body */
+      }
+
+      .front-leg2 {
+        bottom: -40px;
+
+        right: 40px;
+      }
+
+      /* Head - Red Triangle */
+
+      .dog-head {
+        position: absolute;
+
+        width: 0;
+
+        height: 0;
+
+        border-left: 15px solid transparent;
+
+        border-right: 15px solid transparent;
+
+        border-bottom: 30px solid red; /* Create a triangle facing up */
+
+        top: -30px;
+
+        right: -15px; /* Connect the middle of the base to the end of the body */
+
+        display: flex;
+
+        align-items: center;
+
+        justify-content: center;
+      }
+
+      /* Face */
+
+      .face {
+        position: absolute;
+
+        top: 13px; /* Lowered the face by 5 pixels */
+
+        text-align: center;
+
+        color: black;
+
+        display: flex;
+
+        flex-direction: column;
+
+        align-items: center;
+      }
+
+      /* Eyes */
+
+      .eyes {
+        display: flex;
+
+        justify-content: center;
+
+        gap: 4px;
+      }
+
+      .eye {
+        display: inline-block;
+
+        width: 3px;
+
+        height: 3px;
+
+        background-color: black;
+
+        border-radius: 50%;
+      }
+
+      /* Mouth */
+
+      .mouth {
+        width: 10px;
+
+        height: 2px;
+
+        background-color: black;
+
+        border-radius: 50%;
+
+        margin-top: 8px; /* Lowered the mouth by 5 pixels */
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="dog-body">
+      <div class="leg back-leg1"></div>
+
+      <div class="leg back-leg2"></div>
+
+      <div class="leg front-leg1"></div>
+
+      <div class="leg front-leg2"></div>
+
+      <div class="dog-head">
+        <div class="face">
+          <div class="eyes">
+            <div class="eye"></div>
+
+            <div class="eye"></div>
+          </div>
+
+          <div class="mouth"></div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

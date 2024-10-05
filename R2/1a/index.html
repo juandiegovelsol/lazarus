@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dynamic Weather Dashboard</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="dashboard">
+      <div class="city-card">
+        <div class="weather-effect rain-container">
+          <div class="rain">
+            <div class="drop" style="left: 10%; animation-duration: 0.5s"></div>
+            <div class="drop" style="left: 20%; animation-duration: 0.7s"></div>
+            <div class="drop" style="left: 30%; animation-duration: 0.9s"></div>
+          </div>
+        </div>
+        <h2 class="city-name">Seattle</h2>
+        <div class="current-weather">
+          <span class="temperature">55°F</span>
+        </div>
+        <div class="weather-details">
+          <p>Humidity: 80%</p>
+          <p>Wind: 8 mph SW</p>
+        </div>
+        <div class="forecast"></div>
+        <div class="weather-condition">Raining</div>
+      </div>
+
+      <div class="city-card">
+        <div class="weather-effect snow">
+          <div class="snowflake" style="left: 10%; animation-duration: 10s, 3s">
+            ❄
+          </div>
+          <div class="snowflake" style="left: 20%; animation-duration: 8s, 4s">
+            ❅
+          </div>
+          <div class="snowflake" style="left: 30%; animation-duration: 12s, 6s">
+            ❆
+          </div>
+        </div>
+        <h2 class="city-name">Denver</h2>
+        <div class="current-weather">
+          <span class="temperature">28°F</span>
+        </div>
+        <div class="weather-details">
+          <p>Humidity: 65%</p>
+          <p>Wind: 5 mph NE</p>
+        </div>
+        <div class="forecast"></div>
+        <div class="weather-condition">Snowing</div>
+      </div>
+
+      <div class="city-card">
+        <div class="weather-effect sunny">
+          <div class="sun"></div>
+        </div>
+        <h2 class="city-name">Los Angeles</h2>
+        <div class="current-weather">
+          <span class="temperature">75°F</span>
+        </div>
+        <div class="weather-details">
+          <p>Humidity: 45%</p>
+          <p>Wind: 3 mph W</p>
+        </div>
+        <div class="forecast"></div>
+        <div class="weather-condition">Sunny</div>
+      </div>
+
+      <div class="city-card">
+        <div class="weather-effect cloudy">
+          <div class="cloud"></div>
+        </div>
+        <h2 class="city-name">New York</h2>
+        <div class="current-weather">
+          <span class="temperature">62°F</span>
+        </div>
+        <div class="weather-details">
+          <p>Humidity: 70%</p>
+          <p>Wind: 10 mph E</p>
+        </div>
+        <div class="forecast"></div>
+        <div class="weather-condition">Cloudy</div>
+      </div>
+    </div>
+  </body>
+</html>

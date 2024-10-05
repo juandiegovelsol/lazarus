@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tasty Bytes: An Interactive Cookbook</title>
+    <link rel="stylesheet" href="style11.css">
+</head>
+<body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+    
+    <header>
+        <div class="container">
+            <h1>Tasty Bytes: An Interactive Cookbook</h1>
+        </div>
+    </header>
+
+    <nav>
+        <div class="container">
+            <ul>
+                <li><a href="#breakfast" class="nav-button">Breakfast</a></li>
+                <li><a href="#lunch" class="nav-button">Lunch</a></li>
+                <li><a href="#dinner" class="nav-button">Dinner</a></li>
+                <li><a href="#dessert" class="nav-button">Dessert</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main id="main-content" class="container">
+        <section id="breakfast" class="recipe-grid visible">
+            <article class="recipe-card">
+                <div class="recipe-card-inner">
+                    <div class="recipe-card-front">
+                        <img src="https://images.pexels.com/photos/376464/pexels-photo-376464.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="Pancakes">
+                        <div class="recipe-card-content">
+                            <h3>Fluffy Pancakes</h3>
+                            <p>Start your day with these delicious, fluffy pancakes.</p>
+                            <div class="recipe-categories">
+                                <span class="category-tag">Breakfast</span>
+                                <span class="category-tag">Quick</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="recipe-card-back">
+                        <h3>Ingredients Preview</h3>
+                        <ul>
+                            <li>Flour</li>
+                            <li>Milk</li>
+                            <li>Eggs</li>
+                            <li>Butter</li>
+                        </ul>
+                        <a href="#pancake-recipe">View Full Recipe</a>
+                    </div>
+                </div>
+            </article>
+        </section>
+
+        <section id="lunch" class="recipe-grid">
+            <article class="recipe-card">
+                <div class="recipe-card-inner">
+                    <div class="recipe-card-front">
+                        <img src="https://images.pexels.com/photos/1099680/pexels-photo-1099680.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="Caprese Salad">
+                        <div class="recipe-card-content">
+                            <h3>Caprese Salad</h3>
+                            <p>A refreshing Italian salad with tomatoes, mozzarella, and basil.</p>
+                            <div class="recipe-categories">
+                                <span class="category-tag">Lunch</span>
+                                <span class="category-tag">Vegetarian</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="recipe-card-back">
+                        <h3>Ingredients Preview</h3>
+                        <ul>
+                            <li>Tomatoes</li>
+                            <li>Mozzarella</li>
+                            <li>Fresh Basil</li>
+                            <li>Olive Oil</li>
+                        </ul>
+                        <a href="#caprese-recipe">View Full Recipe</a>
+                    </div>
+                </div>
+            </article>
+        </section>
+
+        <section id="dinner" class="recipe-grid">
+            <article class="recipe-card">
+                <div class="recipe-card-inner">
+                    <div class="recipe-card-front">
+                        <img src="https://images.pexels.com/photos/699953/pexels-photo-699953.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="Grilled Salmon">
+                        <div class="recipe-card-content">
+                            <h3>Grilled Salmon</h3>
+                            <p>Delicious grilled salmon with lemon and herbs.</p>
+                            <div class="recipe-categories">
+                                <span class="category-tag">Dinner</span>
+                                <span class="category-tag">Healthy</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="recipe-card-back">
+                        <h3>Ingredients Preview</h3>
+                        <ul>
+                            <li>Salmon fillet</li>
+                            <li>Lemon</li>
+                            <li>Olive oil</li>
+                            <li>Fresh herbs</li>
+                        </ul>
+                        <a href="#salmon-recipe">View Full Recipe</a>
+                    </div>
+                </div>
+            </article>
+        </section>
+
+        <section id="dessert" class="recipe-grid">
+            <article class="recipe-card">
+                <div class="recipe-card-inner">
+                    <div class="recipe-card-front">
+                        <img src="https://images.pexels.com/photos/1126359/pexels-photo-1126359.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="Chocolate Cake">
+                        <div class="recipe-card-content">
+                            <h3>Chocolate Cake</h3>
+                            <p>A rich, moist chocolate cake for any occasion.</p>
+                            <div class="recipe-categories">
+                                <span class="category-tag">Dessert</span>
+                                <span class="category-tag">Baking</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="recipe-card-back">
+                        <h3>Ingredients Preview</h3>
+                        <ul>
+                            <li>Flour</li>
+                            <li>Cocoa powder</li>
+                            <li>Sugar</li>
+                            <li>Eggs</li>
+                        </ul>
+                        <a href="#chocolate-cake-recipe">View Full Recipe</a>
+                    </div>
+                </div>
+            </article>
+        </section>
+
+        <section id="pancake-recipe" class="recipe-details">
+            <h2>Fluffy Pancakes</h2>
+            <img src="https://images.pexels.com/photos/376464/pexels-photo-376464.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="Fluffy Pancakes">
+            <h3>Ingredients:</h3>
+            <ul>
+                <li>1 1/2 cups all-purpose flour</li>
+                <li>3 1/2 teaspoons baking powder</li>
+                <li>1/4 teaspoon salt</li>
+                <li>1 tablespoon sugar</li>
+                <li>1 1/4 cups milk</li>
+                <li>1 egg</li>
+                <li>3 tablespoons melted butter</li>
+            </ul>
+            <h3>Instructions:</h3>
+            <ol>
+                <li>In a large bowl, sift together the flour, baking powder, salt, and sugar.</li>
+                <li>In another bowl, whisk together the milk, egg, and melted butter.</li>
+                <li>Pour the wet ingredients into the dry ingredients and whisk until just combined. Don't overmix!</li>
+                <li>Heat a lightly oiled griddle or frying pan over medium-high heat.</li>
+                <li>Pour or scoop the batter onto the griddle, using approximately 1/4 cup for each pancake.</li>
+                <li>Cook until bubbles form on the surface, then flip and cook until golden brown on both sides.</li>
+            </ol>
+            <a href="#" class="close-details">Close Recipe</a>
+        </section>
+
+        <section id="caprese-recipe" class="recipe-details">
+            <h2>Caprese Salad</h2>
+            <img src="https://images.pexels.com/photos/1099680/pexels-photo-1099680.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="Caprese Salad">
+            <h3>Ingredients:</h3>
+            <ul>
+                <li>4 ripe tomatoes, sliced</li>
+                <li>1 pound fresh mozzarella, sliced</li>
+                <li>1/4 cup fresh basil leaves</li>
+                <li>2 tablespoons extra virgin olive oil</li>
+                <li>1 tablespoon balsamic vinegar</li>
+                <li>Salt and freshly ground black pepper to taste</li>
+            </ul>
+            <h3>Instructions:</h3>
+            <ol>
+                <li>On a large platter, alternately arrange the tomato and mozzarella slices.</li>
+                <li>Tuck the fresh basil leaves between the slices.</li>
+                <li>Drizzle with olive oil and balsamic vinegar.</li>
+                <li>Season with salt and pepper to taste.</li>
+                <li>Serve immediately and enjoy!</li>
+            </ol>
+            <a href="#" class="close-details">Close Recipe</a>
+        </section>
+
+        <section id="salmon-recipe" class="recipe-details">
+            <h2>Grilled Salmon</h2>
+            <img src="https://images.pexels.com/photos/699953/pexels-photo-699953.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="Grilled Salmon">
+            <h3>Ingredients:</h3>
+            <ul>
+                <li>4 salmon fillets (about 6 ounces each)</li>
+                <li>2 tablespoons olive oil</li>
+                <li>2 tablespoons lemon juice</li>
+                <li>2 cloves garlic, minced</li>
+                <li>1 teaspoon dried oregano</li>
+                <li>1 teaspoon dried thyme</li>
+                <li>Salt and freshly ground black pepper to taste</li>
+                <li>Lemon wedges for serving</li>
+            </ul>
+            <h3>Instructions:</h3>
+            <ol>
+                <li>In a small bowl, mix olive oil, lemon juice, garlic, oregano, and thyme.</li>
+                <li>Place salmon fillets in a large resealable plastic bag. Pour the marinade over the salmon, seal the bag, and turn to coat. Refrigerate for 30 minutes.</li>
+                <li>Preheat grill to medium-high heat.</li>
+                <li>Remove salmon from the marinade and season with salt and pepper.</li>
+                <li>Grill salmon for 4-5 minutes per side, or until it flakes easily with a fork.</li>
+                <li>Serve with lemon wedges.</li>
+            </ol>
+            <a href="#" class="close-details">Close Recipe</a>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 Tasty Bytes Cookbook. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <a href="#" class="back-to-top">Back to Top</a>
+</body>
+</html>

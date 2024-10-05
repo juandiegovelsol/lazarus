@@ -1,0 +1,153 @@
+:root {
+  --primary-color: #3498db;
+  --secondary-color: #2ecc71;
+  --background-color: #ffffff;
+  --text-color: #000000;
+}
+
+#theme-toggle:checked ~ * {
+  --primary-color: #34495e;
+  --secondary-color: #9b59b6;
+  --background-color: #2c3e50;
+  --text-color: #ecf0f1;
+}
+
+body {
+  margin: 0;
+  font-family: "Roboto Flex", sans-serif;
+}
+
+.page {
+  background-color: var(--background-color);
+  color: var(--text-color);
+  min-height: 100vh;
+  padding: 1rem;
+}
+
+.page h1 {
+  text-align: center;
+  font-size: 2rem;
+  font-variation-settings: "wght" 700;
+  margin-bottom: 2rem;
+}
+
+#theme-toggle {
+  display: none;
+}
+
+.theme-toggle {
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+  font-size: 2rem;
+  cursor: pointer;
+  z-index: 1000;
+}
+
+.theme-toggle:focus {
+  outline: 2px solid var(--secondary-color);
+}
+
+.theme-toggle .icon.sun {
+  display: inline;
+}
+
+.theme-toggle .icon.moon {
+  display: none;
+}
+
+#theme-toggle:checked ~ .theme-toggle .icon.sun {
+  display: none;
+}
+
+#theme-toggle:checked ~ .theme-toggle .icon.moon {
+  display: inline;
+}
+
+.container {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+.card {
+  background-color: var(--primary-color);
+  color: var(--text-color);
+  border-radius: 8px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.card img {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+}
+
+.card-content {
+  padding: 1rem;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.card-content h2 {
+  margin-top: 0;
+  font-size: 1.5rem;
+  font-variation-settings: "wght" 700;
+}
+
+.card-content p {
+  flex-grow: 1;
+  font-size: 1rem;
+  font-variation-settings: "wght" 400;
+}
+
+.card-content button {
+  background-color: var(--secondary-color);
+  color: #fff;
+  border: none;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  border-radius: 4px;
+  font-size: 1rem;
+  align-self: flex-start;
+}
+
+.card-content button:focus {
+  outline: 2px solid var(--secondary-color);
+}
+
+.card-content button:hover {
+  background-color: var(--secondary-color);
+  opacity: 0.9;
+}
+
+@media (min-width: 480px) {
+  .container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 768px) {
+  .container {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .container {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+@media (min-width: 1440px) {
+  .container {
+    grid-template-columns: repeat(5, 1fr);
+  }
+}

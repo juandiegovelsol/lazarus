@@ -1,0 +1,14 @@
+[
+  {
+    "name": "Bitcoin",
+    "price": 64255
+  },
+  {
+    "name": "Ethereum",
+    "price": 2627.02
+  },
+  {
+    "name": "Dogecoin",
+    "price": 0.109992
+  }
+]

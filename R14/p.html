@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title data-i18n="page.title">Welcome</title>
+    <style>
+      body {
+        direction: ltr;
+      }
+      .rtl-content {
+        direction: rtl;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1 data-i18n="header.welcome">Welcome to our site</h1>
+      <nav>
+        <ul>
+          <li><a href="#" data-i18n="nav.home">Home</a></li>
+          <li><a href="#" data-i18n="nav.about">About</a></li>
+          <li><a href="#" data-i18n="nav.contact">Contact</a></li>
+        </ul>
+      </nav>
+    </header>
+    <main>
+      <section id="content">
+        <p data-i18n="content.paragraph">This is some sample content.</p>
+      </section>
+    </main>
+    <footer>
+      <p data-i18n="footer.copyright">&copy; 2023 Our Company</p>
+    </footer>
+    <script>
+      function changeLanguage(lang) {
+        document.documentElement.lang = lang;
+        if (lang === "ar") {
+          document.body.classList.add("rtl-content");
+        } else {
+          document.body.classList.remove("rtl-content");
+        }
+        // Translate content (not implemented)
+      }
+    </script>
+  </body>
+</html>

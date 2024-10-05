@@ -1,0 +1,85 @@
+/* style.css */
+
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+header {
+  background-color: #f0f0f0;
+  padding: 20px;
+  text-align: center;
+}
+
+.quiz {
+  background-color: #fff;
+  padding: 20px;
+}
+
+.question {
+  background-color: #f7f7f7;
+  border: 1px solid #ddd;
+  margin-bottom: 20px;
+  padding: 20px;
+}
+
+.question progress {
+  width: 100%;
+  height: 10px;
+  border: none;
+  border-radius: 10px;
+  background-color: #ccc;
+}
+
+.question progress::-webkit-progress-bar {
+  background-color: #ccc;
+}
+
+.question progress::-webkit-progress-value {
+  background-color: #4caf50;
+}
+
+.question progress::-moz-progress-bar {
+  background-color: #4caf50;
+}
+
+.answers {
+  margin-top: 20px;
+}
+
+.answers button {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  padding: 10px 20px;
+  cursor: pointer;
+}
+
+.answers button:hover {
+  background-color: #f0f0f0;
+}
+
+.answers button.correct {
+  background-color: #4caf50;
+  color: #fff;
+}
+
+.results {
+  background-color: #fff;
+  padding: 20px;
+  text-align: center;
+}
+
+.results button {
+  background-color: #4caf50;
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  padding: 10px 20px;
+  cursor: pointer;
+}
+
+.results button:hover {
+  background-color: #3e8e41;
+}

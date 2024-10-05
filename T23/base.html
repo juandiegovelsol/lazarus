@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pendulum Animation</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: #87ceeb;
+        transition: background-color 0.5s linear;
+      }
+
+      .pendulum-container {
+        position: relative;
+        width: 200px;
+        height: 400px;
+      }
+
+      .string {
+        position: absolute;
+        top: 0;
+        left: 50%;
+        width: 2px;
+        height: 250px;
+        background-color: black;
+        transform-origin: top;
+        animation: swing 2s linear infinite;
+      }
+
+      .weight {
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        width: 50px;
+        height: 50px;
+        background-color: black;
+        border-radius: 50%;
+        transform: translateX(-50%);
+      }
+
+      @keyframes swing {
+        0% {
+          transform: rotate(0deg);
+          background-color: #87ceeb;
+        }
+        50% {
+          transform: rotate(45deg);
+          background-color: #ff6347;
+        }
+        100% {
+          transform: rotate(-45deg);
+          background-color: #87ceeb;
+        }
+      }
+
+      @keyframes backgroundSwing {
+        0% {
+          background-color: #87ceeb;
+        }
+        50% {
+          background-color: #ff6347;
+        }
+        100% {
+          background-color: #87ceeb;
+        }
+      }
+
+      body {
+        animation: backgroundSwing 2s linear infinite;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="pendulum-container">
+      <div class="string">
+        <div class="weight"></div>
+      </div>
+    </div>
+  </body>
+</html>

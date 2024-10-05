@@ -1,0 +1,212 @@
+/* styles.css */
+
+/* ... existing styles ... */
+/* styles.css */
+
+body {
+    margin: 0;
+    padding: 0;
+    background-color: black;
+    color: white;
+    font-family: Arial, sans-serif;
+}
+
+#intro {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#brand-name {
+    font-size: 5rem;
+    animation: fadeIn 2s forwards;
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+#explore-button {
+    font-size: 2rem;
+    padding: 1rem 2rem;
+    border: none;
+    border-radius: 10px;
+    background-color: #4CAF50;
+    color: white;
+    cursor: pointer;
+    animation: bounce 2s infinite;
+    display: none; /* Initially hidden */
+}
+
+@keyframes bounce {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+#features {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#features-container {
+    display: flex;
+    justify-content: space-around;
+    width: 80%;
+}
+
+.feature-box {
+    width: 30%;
+    height: 30vh;
+    background-color: #333;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2rem;
+    cursor: pointer;
+    transition: transform 0.5s, font-size 0.5s;
+}
+
+.feature-box:hover {
+    transform: scale(1.2);
+    font-size: 2.4rem; /* Increase font-size on hover */
+}
+
+.feature-title {
+    margin: 0;
+}
+
+#design-images, #sound-videos {
+    display: flex;
+    justify-content: space-between;
+    width: 80%;
+}
+
+#design-images img, #sound-videos video {
+    width: 30%;
+    height: 30vh;
+    object-fit: cover;
+    cursor: pointer;
+    transition: transform 0.5s;
+    margin: 0 10px; /* Added spacing */
+}
+
+#design-images img:hover, #sound-videos video:hover {
+    transform: scale(1.1);
+}
+
+#models-table {
+    border-collapse: collapse;
+    width: 80%;
+}
+
+#models-table th, #models-table td {
+    border: 1px solid white;
+    padding: 1rem;
+    text-align: center;
+}
+
+#back-to-features, #back-to-home {
+    font-size: 2rem;
+    padding: 1rem 2rem;
+    border: none;
+    border-radius: 10px;
+    background-color: #4CAF50;
+    color: white;
+    cursor: pointer;
+    display: block;
+    margin-top: 20px;
+}
+
+/* Media Queries */
+@media only screen and (max-width: 768px) {
+    #features-container {
+        flex-direction: column;
+    }
+    .feature-box {
+        width: 100%;
+        height: 30vh;
+        margin-bottom: 2rem;
+    }
+    #design-images, #sound-videos {
+        flex-direction: column;
+    }
+    #design-images img, #sound-videos video {
+        width: 100%;
+        height: 30vh;
+        margin-bottom: 2rem;
+    }
+}
+
+/* Animation for section titles */
+.section-title {
+    opacity: 0;
+    transform: translateY(-20px);
+    transition: opacity 2s, transform 2s;
+}
+
+.section-title.animate-title {
+    opacity: 1;
+    transform: translateY(0);
+}
+/* Center feature boxes next to each other */
+#features-container {
+    display: flex;
+    justify-content: center;
+}
+
+.feature-box {
+    margin: 0 20px; /* Add spacing between boxes */
+}
+
+/* ... existing styles ... */
+
+/* Media Queries */
+@media only screen and (max-width: 768px) {
+    #features-container {
+        flex-direction: column;
+    }
+    .feature-box {
+        margin-bottom: 2rem;
+    }
+}
+
+/* Animation for section content */
+.section-content {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 2s, transform 2s;
+}
+
+.section-content.animate-content {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Hover effect for videos in sound section */
+#sound-videos video {
+    transition: transform 0.5s;
+}
+
+#sound-videos video:hover {
+    transform: scale(1.1);
+}
+
+#sound-videos video:playing {
+    transform: scale(1.1);
+}

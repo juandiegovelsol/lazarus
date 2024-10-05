@@ -1,0 +1,258 @@
+User Profile System Implementation
+JavaScript Code (userProfile.js)
+
+class UserProfile {
+  constructor(userId) {
+    this.userId = userId;
+    this.preferences = this.loadPreferences();
+    this.sessionId = this.generateSessionId();
+    this.setupEventListeners();
+  }
+
+  generateSessionId() {
+    return Math.random().toString(36).substr(2, 9);
+  }
+
+  loadPreferences() {
+    const userProfiles = JSON.parse(localStorage.getItem('userProfiles') || '{}');
+    return userProfiles[this.userId] || {
+      theme: 'light',
+      language: 'en',
+      notifications: true
+    };
+  }
+
+  savePreferences() {
+    const userProfiles = JSON.parse(localStorage.getItem('userProfiles') || '{}');
+    userProfiles[this.userId] = this.preferences;
+    localStorage.setItem('userProfiles', JSON.stringify(userProfiles));
+    this.broadcastUpdate();
+  }
+
+  updatePreference(key, value) {
+    this.preferences[key] = value;
+    this.savePreferences();
+    this.applyPreferences();
+  }
+
+  broadcastUpdate() {
+    window.dispatchEvent(new CustomEvent('userProfileUpdate', {
+      detail: { userId: this.userId, preferences: this.preferences }
+    }));
+  }
+
+  setupEventListeners() {
+    window.addEventListener('storage', this.handleStorageEvent.bind(this));
+    window.addEventListener('userProfileUpdate', this.handleProfileUpdate.bind(this));
+  }
+
+  handleStorageEvent(event) {
+    if (event.key === 'userProfiles') {
+      const userProfiles = JSON.parse(event.newValue || '{}');
+      if (userProfiles[this.userId]) {
+        this.preferences = userProfiles[this.userId];
+        this.applyPreferences();
+      }
+    }
+  }
+
+  handleProfileUpdate(event) {
+    if (event.detail.userId === this.userId) {
+      this.preferences = event.detail.preferences;
+      this.applyPreferences();
+    }
+  }
+
+  applyPreferences() {
+    document.body.className = this.preferences.theme;
+    document.documentElement.lang = this.preferences.language;
+    // Apply other preferences as needed
+    this.notifyListeners();
+  }
+
+  addListener(callback) {
+    if (!this.listeners) this.listeners = [];
+    this.listeners.push(callback);
+  }
+
+  notifyListeners() {
+    if (this.listeners) {
+      this.listeners.forEach(callback => callback(this.preferences));
+    }
+  }
+}
+
+const userProfileManager = {
+  profiles: {},
+  getProfile(userId) {
+    if (!this.profiles[userId]) {
+      this.profiles[userId] = new UserProfile(userId);
+    }
+    return this.profiles[userId];
+  }
+};
+
+
+HTML Code (index.html)
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>User Profile System</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div id="user-profile">
+    <h1>User Profile System</h1>
+    <form id="preference-form">
+      <label for="user-id">User ID:</label>
+      <input type="text" id="user-id" required>
+      <br>
+      <label for="theme">Theme:</label>
+      <select id="theme">
+        <option value="light">Light</option>
+        <option value="dark">Dark</option>
+      </select>
+      <br>
+      <label for="language">Language:</label>
+      <select id="language">
+        <option value="en">English</option>
+        <option value="es">Spanish</option>
+        <option value="fr">French</option>
+      </select>
+      <br>
+      <label for="notifications">
+        <input type="checkbox" id="notifications">
+        Enable Notifications
+      </label>
+      <br>
+      <button type="submit">Save Preferences</button>
+    </form>
+    <div id="current-preferences"></div>
+  </div>
+  <script src="userProfile.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
+
+
+CSS Code (styles.css)
+
+body {
+  font-family: Arial, sans-serif;
+  line-height: 1.6;
+  margin: 0;
+  padding: 20px;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+body.light {
+  background-color: #f4f4f4;
+  color: #333;
+}
+
+body.dark {
+  background-color: #333;
+  color: #f4f4f4;
+}
+
+#user-profile {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+form {
+  background: #fff;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+input[type="text"], select {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+button {
+  background: #333;
+  color: #fff;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #444;
+}
+
+#current-preferences {
+  margin-top: 20px;
+  padding: 10px;
+  background: #e7e7e7;
+  border-radius: 4px;
+}
+
+
+Application Logic (app.js)
+
+document.addEventListener('DOMContentLoaded', () => {
+  const form = document.getElementById('preference-form');
+  const userIdInput = document.getElementById('user-id');
+  const themeSelect = document.getElementById('theme');
+  const languageSelect = document.getElementById('language');
+  const notificationsCheckbox = document.getElementById('notifications');
+  const currentPreferences = document.getElementById('current-preferences');
+
+  let currentProfile = null;
+
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const userId = userIdInput.value.trim();
+    if (userId) {
+      currentProfile = userProfileManager.getProfile(userId);
+      currentProfile.updatePreference('theme', themeSelect.value);
+      currentProfile.updatePreference('language', languageSelect.value);
+      currentProfile.updatePreference('notifications', notificationsCheckbox.checked);
+      updatePreferencesDisplay();
+    }
+  });
+
+  function updatePreferencesDisplay() {
+    if (currentProfile) {
+      const prefs = currentProfile.preferences;
+      currentPreferences.innerHTML = `
+        <h3>Current Preferences for User ${currentProfile.userId}</h3>
+        <p>Theme: ${prefs.theme}</p>
+        <p>Language: ${prefs.language}</p>
+        <p>Notifications: ${prefs.notifications ? 'Enabled' : 'Disabled'}</p>
+      `;
+      themeSelect.value = prefs.theme;
+      languageSelect.value = prefs.language;
+      notificationsCheckbox.checked = prefs.notifications;
+    }
+  }
+
+  function applyTheme(theme) {
+    document.body.className = theme;
+  }
+
+  if (currentProfile) {
+    currentProfile.addListener(prefs => {
+      updatePreferencesDisplay();
+      applyTheme(prefs.theme);
+    });
+  }
+});
+
+

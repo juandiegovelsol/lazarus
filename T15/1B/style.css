@@ -1,0 +1,172 @@
+.pendulum {
+  position: relative;
+  width: 600px;
+  height: 300px;
+  background-color: #f0f0f0;
+  border: 1px solid #ccc;
+  overflow: hidden;
+}
+
+.ball {
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background-color: #333;
+}
+
+.rope {
+  position: absolute;
+  width: 2px;
+  height: 150px;
+  background-color: #666;
+}
+
+.ball-1 {
+  top: 50px;
+  left: 50px;
+  animation: ball-1 4s infinite;
+}
+
+.rope-1 {
+  top: 0;
+  left: 80px;
+}
+
+.ball-2 {
+  top: 150px;
+  left: 150px;
+  animation: ball-2 4s infinite;
+  animation-delay: 0.5s;
+}
+
+.rope-2 {
+  top: 0;
+  left: 180px;
+}
+
+.ball-3 {
+  top: 150px;
+  left: 250px;
+  animation: ball-3 4s infinite;
+  animation-delay: 1s;
+}
+
+.rope-3 {
+  top: 0;
+  left: 280px;
+}
+
+.ball-4 {
+  top: 150px;
+  left: 350px;
+  animation: ball-4 4s infinite;
+  animation-delay: 1.5s;
+}
+
+.rope-4 {
+  top: 0;
+  left: 380px;
+}
+
+.ball-5 {
+  top: 150px;
+  left: 450px;
+  animation: ball-5 4s infinite;
+  animation-delay: 2s;
+}
+
+.rope-5 {
+  top: 0;
+  left: 480px;
+}
+
+@keyframes ball-1 {
+  0% {
+    transform: translate(0, 0);
+  }
+  25% {
+    transform: translate(0, 100px);
+  }
+  50% {
+    transform: translate(0, 0);
+  }
+  75% {
+    transform: translate(0, -100px);
+  }
+  100% {
+    transform: translate(0, 0);
+  }
+}
+
+@keyframes ball-2 {
+  0% {
+    transform: translate(0, 0);
+  }
+  25% {
+    transform: translate(0, 0);
+  }
+  50% {
+    transform: translate(0, -100px);
+  }
+  75% {
+    transform: translate(0, 0);
+  }
+  100% {
+    transform: translate(0, 0);
+  }
+}
+
+@keyframes ball-3 {
+  0% {
+    transform: translate(0, 0);
+  }
+  25% {
+    transform: translate(0, 0);
+  }
+  50% {
+    transform: translate(0, 0);
+  }
+  75% {
+    transform: translate(0, -100px);
+  }
+  100% {
+    transform: translate(0, 0);
+  }
+}
+
+@keyframes ball-4 {
+  0% {
+    transform: translate(0, 0);
+  }
+  25% {
+    transform: translate(0, 0);
+  }
+  50% {
+    transform: translate(0, 0);
+  }
+  75% {
+    transform: translate(0, 0);
+  }
+  100% {
+    transform: translate(0, -100px);
+  }
+}
+
+@keyframes ball-5 {
+  0% {
+    transform: translate(0, 0);
+  }
+  25% {
+    transform: translate(0, 0);
+  }
+  50% {
+    transform: translate(0, 0);
+  }
+  75% {
+    transform: translate(0, 0);
+  }
+  100% {
+    transform: translate(0, 0);
+  }
+}

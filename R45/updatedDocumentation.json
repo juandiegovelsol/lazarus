@@ -1,0 +1,11 @@
+[
+  {
+    "error": "Failed to update Feature A"
+  },
+  {
+    "error": "Failed to update Feature B"
+  },
+  {
+    "error": "Failed to update Feature C"
+  }
+]

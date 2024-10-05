@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+      .button {
+        background-color: transparent;
+        border: 2px solid #46c2cb;
+        color: #46c2cb;
+        padding: 15px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        border-radius: 25px;
+        cursor: pointer;
+        transition: all 0.5s ease; /* Smooth transition for all changes */
+      }
+
+      .button:focus {
+        outline: none; /* Remove outline on focus */
+      }
+
+      .button.clicked {
+        border-radius: 50%; /* Change to circular shape */
+        background-color: #46c2cb; /* Fill background with border color */
+        color: transparent; /* Hide the text */
+      }
+
+      .button.clicked::before {
+        content: "\2713"; /* Unicode character for checkmark */
+        font-size: 20px;
+        color: rgba(255, 255, 255, 0.8); /* Semi-transparent white checkmark */
+      }
+
+      /* Define the animation for going back to the original state */
+      .button.clicked {
+        animation: backToOriginal 2s forwards; /* Apply the animation */
+      }
+
+      @keyframes backToOriginal {
+        to {
+          border-radius: 25px; /* Back to original rounded shape */
+          background-color: transparent; /* Back to transparent background */
+          color: #46c2cb; /* Text color back to border color */
+        }
+      }
+
+      .button.clicked::before {
+        animation: hideCheckmark 2s forwards; /* Apply the animation */
+      }
+
+      @keyframes hideCheckmark {
+        to {
+          content: ""; /* Remove the checkmark */
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <button class="button">Click Me</button>
+
+    <script>
+      const button = document.querySelector(".button");
+
+      button.addEventListener("click", () => {
+        button.classList.add("clicked");
+      });
+    </script>
+  </body>
+</html>

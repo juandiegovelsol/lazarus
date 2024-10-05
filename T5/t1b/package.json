@@ -1,0 +1,16 @@
+{
+  "name": "t1a",
+  "version": "1.0.0",
+  "description": "",
+  "main": "shipmentCalculator.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/jest": "^29.5.13",
+    "jest": "^29.7.0"
+  }
+}

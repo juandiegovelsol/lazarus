@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>User Profile System</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div id="user-profile">
+      <h1>User Profile System</h1>
+      <form id="preference-form">
+        <label for="user-id">User ID:</label>
+        <input type="text" id="user-id" required />
+        <br />
+        <label for="theme">Theme:</label>
+        <select id="theme">
+          <option value="light">Light</option>
+          <option value="dark">Dark</option>
+        </select>
+        <br />
+        <label for="language">Language:</label>
+        <select id="language">
+          <option value="en">English</option>
+          <option value="es">Spanish</option>
+          <option value="fr">French</option>
+        </select>
+        <br />
+        <label for="notifications">
+          <input type="checkbox" id="notifications" />
+          Enable Notifications
+        </label>
+        <br />
+        <button type="submit">Save Preferences</button>
+      </form>
+      <div id="current-preferences"></div>
+    </div>
+    <script src="userProfile.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>

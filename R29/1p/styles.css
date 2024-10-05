@@ -1,0 +1,131 @@
+body {
+  --background-color: #ffffff;
+
+  --text-color: #000000;
+
+  --nav-background: rgba(255, 255, 255, 0.8);
+
+  margin: 0;
+
+  font-family: Arial, sans-serif;
+
+  color: var(--text-color);
+
+  background-color: var(--background-color);
+}
+
+h1,
+h2 {
+  text-align: center;
+}
+
+p {
+  max-width: 600px;
+
+  margin: 0 auto;
+
+  line-height: 1.6;
+}
+
+.navbar {
+  --nav-font-size: 3em;
+
+  font-size: var(--nav-font-size);
+
+  position: sticky;
+
+  top: 0;
+
+  width: 100%;
+
+  background-color: var(--nav-background);
+
+  display: flex;
+
+  justify-content: center;
+
+  padding: 10px 0;
+
+  z-index: 1000;
+}
+
+#header-message {
+  font-size: var(--nav-font-size);
+}
+
+.navbar ul {
+  list-style: none;
+
+  display: flex;
+
+  gap: 20px;
+}
+
+.navbar a {
+  text-decoration: none;
+
+  color: var(--text-color);
+
+  font-weight: bold;
+}
+
+.navbar a:hover {
+  text-decoration: underline;
+}
+
+header h1 {
+  margin-top: 40px;
+}
+
+.parallax {
+  position: relative;
+
+  min-height: 100vh;
+
+  background-attachment: fixed;
+
+  background-size: cover;
+
+  background-position: center;
+}
+
+.parallax1 {
+  background-image: url("https://placehold.co/600x400/png");
+}
+
+.parallax2 {
+  background-image: url("https://placehold.co/600x400/orange/red");
+}
+
+.parallax3 {
+  background-image: url("https://placehold.co/600x400/000000/FFFFFF/png");
+}
+
+.content {
+  position: relative;
+
+  padding: 100px 20px;
+
+  background-color: rgba(0, 0, 0, 0.5);
+
+  color: #ffffff;
+}
+
+.content h2,
+.content p {
+  color: #ffffff;
+}
+
+footer {
+  text-align: center;
+
+  padding: 20px;
+}
+
+@media (max-width: 768px) {
+  .navbar ul {
+    flex-direction: column;
+
+    gap: 10px;
+  }
+}

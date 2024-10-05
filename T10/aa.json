@@ -1,0 +1,23 @@
+{
+  "programming_language": ["JavaScript"],
+  "install_commands": ["npm i"],
+  "run_commands": ["npm run dev"],
+  "output": "",
+  "output_expected": "no",
+  "output_mime_type": "application/octet-stream",
+  "stream_source": "stderr",
+  "code": [
+    {
+      "name": "App.jsx",
+      "content": "import React from \"react\";\nimport TicketListModel from \"./TicketListModel\";\nimport TicketListController from \"./TicketListController\";\nimport TicketListView from \"./TicketListView\";\n\nfunction App() {\n  const unacknowledgedTickets = [\n    { id: 1, appName: \"App 1\", grade: 4, feedback: \"Great job!\" },\n    { id: 2, appName: \"App 1\", grade: 3, feedback: \"Good job!\" },\n    { id: 3, appName: \"App 2\", grade: 5, feedback: \"Excellent job!\" },\n    { id: 4, appName: \"App 2\", grade: 2, feedback: \"Fair job!\" },\n    { id: 5, appName: \"App 3\", grade: 4, feedback: \"Great job!\" },\n  ];\n\n  const acknowledgedTickets = [];\n\n  const unacknowledgedModel = new TicketListModel(unacknowledgedTickets);\n  const acknowledgedModel = new TicketListModel(acknowledgedTickets);\n\n  const unacknowledgedController = new TicketListController(\n    unacknowledgedModel\n  );\n  const acknowledgedController = new TicketListController(acknowledgedModel);\n\n  return (\n    <div>\n      <TicketListView controller={unacknowledgedController} />\n      <TicketListView controller={acknowledgedController} />\n    </div>\n  );\n}\n\nexport default App;"
+    },
+    {
+      "name": "TicketListController.jsx",
+      "content": "class TicketListController {\n  constructor(model, view) {\n    this.model = model;\n    this.view = view;\n    this.filter = \"\";\n\n    this.view.onFilterChange = (filter) => {\n      this.filter = filter;\n      this.updateView();\n    };\n\n    this.view.onAcknowledge = (id) => {\n      const acknowledgedTicket = this.model.acknowledgeTicket(id);\n      // Send the acknowledged ticket to another controller or model\n      // For now, just log it\n      // console.log(acknowledgedTicket);\n      this.updateView();\n    };\n  }\n\n  updateView() {\n    const filteredTickets = this.model.filterTickets(this.filter);\n    const averageGrade = this.model.getAverageGrade();\n    this.view.update(filteredTickets, averageGrade);\n  }\n}\n\nexport default TicketListController;"
+    },
+    {
+      "name": "TicketListView.jsx",
+      "content": "import React, { useState, useEffect } from \"react\";\n\nfunction TicketListView({ controller }) {\n  const [tickets, setTickets] = useState([]);\n  const [averageGrade, setAverageGrade] = useState(0);\n  const [filter, setFilter] = useState(\"\");\n\n  useEffect(() => {\n    controller.updateView();\n  }, [controller]);\n\n  const handleFilterChange = (e) => {\n    controller.onFilterChange(e.target.value);\n  };\n\n  const handleAcknowledge = (id) => {\n    controller.onAcknowledge(id);\n  };\n\n  const update = (tickets, averageGrade) => {\n    setTickets(tickets);\n    setAverageGrade(averageGrade);\n  };\n\n  controller.view = {\n    onFilterChange: handleFilterChange,\n    onAcknowledge: handleAcknowledge,\n    update,\n  };\n\n  return (\n    <div>\n      <select value={filter} onChange={handleFilterChange}>\n        <option value=\"\">All Apps</option>\n        <option value=\"App 1\">App 1</option>\n        <option value=\"App 2\">App 2</option>\n        <option value=\"App 3\">App 3</option>\n      </select>\n      <h2>Ticket List</h2>\n      <p>Average Grade: {averageGrade.toFixed(2)}</p>\n      <ul>\n        {tickets\n          .sort((a, b) => a.grade - b.grade)\n          .map((ticket) => (\n            <li key={ticket.id}>\n              <p>App Name: {ticket.appName}</p>\n              <p>Ticket ID: {ticket.id}</p>\n              <p>Grade: {ticket.grade}</p>\n              <p>Feedback: {ticket.feedback}</p>\n              <button onClick={() => handleAcknowledge(ticket.id)}>\n                Acknowledge\n              </button>\n            </li>\n          ))}\n      </ul>\n    </div>\n  );\n}\n\nexport default TicketListView;"
+    }
+  ]
+}

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Air Conditioning Controller</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <h1>Air Conditioning Controller</h1>
+      <div class="controls">
+        <button id="on-button">On</button>
+        <button id="off-button">Off</button>
+        <button id="increase-button">+</button>
+        <button id="decrease-button">-</button>
+        <label for="units-toggle">Units:</label>
+        <input type="checkbox" id="units-toggle" />
+        <label for="units-toggle" id="units-label">°C</label>
+      </div>
+      <div class="display">
+        <p id="temperature-display">
+          Temperature: <span id="temperature-value">20</span>
+          <span id="temperature-unit">°C</span>
+        </p>
+        <p id="state-display">State: <span id="state-value">Off</span></p>
+        <p id="message-display" style="display: none"></p>
+      </div>
+    </div>
+    <script src="script.js"></script>
+  </body>
+</html>

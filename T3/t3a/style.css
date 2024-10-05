@@ -1,0 +1,46 @@
+body {
+  font-family: Arial, sans-serif;
+}
+
+.container {
+  width: 800px;
+  margin: 50px auto;
+  text-align: center;
+}
+
+.controls {
+  margin-bottom: 20px;
+}
+
+button {
+  width: 50px;
+  height: 30px;
+  margin: 5px;
+}
+
+#units-toggle {
+  vertical-align: middle;
+}
+
+#units-label {
+  vertical-align: middle;
+}
+
+.display {
+  border: 1px solid #ccc;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+#message-display {
+  font-size: 14px;
+  color: #666;
+  margin-top: 10px;
+}
+
+#temperature-chart {
+  width: 700px;
+  height: 300px;
+  margin: 20px auto;
+}

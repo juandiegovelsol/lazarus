@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+      .spinner {
+        position: relative;
+        width: 100px;
+        height: 100px;
+        transform-style: preserve-3d;
+        perspective: 500px;
+      }
+
+      .circle {
+        position: absolute;
+        border-radius: 50%;
+        animation: rotate 1.5s linear infinite;
+        transform-style: preserve-3d;
+        transform-origin: center top;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+      }
+
+      @keyframes rotate {
+        0% {
+          transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg);
+        }
+        100% {
+          transform: rotateX(360deg) rotateY(360deg) rotateZ(360deg);
+        }
+      }
+
+      .circle:nth-child(2),
+      .circle:nth-child(4) {
+        animation-name: rotate-anti;
+      }
+
+      @keyframes rotate-anti {
+        0% {
+          transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg);
+        }
+        100% {
+          transform: rotateX(-360deg) rotateY(-360deg) rotateZ(-360deg);
+        }
+      }
+
+      .circle:nth-child(1) {
+        width: 100px;
+        height: 100px;
+        background: linear-gradient(#f0f0f0, #f0f0f0) padding-box,
+          conic-gradient(#f0f0f0 0deg 72deg, transparent 72deg 360deg)
+            border-box,
+          conic-gradient(from 72deg, #f00, transparent) border-box;
+        animation-delay: 0s;
+      }
+
+      .circle:nth-child(2) {
+        width: 80px;
+        height: 80px;
+        top: 10px;
+        left: 10px;
+        background: linear-gradient(#f0f0f0, #f0f0f0) padding-box,
+          conic-gradient(#f0f0f0 0deg 72deg, transparent 72deg 360deg)
+            border-box,
+          conic-gradient(from 72deg, #0f0, transparent) border-box;
+        animation-delay: 0.2s;
+      }
+
+      .circle:nth-child(3) {
+        width: 60px;
+        height: 60px;
+        top: 20px;
+        left: 20px;
+        background: linear-gradient(#f0f0f0, #f0f0f0) padding-box,
+          conic-gradient(#f0f0f0 0deg 72deg, transparent 72deg 360deg)
+            border-box,
+          conic-gradient(from 72deg, #00f, transparent) border-box;
+        animation-delay: 0.4s;
+      }
+
+      .circle:nth-child(4) {
+        width: 40px;
+        height: 40px;
+        top: 30px;
+        left: 30px;
+        background: linear-gradient(#f0f0f0, #f0f0f0) padding-box,
+          conic-gradient(#f0f0f0 0deg 72deg, transparent 72deg 360deg)
+            border-box,
+          conic-gradient(from 72deg, #ff0, transparent) border-box;
+        animation-delay: 0.6s;
+      }
+
+      .circle:nth-child(5) {
+        width: 20px;
+        height: 20px;
+        top: 40px;
+        left: 40px;
+        background: linear-gradient(#f0f0f0, #f0f0f0) padding-box,
+          conic-gradient(#f0f0f0 0deg 72deg, transparent 72deg 360deg)
+            border-box,
+          conic-gradient(from 72deg, #0ff, transparent) border-box;
+        animation-delay: 0.8s;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="spinner">
+      <div class="circle"></div>
+      <div class="circle"></div>
+      <div class="circle"></div>
+      <div class="circle"></div>
+      <div class="circle"></div>
+    </div>
+  </body>
+</html>

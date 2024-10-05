@@ -1,0 +1,36 @@
+<div class="blog-container" aria-label="Blog Posts">
+  <div class="pagination" role="navigation" aria-label="Pagination Navigation">
+    <button class="prev-page" aria-label="Previous Page">&laquo;</button>
+    <span class="current-page" aria-hidden="true">Page 1</span>
+    <button class="next-page" aria-label="Next Page">&raquo;</button>
+  </div>
+  <div
+    class="post"
+    id="post-1"
+    tabindex="0"
+    role="article"
+    aria-labelledby="title-1"
+  >
+    <h2 class="post-title" id="title-1">First Blog Post</h2>
+    <p class="post-content">
+      This is the content of the first blog post. It covers several interesting
+      points and includes some CSS styling.
+    </p>
+    <div class="post-footer">
+      <span class="post-author">Author: Jane Doe</span>
+      <span class="post-date">Published: September 25, 2024</span>
+    </div>
+    <div class="comment-section">
+      <h3 class="comments-title" aria-label="Comments Section">Comments</h3>
+      <div class="comments-list" aria-live="polite">
+        <p>No comments yet.</p>
+      </div>
+      <textarea
+        class="comment-input"
+        aria-label="Add a Comment"
+        placeholder="Write your comment here..."
+      ></textarea>
+      <button class="submit-comment" aria-label="Submit Comment">Submit</button>
+    </div>
+  </div>
+</div>

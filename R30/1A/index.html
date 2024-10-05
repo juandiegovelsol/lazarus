@@ -1,0 +1,90 @@
+<!-- index.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Quiz</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <!-- Header Section -->
+    <header>
+      <h1>Quiz Title</h1>
+      <p>Instructions: Choose the correct answer for each question.</p>
+    </header>
+
+    <!-- Quiz Section -->
+    <section class="quiz">
+      <h2>Questions</h2>
+      <!-- Question 1 -->
+      <section class="question">
+        <p>Question 1 of 5</p>
+        <progress value="1" max="5"></progress>
+        <h3>What is the capital of France?</h3>
+        <div class="answers">
+          <button>London</button>
+          <button>Berlin</button>
+          <button class="correct">Paris</button>
+          <button>Rome</button>
+        </div>
+      </section>
+      <!-- Question 2 -->
+      <section class="question">
+        <p>Question 2 of 5</p>
+        <progress value="2" max="5"></progress>
+        <h3>What is the largest planet in our solar system?</h3>
+        <div class="answers">
+          <button>Earth</button>
+          <button>Saturn</button>
+          <button>Jupiter</button>
+          <button class="correct">Jupiter</button>
+        </div>
+      </section>
+      <!-- Question 3 -->
+      <section class="question">
+        <p>Question 3 of 5</p>
+        <progress value="3" max="5"></progress>
+        <h3>Which element is the lightest?</h3>
+        <div class="answers">
+          <button>Oxygen</button>
+          <button>Nitrogen</button>
+          <button class="correct">Hydrogen</button>
+          <button>Helium</button>
+        </div>
+      </section>
+      <!-- Question 4 -->
+      <section class="question">
+        <p>Question 4 of 5</p>
+        <progress value="4" max="5"></progress>
+        <h3>Who painted the Mona Lisa?</h3>
+        <div class="answers">
+          <button>Leonardo da Vinci</button>
+          <button class="correct">Leonardo da Vinci</button>
+          <button>Vincent van Gogh</button>
+          <button>Pablo Picasso</button>
+        </div>
+      </section>
+      <!-- Question 5 -->
+      <section class="question">
+        <p>Question 5 of 5</p>
+        <progress value="5" max="5"></progress>
+        <h3>What is the chemical symbol for gold?</h3>
+        <div class="answers">
+          <button>Ag</button>
+          <button>Cu</button>
+          <button class="correct">Au</button>
+          <button>Hg</button>
+        </div>
+      </section>
+    </section>
+
+    <!-- Results Section -->
+    <section class="results">
+      <h2>Results</h2>
+      <p>You answered 5 questions.</p>
+      <button>Retake Quiz</button>
+    </section>
+  </body>
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>User Profile System</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <h1>User Profile System</h1>
+    <form id="preference-form">
+      <label for="theme">Theme:</label>
+      <select id="theme" name="theme">
+        <option value="light">Light</option>
+        <option value="dark">Dark</option>
+      </select>
+      <br />
+      <label for="language">Language:</label>
+      <select id="language" name="language">
+        <option value="en">English</option>
+        <option value="es">Spanish</option>
+        <option value="fr">French</option>
+      </select>
+      <br />
+      <label for="notifications">Notifications:</label>
+      <input type="checkbox" id="notifications" name="notifications" />
+      <br />
+      <button id="save-preferences">Save Preferences</button>
+    </form>
+
+    <script src="userProfile.js"></script>
+    <script>
+      const form = document.getElementById("preference-form");
+      const saveButton = document.getElementById("save-preferences");
+      const sessionId = UserProfile.generateSessionId();
+      const userProfile = new UserProfile(sessionId);
+
+      // Update form values based on user preferences
+      userProfile.addListener((preferences) => {
+        document.getElementById("theme").value = preferences.theme;
+        document.getElementById("language").value = preferences.language;
+        document.getElementById("notifications").checked =
+          preferences.notifications;
+      });
+
+      // Save user preferences when form is submitted
+      saveButton.addEventListener("click", (event) => {
+        event.preventDefault();
+        const theme = document.getElementById("theme").value;
+        const language = document.getElementById("language").value;
+        const notifications = document.getElementById("notifications").checked;
+        userProfile.updatePreference("theme", theme);
+        userProfile.updatePreference("language", language);
+        userProfile.updatePreference("notifications", notifications);
+      });
+    </script>
+  </body>
+</html>

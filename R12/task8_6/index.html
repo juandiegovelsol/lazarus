@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guitar Brand Page</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <section id="intro">
+        <h1 id="brand-name" class="section-title">Guitar Brand</h1>
+        <button id="explore-button">Explore Guitars</button>
+    </section>
+
+    <section id="features" style="display: none;">
+        <div id="features-container">
+            <div class="feature-box" id="design-box">
+                <h2 class="feature-title">Design</h2>
+            </div>
+            <div class="feature-box" id="sound-box">
+                <h2 class="feature-title">Sound</h2>
+            </div>
+            <div class="feature-box" id="models-box">
+                <h2 class="feature-title">Models</h2>
+            </div>
+        </div>
+        <button id="back-to-home">Back to Home</button>
+    </section>
+
+    <section id="design-section" style="display: none;">
+        <h1 class="section-title">Design</h1>
+        <div class="content">
+            <img src="gat_bee.jpeg" alt="Guitar Design 1">
+            <img src="gat_bee.jpeg" alt="Guitar Design 2">
+            <img src="gat_bee.jpeg" alt="Guitar Design 3">
+        </div>
+        <button id="back-to-features">Back to Features</button>
+    </section>
+
+    <section id="sound-section" style="display: none;">
+        <h1 class="section-title">Sound</h1>
+        <div class="content">
+            <video src="vid1.mp4" poster="medalla.jpeg"></video>
+            <video src="vid2.mp4" poster="medalla.jpeg"></video>
+            <video src="vid3.mp4" poster="medalla.jpeg"></video>
+        </div>
+        <button id="back-to-features">Back to Features</button>
+    </section>
+
+    <section id="models-section" style="display: none;">
+        <h1 class="section-title">Models</h1>
+        <div class="content">
+            <table id="models-table">
+                <tr>
+                    <th>Model</th>
+                    <th>Type</th>
+                    <th>Image</th>
+                </tr>
+                <tr>
+                    <td>Stratocaster</td>
+                    <td>Electric</td>
+                    <td><img src="stratocaster.jpg" alt="Stratocaster"></td>
+                </tr>
+                <tr>
+                    <td>Telecaster</td>
+                    <td>Electric</td>
+                    <td><img src="telecaster.jpg" alt="Telecaster"></td>
+                </tr>
+                <tr>
+                    <td>Les Paul</td>
+                    <td>Electric</td>
+                    <td><img src="les-paul.jpg" alt="Les Paul"></td>
+                </tr>
+                <tr>
+                    <td>SG</td>
+                    <td>Electric</td>
+                    <td><img src="sg.jpg" alt="SG"></td>
+                </tr>
+            </table>
+        </div>
+        <button id="back-to-features">Back to Features</button>
+    </section>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
