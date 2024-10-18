@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Post-it Generator</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+      }
+
+      .container {
+        display: flex;
+        flex-direction: row;
+        height: 100vh;
+        overflow-y: hidden;
+      }
+
+      .sidebar {
+        background-color: #f0f0f0;
+        padding: 20px;
+        width: 250px;
+        height: 100vh;
+        overflow-y: auto;
+        border-right: 1px solid #ddd;
+      }
+
+      .post-it-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: flex-start;
+        align-items: flex-start;
+        padding: 20px;
+        overflow-y: auto;
+      }
+
+      .post-it {
+        width: 150px;
+        height: 150px;
+        margin: 10px;
+        padding: 10px;
+        border: 1px solid #ddd;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        background-color: #fff;
+        display: inline-block;
+        vertical-align: top;
+      }
+
+      .post-it textarea {
+        width: 100%;
+        height: 100%;
+        border: none;
+        padding: 10px;
+        font-size: 14px;
+        resize: none;
+      }
+
+      .color-picker {
+        margin-bottom: 20px;
+      }
+
+      .color-picker label {
+        display: block;
+        margin-bottom: 10px;
+      }
+
+      .color-picker input[type="color"] {
+        width: 100%;
+        height: 30px;
+        padding: 0;
+        border: none;
+        border-radius: 10px;
+      }
+
+      .create-button {
+        width: 100%;
+        height: 30px;
+        background-color: #4caf50;
+        color: #fff;
+        border: none;
+        border-radius: 10px;
+        cursor: pointer;
+      }
+
+      .create-button:hover {
+        background-color: #3e8e41;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="sidebar">
+        <h2>Post-it Generator</h2>
+        <div class="color-picker">
+          <label for="color">Select a color:</label>
+          <input type="color" id="color" value="#ffff00" />
+        </div>
+        <textarea id="content" placeholder="Enter your note here..."></textarea>
+        <button class="create-button" onclick="createPostIt()">
+          Create Post-it
+        </button>
+      </div>
+      <div class="post-it-container" id="post-it-container"></div>
+    </div>
+
+    <script>
+      let postItContainer = document.getElementById("post-it-container");
+      let colorPicker = document.getElementById("color");
+      let contentTextArea = document.getElementById("content");
+
+      function createPostIt() {
+        let postIt = document.createElement("div");
+        postIt.className = "post-it";
+        postIt.style.backgroundColor = colorPicker.value;
+
+        let textarea = document.createElement("textarea");
+        textarea.value = contentTextArea.value;
+        postIt.appendChild(textarea);
+
+        postItContainer.appendChild(postIt);
+
+        contentTextArea.value = "";
+      }
+    </script>
+  </body>
+</html>

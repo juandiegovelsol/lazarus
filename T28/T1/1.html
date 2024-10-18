@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Health Monitoring App</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: Arial, sans-serif;
+      }
+
+      .container {
+        width: 100%;
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        background-color: #f1f1f1;
+      }
+
+      .header {
+        height: 60px;
+        background: linear-gradient(to right, #33ccff, #ff99cc);
+        color: #333;
+        text-align: center;
+        line-height: 60px;
+        width: 100%;
+      }
+
+      .metrics {
+        display: flex;
+        justify-content: space-between;
+        gap: 20px;
+        padding: 20px;
+      }
+
+      .metric {
+        width: 30%;
+        background-color: #ffffff;
+        padding: 20px;
+        text-align: center;
+        border-radius: 10px;
+        box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .icon {
+        font-size: 60px;
+        margin-bottom: 10px;
+      }
+
+      .steps-icon {
+        animation: walk 2s infinite;
+      }
+
+      .heart-icon {
+        animation: heartbeat 1s infinite;
+      }
+
+      .water-icon {
+        animation: drop 2s infinite;
+      }
+
+      .foot-logo {
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        font-size: 30px;
+        animation: move 5s infinite;
+      }
+
+      @keyframes walk {
+        0% {
+          transform: translateX(0);
+        }
+        50% {
+          transform: translateX(10px);
+        }
+        100% {
+          transform: translateX(0);
+        }
+      }
+
+      @keyframes heartbeat {
+        0% {
+          transform: scale(1);
+        }
+        50% {
+          transform: scale(1.2);
+        }
+        100% {
+          transform: scale(1);
+        }
+      }
+
+      @keyframes drop {
+        0% {
+          transform: translateY(0);
+        }
+        50% {
+          transform: translateY(10px);
+        }
+        100% {
+          transform: translateY(0);
+        }
+      }
+
+      @keyframes move {
+        0% {
+          transform: translateX(0);
+        }
+        50% {
+          transform: translateX(-100%);
+        }
+        100% {
+          transform: translateX(0);
+        }
+      }
+
+      @media (max-width: 768px) {
+        .metrics {
+          display: block;
+          padding: 10px;
+        }
+
+        .metric {
+          width: 100%;
+          margin-bottom: 20px;
+        }
+      }
+
+      footer {
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        height: 50px;
+        background-color: #333;
+        color: white;
+        text-align: center;
+        line-height: 50px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="header">
+        <h1>Your Personal Health Dashboard</h1>
+      </div>
+
+      <div class="metrics">
+        <div class="metric steps">
+          <div class="icon steps-icon">&#128095;</div>
+          <h2>Steps Taken Today</h2>
+          <p id="steps-count">12,000</p>
+          <div class="foot-logo">&#128095;</div>
+        </div>
+
+        <div class="metric heart-rate">
+          <div class="icon heart-icon">&#10084;</div>
+          <h2>Current Heart Rate</h2>
+          <p id="heart-rate">80 bpm</p>
+        </div>
+
+        <div class="metric water-intake">
+          <div class="icon water-icon">&#128167;</div>
+          <h2>Water Intake</h2>
+          <p id="water-intake">2 liters</p>
+        </div>
+      </div>
+    </div>
+
+    <footer>
+      <p>Stay Healthy! Monitor your progress every day.</p>
+    </footer>
+  </body>
+</html>

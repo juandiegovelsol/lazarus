@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Health Monitoring App</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: Arial, sans-serif;
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        transition: background-color 0.3s ease-in-out;
+      }
+
+      .container {
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        overflow: hidden;
+      }
+
+      .header {
+        height: 5vh;
+        background: linear-gradient(to right, #33ccff, #ff99cc);
+        color: #333;
+        text-align: center;
+        line-height: 1.5;
+        width: 100%;
+        padding: 0 10px;
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .dark-mode-toggle {
+        position: absolute;
+        top: 50%;
+        right: 10px;
+        transform: translateY(-50%);
+        background-color: #333;
+        color: #fff;
+        padding: 5px 10px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+
+      .dark-mode-toggle:hover {
+        background-color: #444;
+      }
+
+      .metrics {
+        flex-grow: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+        padding: 20px;
+        overflow-y: auto;
+      }
+
+      .dark-mode .metrics {
+        background-color: #5a5a5a;
+      }
+
+      .metric {
+        width: 100%;
+        background-color: #ffffff;
+        padding: 20px;
+        text-align: center;
+        border-radius: 10px;
+        box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 20px;
+      }
+
+      .metric:hover {
+        transform: scale(1.05);
+        background-color: #f7f7f7;
+      }
+
+      .dark-mode .metric {
+        background-color: #333;
+        color: #fff;
+      }
+
+      .dark-mode .metric:hover {
+        background-color: #444;
+      }
+
+      .icon {
+        font-size: 60px;
+        margin-bottom: 10px;
+      }
+
+      .steps-icon {
+        animation: walk 2s infinite;
+      }
+
+      .heart-icon {
+        animation: heartbeat 1s infinite;
+      }
+
+      .water-icon {
+        animation: drop 2s infinite;
+      }
+
+      .progress-bar-container {
+        margin-top: 10px;
+        width: 100%;
+      }
+
+      .progress-bar {
+        width: 100%;
+        height: 20px;
+        background-color: #f1f1f1;
+        border-radius: 10px;
+        overflow: hidden;
+        position: relative;
+        margin-top: 5px;
+      }
+
+      .progress {
+        height: 100%;
+        background-color: #33ccff;
+        border-radius: 10px;
+        transition: width 0.3s ease-in-out;
+      }
+
+      .progress-text {
+        position: absolute;
+        width: 100%;
+        text-align: center;
+        top: 0;
+        font-size: 12px;
+        color: #333;
+      }
+
+      .dark-mode .progress-bar {
+        background-color: #444;
+      }
+
+      .dark-mode .progress {
+        background-color: #ff99cc;
+      }
+
+      .footer {
+        height: auto;
+        background-color: #f1f1f1;
+        color: #333;
+        text-align: center;
+        padding: 10px;
+      }
+
+      .dark-mode .footer {
+        background-color: #333;
+        color: #fff;
+      }
+
+      @keyframes walk {
+        0% {
+          transform: translateX(0);
+        }
+        50% {
+          transform: translateX(10px);
+        }
+        100% {
+          transform: translateX(0);
+        }
+      }
+
+      @keyframes heartbeat {
+        0% {
+          transform: scale(1);
+        }
+        50% {
+          transform: scale(1.2);
+        }
+        100% {
+          transform: scale(1);
+        }
+      }
+
+      @keyframes drop {
+        0% {
+          transform: translateY(0);
+        }
+        50% {
+          transform: translateY(10px);
+        }
+        100% {
+          transform: translateY(0);
+        }
+      }
+
+      @media (max-width: 768px) {
+        .header {
+          font-size: 10px;
+        }
+        .metrics {
+          flex-direction: column;
+        }
+
+        .metric {
+          width: 100%;
+        }
+
+        h2,
+        .dark-mode-toggle {
+          font-size: 14px;
+        }
+
+        .progress-text {
+          font-size: 10px;
+        }
+      }
+
+      .goal-input {
+        width: 100%;
+        height: 30px;
+        font-size: 16px;
+        padding: 10px;
+        border: none;
+        border-radius: 10px;
+        background-color: #f1f1f1;
+        margin-top: 10px;
+      }
+
+      .dark-mode .goal-input {
+        background-color: #444;
+        color: #fff;
+      }
+
+      .congratulations-message {
+        font-size: 16px;
+        font-weight: bold;
+        color: #33ccff;
+        margin-top: 10px;
+        display: none;
+      }
+
+      .dark-mode .congratulations-message {
+        color: #ff99cc;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+      <header class="header">
+        <h1 style="font-size: 16px; margin: 0 10px">
+          Your Personal Health Dashboard
+        </h1>
+        <button class="dark-mode-toggle" onclick="toggleDarkMode()">
+          Toggle Dark Mode
+        </button>
+      </header>
+
+      <main class="metrics">
+        <section class="metric steps">
+          <div class="icon steps-icon">&#128095;</div>
+          <h2>Steps Taken</h2>
+          <p id="steps-count">
+            <span id="steps-progress">8,000</span> out of
+            <span id="steps-goal">10,000</span>
+          </p>
+          <input
+            type="number"
+            id="steps-goal-input"
+            class="goal-input"
+            value="10000"
+          />
+          <div class="progress-bar-container">
+            <div class="progress-bar">
+              <div class="progress" style="width: 80%"></div>
+            </div>
+          </div>
+          <p id="steps-congratulations" class="congratulations-message">
+            Congratulations! You've reached your daily step goal!
+          </p>
+        </section>
+
+        <section class="metric heart-rate">
+          <div class="icon heart-icon">&#10084;</div>
+          <h2>Current Heart Rate</h2>
+          <p id="heart-rate">80 bpm</p>
+        </section>
+
+        <section class="metric water-intake">
+          <div class="icon water-icon">&#128167;</div>
+          <h2>Water Intake</h2>
+          <p id="water-intake">
+            <span id="water-progress">2</span> liters out of
+            <span id="water-goal">3</span>
+          </p>
+          <input
+            type="number"
+            id="water-goal-input"
+            class="goal-input"
+            value="3"
+          />
+          <div class="progress-bar-container">
+            <div class="progress-bar">
+              <div class="progress" style="width: 66%"></div>
+            </div>
+          </div>
+          <p id="water-congratulations" class="congratulations-message">
+            Congratulations! You've reached your daily water intake!
+          </p>
+        </section>
+      </main>
+
+      <footer class="footer">
+        <p>Stay Healthy! Monitor your progress every day.</p>
+      </footer>
+    </div>
+
+    <script>
+      function toggleDarkMode() {
+        document.body.classList.toggle("dark-mode");
+      }
+
+      const stepsGoalInput = document.getElementById("steps-goal-input");
+      const waterGoalInput = document.getElementById("water-goal-input");
+      const stepsGoalSpan = document.getElementById("steps-goal");
+      const stepsProgressSpan = document.getElementById("steps-progress");
+      const waterGoalSpan = document.getElementById("water-goal");
+      const waterProgressSpan = document.getElementById("water-progress");
+      const stepsProgressBar = document.querySelector(
+        ".metric.steps .progress"
+      );
+      const waterProgressBar = document.querySelector(
+        ".metric.water-intake .progress"
+      );
+      const stepsCongratulations = document.getElementById(
+        "steps-congratulations"
+      );
+      const waterCongratulations = document.getElementById(
+        "water-congratulations"
+      );
+
+      let currentWater = 2; // simulate current water intake
+      // simulate progress on steps taken
+      let steps = 8000;
+      setInterval(() => {
+        steps += 100;
+        updateStepsProgress();
+      }, 1000);
+
+      stepsGoalInput.addEventListener("input", updateStepsGoal);
+      waterGoalInput.addEventListener("input", updateWaterGoal);
+
+      function updateStepsGoal() {
+        const newGoal = parseInt(stepsGoalInput.value);
+        stepsGoalSpan.textContent = newGoal;
+        localStorage.setItem("stepsGoal", newGoal);
+        updateStepsProgress();
+      }
+
+      function updateWaterGoal() {
+        const newGoal = parseInt(waterGoalInput.value);
+        waterGoalSpan.textContent = newGoal;
+        localStorage.setItem("waterGoal", newGoal);
+        updateWaterProgress();
+      }
+
+      function updateStepsProgress() {
+        const goal = parseInt(stepsGoalSpan.textContent);
+        const progress = (steps / goal) * 100;
+        stepsProgressBar.style.width = `${progress}%`;
+        stepsProgressSpan.textContent = steps;
+        if (progress >= 100) {
+          stepsCongratulations.style.display = "block";
+        } else {
+          stepsCongratulations.style.display = "none";
+        }
+      }
+
+      function updateWaterProgress() {
+        const goal = parseInt(waterGoalSpan.textContent);
+        console.log(goal);
+        const progress = (currentWater / goal) * 100;
+        waterProgressBar.style.width = `${progress}%`;
+        waterProgressSpan.textContent = currentWater;
+        if (progress >= 100) {
+          waterCongratulations.style.display = "block";
+        } else {
+          waterCongratulations.style.display = "none";
+        }
+      }
+
+      // load saved goals from localStorage
+      const savedStepsGoal = localStorage.getItem("stepsGoal");
+      const savedWaterGoal = localStorage.getItem("waterGoal");
+      if (savedStepsGoal) {
+        stepsGoalInput.value = savedStepsGoal;
+        stepsGoalSpan.textContent = savedStepsGoal;
+      }
+      if (savedWaterGoal) {
+        waterGoalInput.value = savedWaterGoal;
+        waterGoalSpan.textContent = savedWaterGoal;
+      }
+      updateStepsGoal();
+      updateWaterGoal();
+    </script>
+  </body>
+</html>

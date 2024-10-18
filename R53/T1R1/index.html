@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cryptocurrency Portfolio Tracker</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div id="portfolio"></div>
+
+    <!-- Add Crypto Form -->
+    <form id="addCryptoForm">
+        <label for="cryptoId">Cryptocurrency ID:</label>
+        <input type="text" id="cryptoId" placeholder="Enter cryptocurrency ID">
+        <div id="autofill-suggestions"></div>
+        <label for="quantity">Quantity:</label>
+        <input type="number" id="quantity" placeholder="Enter quantity">
+        <button type="submit">Add to Portfolio</button>
+    </form>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

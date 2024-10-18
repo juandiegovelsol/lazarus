@@ -1,0 +1,26 @@
+.option-btn {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  margin: 10px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.option-btn:hover {
+  background-color: #0056b3;
+}
+
+.chosen {
+  background-color: #2ecc71;
+}
+
+.not-chosen {
+  background-color: #e74c3c;
+}
+
+.disabled {
+  opacity: 0.5;
+  pointer-events: none;
+}

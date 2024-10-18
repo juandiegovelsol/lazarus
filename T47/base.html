@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Fantasy Creature Generator</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+        background-color: #f0f0f0;
+      }
+      .container {
+        text-align: center;
+        background-color: white;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      }
+      .creature {
+        width: 200px;
+        height: 300px;
+        margin: 20px auto;
+        position: relative;
+      }
+      .head {
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        position: absolute;
+        top: 0;
+        left: 50px;
+      }
+      .body {
+        width: 150px;
+        height: 150px;
+        position: absolute;
+        top: 80px;
+        left: 25px;
+      }
+      .legs {
+        width: 50px;
+        height: 100px;
+        position: absolute;
+        bottom: 0;
+      }
+      .left-leg {
+        left: 50px;
+      }
+      .right-leg {
+        right: 50px;
+      }
+      .controls {
+        display: flex;
+        justify-content: space-around;
+        margin-bottom: 20px;
+      }
+      .color-picker {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+      button {
+        margin: 5px;
+        padding: 5px 10px;
+        font-size: 16px;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Fantasy Creature Generator</h1>
+      <div class="controls">
+        <div class="color-picker">
+          <label for="headColor">Head</label>
+          <input type="color" id="headColor" value="#ff0000" />
+        </div>
+        <div class="color-picker">
+          <label for="bodyColor">Body</label>
+          <input type="color" id="bodyColor" value="#00ff00" />
+        </div>
+        <div class="color-picker">
+          <label for="legsColor">Legs</label>
+          <input type="color" id="legsColor" value="#0000ff" />
+        </div>
+      </div>
+      <div class="creature" id="creature">
+        <div class="head"></div>
+        <div class="body"></div>
+        <div class="legs left-leg"></div>
+        <div class="legs right-leg"></div>
+      </div>
+      <button onclick="generateCreature()">Generate Creature</button>
+      <button onclick="saveCreature()">Save Creature</button>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.5.0-beta4/html2canvas.min.js"></script>
+    <script>
+      function generateCreature() {
+        const head = document.querySelector(".head");
+        const body = document.querySelector(".body");
+        const leftLeg = document.querySelector(".left-leg");
+        const rightLeg = document.querySelector(".right-leg");
+
+        head.style.backgroundColor = document.getElementById("headColor").value;
+        body.style.backgroundColor = document.getElementById("bodyColor").value;
+
+        const legColor = document.getElementById("legsColor").value;
+        leftLeg.style.backgroundColor = legColor;
+        rightLeg.style.backgroundColor = legColor;
+      }
+
+      function saveCreature() {
+        html2canvas(document.getElementById("creature")).then((canvas) => {
+          const link = document.createElement("a");
+          link.download = "my-fantasy-creature.png";
+          link.href = canvas.toDataURL();
+          link.click();
+        });
+      }
+
+      generateCreature();
+    </script>
+  </body>
+</html>

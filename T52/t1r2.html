@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pendulum Animation with Clock</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: #87ceeb;
+        font-family: Arial, sans-serif;
+      }
+
+      .clock-container {
+        position: relative;
+        width: 100vw;
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .clock {
+        position: relative;
+        aspect-ratio: 1;
+        width: 50%;
+        border-radius: 50%;
+        border: 2px solid black;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-bottom: 20%;
+      }
+
+      .clock .numbers {
+        position: absolute;
+        font-size: 5vw;
+        font-weight: bold;
+      }
+
+      .clock .numbers.one {
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        text-align: center;
+      }
+
+      .clock .numbers.two {
+        top: 15%;
+        right: 10%;
+      }
+
+      .clock .numbers.three {
+        bottom: 15%;
+        right: 10%;
+      }
+
+      .clock .numbers.four {
+        bottom: 15%;
+        left: 10%;
+      }
+
+      .clock .numbers.five {
+        top: 15%;
+        left: 10%;
+      }
+
+      .clock .numbers.six {
+        bottom: 50%;
+        left: 50%;
+        transform: translate(-50%, 50%);
+        text-align: center;
+      }
+
+      .clock .numbers.seven {
+        top: 20%;
+        right: 20%;
+      }
+
+      .clock .numbers.eight {
+        top: 30%;
+        right: 30%;
+      }
+
+      .clock .numbers.nine {
+        top: 50%;
+        left: 10%;
+      }
+
+      .clock .numbers.ten {
+        top: 20%;
+        left: 20%;
+      }
+
+      .clock .numbers.eleven {
+        top: 30%;
+        left: 30%;
+      }
+
+      .clock .numbers.twelve {
+        top: 0%;
+        left: 50%;
+        transform: translate(-50%, 0%);
+        text-align: center;
+      }
+
+      .clock .seconds {
+        position: absolute;
+        width: 1%;
+        height: 40%;
+        background-color: black;
+        top: 10%;
+        left: 50%;
+        transform-origin: bottom;
+        animation: tick 60s steps(60) infinite;
+      }
+
+      .pendulum-container {
+        position: relative;
+        width: 20%;
+        height: 40%;
+      }
+
+      .string {
+        position: absolute;
+        top: 0;
+        left: 50%;
+        width: 1%;
+        height: 80%;
+        background-color: black;
+        transform-origin: top;
+        animation: swing 2s ease-in-out infinite;
+      }
+
+      .weight {
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        width: 5%;
+        height: 5%;
+        border-radius: 50%;
+        transform: translateX(-50%);
+        animation: colorChange 2s ease-in-out infinite;
+      }
+
+      @keyframes swing {
+        0% {
+          transform: rotate(-45deg);
+        }
+
+        50% {
+          transform: rotate(45deg);
+        }
+
+        100% {
+          transform: rotate(-45deg);
+        }
+      }
+
+      @keyframes colorChange {
+        0% {
+          background-color: black;
+        }
+
+        50% {
+          background-color: #ff6347;
+        }
+
+        100% {
+          background-color: black;
+        }
+      }
+
+      @keyframes tick {
+        0% {
+          transform: rotate(0deg);
+        }
+
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="clock-container">
+      <div class="clock">
+        <div class="numbers twelve">12</div>
+        <div class="numbers three">3</div>
+        <div class="numbers six">6</div>
+        <div class="numbers nine">9</div>
+        <div class="seconds"></div>
+      </div>
+      <div class="pendulum-container">
+        <div class="string">
+          <div class="weight"></div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

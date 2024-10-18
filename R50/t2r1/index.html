@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grocery Bill Calculator</title>
+    <style>
+        /* Add some basic styling to improve readability */
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        form {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        input[type="text"],
+        input[type="number"] {
+            width: 100%;
+            height: 30px;
+            margin-bottom: 20px;
+            padding: 10px;
+            box-sizing: border-box;
+        }
+
+        button[type="submit"] {
+            width: 100%;
+            height: 40px;
+            background-color: #4CAF50;
+            color: #fff;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button[type="submit"]:hover {
+            background-color: #3e8e41;
+        }
+
+        #item-list {
+            margin-bottom: 20px;
+        }
+
+        #total {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Grocery Bill Calculator</h1>
+    <form id="grocery-form">
+        <div id="item-list">
+            <input type="text" placeholder="Enter item name" name="item1">
+            <input type="number" placeholder="Enter quantity" name="quantity1">
+            <span style="color: red;"></span>
+        </div>
+        <button type="button" id="add-button">Add new item</button>
+        <button type="submit">Calculate Total</button>
+    </form>
+    <p id="total"></p>
+    <form id="search-form">
+        <input type="text" id="search-input" placeholder="Enter product name">
+        <button type="submit">Search</button>
+    </form>
+    <p id="search-result"></p>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

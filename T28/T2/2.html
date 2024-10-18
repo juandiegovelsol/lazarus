@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Health Monitoring App</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: Arial, sans-serif;
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        transition: background-color 0.3s ease-in-out;
+      }
+
+      body.light {
+        background-color: #f0f0f0;
+      }
+
+      body.dark {
+        background-color: #333;
+      }
+
+      .container {
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+      }
+
+      .header {
+        height: 5vh;
+        background: linear-gradient(to right, #33ccff, #ff99cc);
+        color: #333;
+        text-align: center;
+        line-height: 60px;
+        width: 100%;
+        padding: 0 10px;
+      }
+
+      .dark-mode-toggle {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        background-color: #333;
+        color: #fff;
+        border: none;
+        padding: 10px 20px;
+        cursor: pointer;
+      }
+
+      .dark-mode-toggle:hover {
+        background-color: #444;
+      }
+
+      .metrics {
+        flex-grow: 1;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 20px;
+        padding: 20px;
+      }
+
+      .metric {
+        height: 30%;
+        width: 30%;
+        background-color: #ffffff;
+        padding: 20px;
+        text-align: center;
+        border-radius: 10px;
+        box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+        transition: transform 0.3s ease-in-out,
+          background-color 0.3s ease-in-out;
+      }
+
+      .metric:hover {
+        transform: scale(1.1);
+      }
+
+      body.light .metric:hover {
+        background-color: #e0e0e0;
+      }
+
+      body.dark .metric {
+        background-color: #444;
+        color: #fff;
+      }
+
+      body.dark .metric:hover {
+        background-color: #555;
+      }
+
+      .icon {
+        font-size: 60px;
+        margin-bottom: 10px;
+      }
+
+      .steps-icon {
+        animation: walk 2s infinite;
+      }
+
+      .heart-icon {
+        animation: heartbeat 1s infinite;
+      }
+
+      .water-icon {
+        animation: drop 2s infinite;
+      }
+
+      .progress-bars {
+        display: flex;
+        justify-content: space-between;
+        padding: 20px;
+      }
+
+      .progress-bar {
+        width: 45%;
+        height: 20px;
+        background-color: #e0e0e0;
+        border-radius: 10px;
+        position: relative;
+      }
+
+      .progress-bar-fill {
+        height: 100%;
+        background-color: #33ccff;
+        border-radius: 10px;
+        position: absolute;
+        left: 0;
+        top: 0;
+      }
+
+      body.dark .progress-bar {
+        background-color: #555;
+      }
+
+      body.dark .progress-bar-fill {
+        background-color: #66ccff;
+      }
+
+      @keyframes walk {
+        0% {
+          transform: translateX(0);
+        }
+
+        50% {
+          transform: translateX(10px);
+        }
+
+        100% {
+          transform: translateX(0);
+        }
+      }
+
+      @keyframes heartbeat {
+        0% {
+          transform: scale(1);
+        }
+
+        50% {
+          transform: scale(1.2);
+        }
+
+        100% {
+          transform: scale(1);
+        }
+      }
+
+      @keyframes drop {
+        0% {
+          transform: translateY(0);
+        }
+
+        50% {
+          transform: translateY(10px);
+        }
+
+        100% {
+          transform: translateY(0);
+        }
+      }
+
+      @media (max-width: 768px) {
+        .metrics {
+          flex-direction: column;
+        }
+
+        .metric {
+          width: 100%;
+          margin-bottom: 20px;
+        }
+      }
+    </style>
+  </head>
+
+  <body class="light">
+    <div class="container">
+      <header class="header">
+        <h1>Your Personal Health Dashboard</h1>
+        <button class="dark-mode-toggle" onclick="toggleDarkMode()">
+          Toggle Dark Mode
+        </button>
+      </header>
+
+      <main class="metrics">
+        <section class="metric steps">
+          <div class="icon steps-icon">&#128095;</div>
+          <h2>Steps Taken Today</h2>
+          <p id="steps-count">5,000</p>
+        </section>
+
+        <section class="metric heart-rate">
+          <div class="icon heart-icon">&#10084;</div>
+          <h2>Current Heart Rate</h2>
+          <p id="heart-rate">80 bpm</p>
+        </section>
+
+        <section class="metric water-intake">
+          <div class="icon water-icon">&#128167;</div>
+          <h2>Water Intake</h2>
+          <p id="water-intake">1.5 liters</p>
+        </section>
+      </main>
+
+      <div class="progress-bars">
+        <div class="progress-bar steps-progress-bar">
+          <div class="progress-bar-fill" style="width: 50%"></div>
+          <p>Steps: 5,000/10,000</p>
+        </div>
+
+        <div class="progress-bar water-progress-bar">
+          <div class="progress-bar-fill" style="width: 75%"></div>
+          <p>Water Intake: 1.5/2 liters</p>
+        </div>
+      </div>
+
+      <footer class="footer">
+        <p>Stay Healthy! Monitor your progress every day.</p>
+      </footer>
+    </div>
+
+    <script>
+      function toggleDarkMode() {
+        document.body.classList.toggle("dark");
+      }
+    </script>
+  </body>
+</html>

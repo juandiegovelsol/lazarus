@@ -1,0 +1,27 @@
+@media only screen and (min-width: 700px) {
+  .menu {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 200px;
+    height: 100%;
+    transform: translateX(-100%);
+    transition: transform 0.3s ease-in-out;
+  }
+
+  .menu.open {
+    transform: translateX(0);
+  }
+
+  .close-button {
+    transform: translateX(-50%) rotate(90deg);
+  }
+
+  .content {
+    margin-left: 0;
+  }
+
+  .menu.open + .content {
+    margin-left: 200px;
+  }
+}

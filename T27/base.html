@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Capital to Invest Calculator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            width: 100%;
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin: 10px 0 5px;
+            font-weight: bold;
+        }
+
+        input[type="number"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+        .result {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #e7f7d4;
+            border-radius: 5px;
+            text-align: center;
+            font-size: 18px;
+            color: #4CAF50;
+            font-weight: bold;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <h1>Capital to Invest Calculator</h1>
+
+        <label for="totalCapital">Total Capital ($):</label>
+        <input type="number" id="totalCapital" placeholder="Enter your capital">
+
+        <label for="entryPrice">Entry Price ($):</label>
+        <input type="number" id="entryPrice" placeholder="Enter the share entry price">
+
+        <label for="stopLossPrice">Stop Loss ($):</label>
+        <input type="number" id="stopLossPrice" placeholder="Enter the stop loss price">
+
+        <label for="riskPercentage">Risk assumed (%):</label>
+        <input type="number" id="riskPercentage" placeholder="Enter the desired risk percentage">
+
+        <button onclick="calculateInvestment()">Calculate</button>
+
+        <div id="result" class="result" style="display: none;">
+        </div>
+    </div>
+
+    <script>
+        function calculateInvestment() {
+            const totalCapital = parseFloat(document.getElementById("totalCapital").value);
+            const entryPrice = parseFloat(document.getElementById("entryPrice").value);
+            const stopLossPrice = parseFloat(document.getElementById("stopLossPrice").value);
+            const riskPercentage = parseFloat(document.getElementById("riskPercentage").value);
+
+            if (isNaN(totalCapital) || isNaN(entryPrice) || isNaN(stopLossPrice) || isNaN(riskPercentage) ||
+                totalCapital <= 0 || entryPrice <= 0 || stopLossPrice <= 0 || riskPercentage <= 0) {
+                alert("Enter valid inputs in all fields.");
+                return;
+            }
+
+            const riskPerShare = entryPrice - stopLossPrice;
+
+            if (riskPerShare <= 0) {
+                alert("The Stop Loss price must be lower than the entry price.");
+                return;
+            }
+
+            const totalRisk = (totalCapital * (riskPercentage / 100));
+
+            const sharesToBuy = totalRisk / riskPerShare;
+
+            const operationValue = sharesToBuy * entryPrice;
+
+            const resultDiv = document.getElementById("result");
+            resultDiv.style.display = "block";
+            resultDiv.innerHTML = `Capital to invest: $${operationValue.toFixed(2)}`;
+        }
+    </script>
+
+</body>
+
+</html>

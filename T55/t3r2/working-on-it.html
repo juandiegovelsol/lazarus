@@ -1,0 +1,65 @@
+<!-- 
+  The HTML document starts with the declaration of the document type and the language used.
+  The 'lang' attribute specifies the language of the document's content.
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <!-- 
+  The 'head' section contains metadata about the document, such as the character encoding, 
+  viewport settings, and links to external stylesheets or scripts.
+-->
+
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>We're Working On It</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+
+  <!-- 
+  The 'body' section contains the content of the HTML document.
+  In this case, we're using a flexbox layout to divide the content into two main sections: 
+  the sidebar and the main content area.
+-->
+
+  <body>
+    <!-- 
+    The sidebar section contains the navigation menu and the app name.
+    It's styled using the '.sidebar' class in the CSS file.
+  -->
+    <div class="sidebar">
+      <!-- 
+      The sidebar header contains the app name.
+      It's styled using the '.sidebar-header' class in the CSS file.
+    -->
+      <div class="sidebar-header">
+        <h2>App Name</h2>
+      </div>
+
+      <!-- 
+      The sidebar navigation menu contains links to different pages.
+      It's styled using the '.sidebar-nav' class in the CSS file.
+    -->
+      <ul class="sidebar-nav">
+        <li><a href="index.html">Dashboard</a></li>
+        <li><a href="working-on-it.html">Reports</a></li>
+        <li><a href="working-on-it.html">Analytics</a></li>
+        <li><a href="working-on-it.html">Settings</a></li>
+      </ul>
+    </div>
+
+    <!-- 
+    The main content section contains the message.
+    It's styled using the '.main-content' class in the CSS file.
+  -->
+    <div class="main-content">
+      <div class="content">
+        <h1>We're Working On It</h1>
+        <p>
+          This feature is currently under development. Please check back later
+          for updates.
+        </p>
+      </div>
+    </div>
+  </body>
+</html>

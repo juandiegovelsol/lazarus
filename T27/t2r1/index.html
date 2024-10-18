@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Capital to Invest Calculator</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+
+  <body>
+    <div class="container">
+      <h1 class="app-title">Capital to Invest Calculator</h1>
+      <form class="calculator-form">
+        <div class="calculator-form__group">
+          <label class="calculator-form__label" for="totalCapital"
+            >Total Capital ($):</label
+          >
+          <input
+            class="calculator-form__input"
+            type="number"
+            id="totalCapital"
+            placeholder="Enter your capital"
+            required
+          />
+        </div>
+        <div class="calculator-form__group">
+          <label class="calculator-form__label" for="entryPrice"
+            >Entry Price ($):</label
+          >
+          <input
+            class="calculator-form__input"
+            type="number"
+            id="entryPrice"
+            placeholder="Enter the share entry price"
+            required
+          />
+        </div>
+        <div class="calculator-form__group">
+          <label class="calculator-form__label" for="stopLossPrice"
+            >Stop Loss ($):</label
+          >
+          <input
+            class="calculator-form__input"
+            type="number"
+            id="stopLossPrice"
+            placeholder="Enter the stop loss price"
+            required
+          />
+        </div>
+        <div class="calculator-form__group">
+          <label class="calculator-form__label" for="riskPercentage"
+            >Risk assumed (%):</label
+          >
+          <input
+            class="calculator-form__input"
+            type="number"
+            id="riskPercentage"
+            placeholder="Enter the desired risk percentage"
+            required
+          />
+        </div>
+        <button class="calculator-form__button" type="submit">Calculate</button>
+      </form>
+      <div
+        id="result"
+        class="calculator-form__result"
+        style="display: none"
+      ></div>
+    </div>
+    <script src="script.js"></script>
+  </body>
+</html>

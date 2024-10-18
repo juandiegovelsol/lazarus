@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Enhanced Landing Page</title>
+</head>
+<body>
+    <header class="header">
+        <div class="logo">MyWebsite</div>
+        <nav class="nav">
+            <ul class="nav-links">
+                <li><a href="#">Home</a></li>
+                <li><a href="#">About</a></li>
+                <li><a href="#">Services</a></li>
+                <li><a href="#">Contact</a></li>
+            </ul>
+            <button class="login-button">Login</button>
+            <button class="toggle-nav" aria-label="Toggle Navigation">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </nav>
+        <button class="toggle-bg">Toggle Header Color</button>
+        <button class="toggle-dark-mode">Toggle Dark Mode</button>
+    </header>
+    <div class="login-modal" id="login-modal">
+        <div class="login-modal-content">
+            <span class="close-modal">&times;</span>
+            <form>
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="username"><br><br>
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password"><br><br>
+                <input type="checkbox" id="remember-me" name="remember-me">
+                <label for="remember-me">Remember Me</label><br><br>
+                <button class="login-modal-button">Login</button>
+                <button class="cancel-modal-button">Cancel</button>
+            </form>
+        </div>
+    </div>
+    <main class="main-content">
+        <section class="intro">
+            <h1>Welcome to MyWebsite</h1>
+            <p>Your one-stop solution for all your needs.</p>
+            <img src="example.jpg" alt="Example Image" />
+        </section>
+        <section class="features">
+            <h2>Our Features</h2>
+            <div class="features-container">
+                <div class="feature">
+                    <h3>Feature One</h3>
+                    <p>Description of feature one.</p>
+                </div>
+                <div class="feature">
+                    <h3>Feature Two</h3>
+                    <p>Description of feature two.</p>
+                </div>
+                <div class="feature">
+                    <h3>Feature Three</h3>
+                    <p>Description of feature three.</p>
+                </div>
+            </div>
+        </section>
+        <section class="testimonials">
+            <h2>What Our Clients Say</h2>
+            <div class="testimonials-carousel">
+                <div class="testimonial active">
+                    <p>Testimonial one from a satisfied client.</p>
+                    <p>— Client Name</p>
+                </div>
+                <div class="testimonial">
+                    <p>Testimonial two from a satisfied client.</p>
+                    <p>— Client Name</p>
+                </div>
+                <div class="testimonial">
+                    <p>Testimonial three from a satisfied client.</p>
+                    <p>— Client Name</p>
+                </div>
+            </div>
+            <div class="carousel-controls">
+                <button class="prev-testimonial" aria-label="Previous Testimonial">
+                    <span>&lt;</span>
+                </button>
+                <button class="next-testimonial" aria-label="Next Testimonial">
+                    <span>&gt;</span>
+                </button>
+            </div>
+        </section>
+    </main>
+    <footer class="footer">
+        <p>&copy; 2024 MyWebsite. All rights reserved.</p>
+        <ul class="social-links">
+            <li><a href="#" target="_blank"><i class="fa-brands fa-facebook-f"></i></a></li>
+            <li><a href="#" target="_blank"><i class="fa-brands fa-twitter"></i></a></li>
+            <li><a href="#" target="_blank"><i class="fa-brands fa-linkedin-in"></i></a></li>
+        </ul>
+    </footer>
+    <script src="script.js"></script>
+</body>
+</html>

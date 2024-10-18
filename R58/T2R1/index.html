@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <title>Enhanced Landing Page</title>
+  </head>
+  <body>
+    <header class="header">
+      <div class="logo">MyWebsite</div>
+      <nav class="nav">
+        <ul class="nav-links">
+          <li><a href="#" class="nav-link">Home</a></li>
+          <li><a href="#" class="nav-link">About</a></li>
+          <li><a href="#" class="nav-link">Services</a></li>
+          <li><a href="#" class="nav-link">Contact</a></li>
+        </ul>
+        <button class="login-button" id="login-button">Login</button>
+        <button class="toggle-nav" id="toggle-nav">
+          <span class="toggle-nav-icon"></span>
+        </button>
+      </nav>
+    </header>
+    <div class="login-modal" id="login-modal">
+      <div class="login-modal-content">
+        <h2>Login</h2>
+        <form>
+          <label for="username">Username:</label>
+          <input type="text" id="username" name="username" /><br /><br />
+          <label for="password">Password:</label>
+          <input type="password" id="password" name="password" /><br /><br />
+          <button class="login-modal-button" id="login-modal-button">
+            Login
+          </button>
+          <button class="login-modal-button" id="cancel-modal-button">
+            Cancel
+          </button>
+        </form>
+      </div>
+    </div>
+    <main class="main-content">
+      <section class="intro">
+        <h1>Welcome to MyWebsite</h1>
+        <p>Your one-stop solution for all your needs.</p>
+        <img src="example.jpg" alt="Example Image" />
+      </section>
+      <section class="features">
+        <h2>Our Features</h2>
+        <div class="features-container">
+          <div class="feature">
+            <h3>Feature One</h3>
+            <p>Description of feature one.</p>
+          </div>
+          <div class="feature">
+            <h3>Feature Two</h3>
+            <p>Description of feature two.</p>
+          </div>
+          <div class="feature">
+            <h3>Feature Three</h3>
+            <p>Description of feature three.</p>
+          </div>
+        </div>
+      </section>
+      <section class="testimonials">
+        <h2>What Our Clients Say</h2>
+        <div class="testimonials-container">
+          <div class="testimonial active">
+            <p>Testimonial one from a satisfied client.</p>
+            <p>— Client Name</p>
+          </div>
+          <div class="testimonial">
+            <p>Testimonial two from a satisfied client2.</p>
+            <p>— Client Name</p>
+          </div>
+          <div class="testimonial">
+            <p>Testimonial three from a satisfied client3.</p>
+            <p>— Client Name</p>
+          </div>
+        </div>
+        <div class="testimonial-nav">
+          <button class="testimonial-prev" id="testimonial-prev"></button>
+          <button class="testimonial-next" id="testimonial-next"></button>
+        </div>
+      </section>
+    </main>
+    <footer class="footer">
+      <p>&copy; 2024 MyWebsite. All rights reserved.</p>
+      <ul class="social-links">
+        <li>
+          <a href="#" target="_blank"
+            ><i class="fa-brands fa-facebook-f"></i
+          ></a>
+        </li>
+        <li>
+          <a href="#" target="_blank"><i class="fa-brands fa-twitter"></i></a>
+        </li>
+        <li>
+          <a href="#" target="_blank"
+            ><i class="fa-brands fa-linkedin-in"></i
+          ></a>
+        </li>
+      </ul>
+    </footer>
+    <button class="toggle-bg">Toggle Header Color</button>
+    <script src="script.js"></script>
+  </body>
+</html>

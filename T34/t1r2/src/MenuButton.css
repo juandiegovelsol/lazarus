@@ -1,0 +1,7 @@
+.menu-button {
+  cursor: pointer;
+  padding: 10px 15px;
+  background-color: #ddd;
+  border: none;
+  border-radius: 5px;
+}

@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Health Monitoring App</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
+
+      .container {
+        width: 80%;
+        height: auto;
+        background-color: #ffffff;
+      }
+
+      .header {
+        height: 60px;
+        background: linear-gradient(to right, #33ccff, #ff99cc);
+        color: #333;
+        text-align: center;
+        line-height: 60px;
+      }
+
+      .metrics {
+        display: flex;
+        justify-content: space-between;
+        padding: 20px;
+        gap: 10px;
+      }
+
+      .metric {
+        width: 30%;
+        background-color: #f1f1f1;
+        padding: 15px;
+        text-align: center;
+        border-radius: 10px;
+        box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+      }
+
+      .steps,
+      .heart-rate,
+      .water-intake {
+        font-size: 20px;
+      }
+
+      .icon {
+        font-size: 60px;
+      }
+
+      @media (max-width: 768px) {
+        .metrics {
+          display: block;
+          padding: 10px;
+        }
+
+        .metric {
+          width: 100%;
+          margin-bottom: 15px;
+        }
+
+        .container {
+          padding: 5px;
+        }
+      }
+
+      footer {
+        position: relative;
+        bottom: 0;
+        width: 100%;
+        height: 50px;
+        background-color: #333;
+        color: white;
+        text-align: center;
+        line-height: 50px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="header">
+        <h1>Your Personal Health Dashboard</h1>
+      </div>
+
+      <div class="metrics">
+        <div class="metric steps">
+          <div class="icon">👟</div>
+          <h2>Steps Taken Today</h2>
+          <p id="steps-count">12,000</p>
+        </div>
+
+        <div class="metric heart-rate">
+          <div class="icon">❤️</div>
+          <h2>Current Heart Rate</h2>
+          <p id="heart-rate">80 bpm</p>
+        </div>
+
+        <div class="metric water-intake">
+          <div class="icon">💧</div>
+          <h2>Water Intake</h2>
+          <p id="water-intake">2 liters</p>
+        </div>
+      </div>
+    </div>
+
+    <footer>
+      <p>Stay Healthy! Monitor your progress every day.</p>
+    </footer>
+  </body>
+</html>

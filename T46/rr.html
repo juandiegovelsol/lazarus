@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tower Construction Game</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f0f0f0;
+      }
+
+      .game-container {
+        width: 500px;
+        margin: 40px auto;
+        text-align: center;
+      }
+
+      .block-counter {
+        font-size: 24px;
+        font-weight: bold;
+        margin-bottom: 20px;
+      }
+
+      .restart-button {
+        padding: 10px 20px;
+        font-size: 18px;
+        border: none;
+        border-radius: 5px;
+        background-color: #4caf50;
+        color: #fff;
+        cursor: pointer;
+      }
+
+      .restart-button:hover {
+        background-color: #3e8e41;
+      }
+
+      .game-area {
+        position: relative;
+        height: 400px;
+        border: 1px solid #ddd;
+        background-color: #fff;
+        overflow: hidden;
+      }
+
+      .blocks {
+        position: absolute;
+        bottom: 20px;
+      }
+
+      .block {
+        position: absolute;
+        background-color: #4caf50;
+        border: 1px solid #3e8e41;
+      }
+
+      .next-block {
+        position: absolute;
+        background-color: #3e8e41;
+        border: 1px solid #4caf50;
+        opacity: 0.5;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="game-container">
+      <div class="block-counter">Blocks: 0</div>
+      <button class="restart-button">Restart</button>
+      <div class="game-area">
+        <div class="blocks"></div>
+      </div>
+    </div>
+    <script>
+      let blockCounter = 0;
+      let blockSize = 100;
+      let blocks = document.querySelector(".blocks");
+      let blockCounterElement = document.querySelector(".block-counter");
+      let restartButton = document.querySelector(".restart-button");
+      let gameArea = document.querySelector(".game-area");
+      let nextBlock;
+      let currentBlock;
+      let maxHeight = 200;
+      let currentTowerHeight = 0;
+
+      function createBlock(size) {
+        let block = document.createElement("div");
+        block.classList.add("block");
+        block.style.width = `${size}px`;
+        block.style.height = "20px";
+        return block;
+      }
+
+      function createNextBlock() {
+        nextBlock = createBlock(blockSize);
+        nextBlock.classList.add("next-block");
+        gameArea.appendChild(nextBlock);
+        nextBlock.style.left = `${gameArea.offsetWidth / 2 - blockSize / 2}px`;
+        nextBlock.style.top = "0px";
+      }
+
+      function moveNextBlock(e) {
+        if (nextBlock) {
+          let x;
+          x = e.clientX - gameArea.offsetLeft;
+          nextBlock.style.left = `${x - blockSize / 2}px`;
+        }
+      }
+
+      function dropNextBlock() {
+        if (nextBlock) {
+          let left = parseFloat(nextBlock.style.left);
+          let top = parseFloat(nextBlock.style.top);
+          if (
+            left < currentBlock.offsetLeft - blockSize ||
+            left > currentBlock.offsetLeft + currentBlock.offsetWidth
+          ) {
+            alert("Game Over!");
+            restartGame();
+            return;
+          }
+          nextBlock.style.top = `${currentBlock.offsetTop - 20}px`;
+          nextBlock.classList.remove("next-block");
+          blocks.appendChild(nextBlock);
+          currentTowerHeight += 20;
+
+          if (currentTowerHeight >= maxHeight) {
+            lowerTower();
+            removeOldestBlock();
+          }
+
+          currentBlock = nextBlock;
+          nextBlock = null;
+          createNextBlock();
+          blockCounter++;
+          blockCounterElement.textContent = `Blocks: ${blockCounter}`;
+          blockSize = Math.floor(Math.random() * (100 - 30 + 1) + 30);
+        }
+      }
+
+      function lowerTower() {
+        const blocksArray = Array.from(blocks.children);
+        blocksArray.forEach((block) => {
+          let currentTop = parseFloat(block.style.top);
+          block.style.top = `${currentTop + 20}px`;
+        });
+      }
+
+      function removeOldestBlock() {
+        const oldestBlock = blocks.firstChild;
+        if (oldestBlock) {
+          blocks.removeChild(oldestBlock);
+          currentTowerHeight -= 20;
+        }
+      }
+
+      function restartGame() {
+        blockCounter = 0;
+        blockSize = 100;
+        currentTowerHeight = 0;
+        blockCounterElement.textContent = `Blocks: ${blockCounter}`;
+        while (blocks.firstChild) {
+          blocks.removeChild(blocks.firstChild);
+        }
+        if (nextBlock) {
+          gameArea.removeChild(nextBlock);
+          nextBlock = null;
+        }
+        currentBlock = createBlock(blockSize);
+        currentBlock.style.left = `${200}px`;
+        blocks.appendChild(currentBlock);
+        createNextBlock();
+      }
+
+      restartButton.addEventListener("click", restartGame);
+      gameArea.addEventListener("mousemove", moveNextBlock);
+      gameArea.addEventListener("click", dropNextBlock);
+
+      currentBlock = createBlock(blockSize);
+      currentBlock.style.left = `${200}px`;
+      blocks.appendChild(currentBlock);
+      createNextBlock();
+    </script>
+  </body>
+</html>

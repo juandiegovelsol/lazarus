@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Interactive Space Telescope</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #000;
+        color: #fff;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        height: 100vh;
+      }
+      #telescope {
+        width: 600px;
+        height: 400px;
+        border: 2px solid #444;
+        border-radius: 10px;
+        margin: 20px 0;
+        position: relative;
+        overflow: hidden;
+      }
+      #sky {
+        width: 100%;
+        height: 100%;
+        background-color: #000033;
+      }
+      #controls {
+        display: flex;
+        justify-content: center;
+        margin-bottom: 20px;
+      }
+      button {
+        margin: 0 10px;
+        padding: 10px 20px;
+        font-size: 16px;
+        background-color: #007bff;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+      #info-panel {
+        width: 80%;
+        max-width: 600px;
+        background-color: rgba(0, 0, 0, 0.7);
+        border-radius: 10px;
+        padding: 20px;
+        margin-top: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Interactive Space Telescope</h1>
+    <div id="telescope">
+      <canvas id="sky"></canvas>
+    </div>
+    <div id="controls">
+      <button id="left">&#8592;</button>
+      <button id="up">&#8593;</button>
+      <button id="down">&#8595;</button>
+      <button id="right">&#8594;</button>
+    </div>
+    <div id="info-panel">
+      <h2 id="object-name">Select a celestial object</h2>
+      <p id="object-info">
+        Use the controls to move the telescope and observe different objects in
+        the sky.
+      </p>
+    </div>
+    <script>
+      const canvas = document.getElementById("sky");
+      const ctx = canvas.getContext("2d");
+      const objectName = document.getElementById("object-name");
+      const objectInfo = document.getElementById("object-info");
+
+      canvas.width = 600;
+      canvas.height = 400;
+
+      const celestialObjects = [
+        {
+          name: "Ursa Major",
+          x: 100,
+          y: 100,
+          info: "Ursa Major is one of the most recognizable constellations in the night sky. In Greek mythology, it represents Callisto, transformed into a bear by Zeus.",
+        },
+        {
+          name: "Jupiter",
+          x: 300,
+          y: 200,
+          info: "Jupiter is the largest planet in the Solar System. It has 79 known moons and a Great Red Spot which is actually a giant storm.",
+        },
+        {
+          name: "Orion Nebula",
+          x: 500,
+          y: 150,
+          info: "The Orion Nebula is a cloud of gas and dust where new stars are forming. It is visible to the naked eye in the night sky.",
+        },
+      ];
+
+      let telescopeX = 300;
+      let telescopeY = 200;
+      let isDragging = false;
+
+      function drawSky() {
+        ctx.fillStyle = "#000033";
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+        for (let i = 0; i < 100; i++) {
+          ctx.fillStyle = "white";
+          ctx.fillRect(
+            Math.random() * canvas.width,
+            Math.random() * canvas.height,
+            1,
+            1
+          );
+        }
+
+        celestialObjects.forEach((obj) => {
+          ctx.fillStyle = "yellow";
+          ctx.beginPath();
+          ctx.arc(obj.x, obj.y, 5, 0, Math.PI * 2);
+          ctx.fill();
+        });
+
+        ctx.strokeStyle = "red";
+        ctx.lineWidth = 2;
+        ctx.beginPath();
+        ctx.arc(telescopeX, telescopeY, 50, 0, Math.PI * 2);
+        ctx.stroke();
+      }
+
+      function moveTelescope(dx, dy) {
+        telescopeX = Math.max(50, Math.min(canvas.width - 50, telescopeX + dx));
+        telescopeY = Math.max(
+          50,
+          Math.min(canvas.height - 50, telescopeY + dy)
+        );
+        drawSky();
+        checkObjects();
+      }
+
+      function checkObjects() {
+        let found = false;
+        for (let obj of celestialObjects) {
+          const distance = Math.sqrt(
+            Math.pow(obj.x - telescopeX, 2) + Math.pow(obj.y - telescopeY, 2)
+          );
+          if (distance < 50) {
+            objectName.textContent = obj.name;
+            objectInfo.textContent = obj.info;
+            found = true;
+            break;
+          }
+        }
+        if (!found) {
+          objectName.textContent = "Empty space";
+          objectInfo.textContent =
+            "There are no celestial objects in this area.";
+        }
+      }
+
+      canvas.addEventListener("mousedown", (e) => {
+        isDragging = true;
+      });
+
+      canvas.addEventListener("mousemove", (e) => {
+        if (isDragging) {
+          const rect = canvas.getBoundingClientRect();
+          const x = e.clientX - rect.left;
+          const y = e.clientY - rect.top;
+          moveTelescope(x - telescopeX, y - telescopeY);
+        }
+      });
+
+      canvas.addEventListener("mouseup", () => {
+        isDragging = false;
+      });
+
+      document
+        .getElementById("left")
+        .addEventListener("click", () => moveTelescope(-20, 0));
+      document
+        .getElementById("right")
+        .addEventListener("click", () => moveTelescope(20, 0));
+      document
+        .getElementById("up")
+        .addEventListener("click", () => moveTelescope(0, -20));
+      document
+        .getElementById("down")
+        .addEventListener("click", () => moveTelescope(0, 20));
+
+      drawSky();
+      checkObjects();
+    </script>
+  </body>
+</html>

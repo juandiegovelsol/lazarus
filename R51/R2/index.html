@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Load Balancer Configuration Assistant</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 800px;
+            margin: auto;
+        }
+        .config-section {
+            margin-bottom: 20px;
+        }
+        input, select {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+        }
+        button {
+            padding: 10px 20px;
+            cursor: pointer;
+        }
+        pre {
+            background-color: #f4f4f4;
+            padding: 20px;
+            overflow: auto;
+            border: 1px solid #ddd;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Load Balancer Configuration Assistant</h1>
+
+    <div class="config-section">
+        <h2>Backend Servers</h2>
+        <div id="backendServers">
+            <input type="text" placeholder="Backend Server (IP or Domain)" class="backend-input">
+        </div>
+        <button id="addBackend">Add Another Backend Server</button>
+    </div>
+
+    <div class="config-section">
+        <h2>Load Balancing Algorithm</h2>
+        <select id="algorithm">
+            <option value="round-robin">Round Robin</option>
+            <option value="least-connections">Least Connections</option>
+            <option value="ip-hash">IP Hash</option>
+        </select>
+    </div>
+
+    <div class="config-section">
+        <h2>Health Check</h2>
+        <input type="text" id="healthCheckPath" placeholder="Health Check Path (e.g., /health)">
+        <input type="number" id="healthCheckInterval" placeholder="Health Check Interval (seconds)" min="1">
+    </div>
+
+    <div class="config-section">
+        <h2>Session Persistence</h2>
+        <select id="sessionPersistence">
+            <option value="none">None</option>
+            <option value="cookie">Cookie-based</option>
+            <option value="ip-based">IP-based</option>
+        </select>
+    </div>
+
+    <button id="generateConfig">Generate Configuration</button>
+
+    <div class="config-section">
+        <h2>Generated Configuration</h2>
+        <pre id="output"></pre>
+    </div>
+</div>
+
+<script>
+    document.getElementById('addBackend').addEventListener('click', function() {
+        const backendServersDiv = document.getElementById('backendServers');
+        const newInput = document.createElement('input');
+        newInput.type = 'text';
+        newInput.placeholder = 'Backend Server (IP or Domain)';
+        newInput.classList.add('backend-input');
+        backendServersDiv.appendChild(newInput);
+    });
+
+    document.getElementById('generateConfig').addEventListener('click', function() {
+        const backendServers = Array.from(document.querySelectorAll('.backend-input')).map(input => input.value);
+        const algorithm = document.getElementById('algorithm').value;
+        const healthCheckPath = document.getElementById('healthCheckPath').value;
+        const healthCheckInterval = document.getElementById('healthCheckInterval').value;
+        const sessionPersistence = document.getElementById('sessionPersistence').value;
+
+        const configData = {
+            backendServers: backendServers,
+            algorithm: algorithm,
+            healthCheck: {
+                path: healthCheckPath,
+                interval: healthCheckInterval
+            },
+            sessionPersistence: sessionPersistence
+        };
+
+        if (window.Worker) {
+            const myWorker = new Worker("worker.js");
+
+            myWorker.postMessage(configData); // send data to worker
+
+            myWorker.onmessage = function(e) { // when worker sends data back
+                document.getElementById('output').textContent = e.data; // display data
+            }
+        } 
+    });
+</script>
+</body>
+</html>

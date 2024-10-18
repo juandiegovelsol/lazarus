@@ -1,0 +1,40 @@
+body {
+  font-family: sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+}
+
+.meme-container {
+  position: relative;
+  width: 300px;
+  min-height: 100px;
+  margin-bottom: 20px;
+  margin-top: 50px;
+}
+
+.meme-container img {
+  max-width: 100%;
+}
+
+.text {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 90%;
+  text-align: center;
+  font-size: 20px;
+  color: black;
+  text-shadow: -2px -2px 0 #000;
+  background-color: transparent;
+  border: none;
+}
+
+.top-text {
+  top: 10px;
+}
+
+.bottom-text {
+  bottom: 10px;
+}

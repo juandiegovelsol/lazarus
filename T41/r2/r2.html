@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Interactive Musical Garden</title>
+    <style>
+      body {
+        margin: 0;
+        overflow: hidden;
+        background-color: #a2d9ce;
+        font-family: sans-serif;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
+      }
+
+      #garden {
+        position: relative;
+        width: 80vw;
+        height: 60vh;
+        border: 10px solid #78909c;
+        border-radius: 20px;
+        overflow: hidden;
+        background-color: #e0f2f1;
+      }
+
+      .flower {
+        position: absolute;
+        width: 100px;
+        height: 100px;
+        cursor: pointer;
+        transition: transform 0.2s ease;
+      }
+
+      .flower img {
+        width: 100%;
+        height: 100%;
+      }
+
+      .flower:hover {
+        transform: scale(1.1);
+      }
+
+      .flower.playing {
+        animation: pulse 0.5s infinite alternate ease-in-out;
+      }
+
+      @keyframes pulse {
+        from {
+          transform: scale(1);
+        }
+        to {
+          transform: scale(1.2);
+        }
+      }
+
+      #controls {
+        margin-top: 20px;
+        display: flex;
+        gap: 20px;
+      }
+
+      .volume-control {
+        display: flex;
+        align-items: center;
+      }
+
+      .volume-control label {
+        margin-right: 10px;
+        color: #37474f;
+      }
+
+      .volume-control input[type="range"] {
+        width: 150px;
+      }
+
+      button {
+        padding: 10px 20px;
+        background-color: #4caf50;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        font-size: 16px;
+        cursor: pointer;
+      }
+
+      button:hover {
+        background-color: #45a049;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Interactive Musical Garden</h1>
+    <div id="garden"></div>
+    <div id="controls">
+      <div class="volume-control">
+        <label for="piano-volume">Piano:</label>
+        <input
+          type="range"
+          id="piano-volume"
+          min="0"
+          max="1"
+          step="0.01"
+          value="1"
+        />
+      </div>
+      <div class="volume-control">
+        <label for="flute-volume">Flute:</label>
+        <input
+          type="range"
+          id="flute-volume"
+          min="0"
+          max="1"
+          step="0.01"
+          value="1"
+        />
+      </div>
+      <div class="volume-control">
+        <label for="violin-volume">Violin:</label>
+        <input
+          type="range"
+          id="violin-volume"
+          min="0"
+          max="1"
+          step="0.01"
+          value="1"
+        />
+      </div>
+      <button id="record-btn">Start Recording</button>
+      <button id="play-recorded-btn" style="display: none">
+        Play Recorded
+      </button>
+    </div>
+
+    <script>
+      const garden = document.getElementById("garden");
+      const pianoVolume = document.getElementById("piano-volume");
+      const fluteVolume = document.getElementById("flute-volume");
+      const violinVolume = document.getElementById("violin-volume");
+      const recordBtn = document.getElementById("record-btn");
+      const playRecordedBtn = document.getElementById("play-recorded-btn");
+
+      const flowers = [
+        { name: "Rose", sound: new Audio("piano_c.mp3"), image: "rose.svg" },
+        { name: "Tulip", sound: new Audio("flute_c.mp3"), image: "tulip.svg" },
+        { name: "Lily", sound: new Audio("violin_c.mp3"), image: "lily.svg" },
+      ];
+
+      let playingSounds = [];
+
+      function createFlower(flower) {
+        const flowerEl = document.createElement("div");
+        flowerEl.classList.add("flower");
+        flowerEl.innerHTML = `<img src="${flower.image}" alt="${flower.name}">`;
+        flowerEl.style.left = `${Math.random() * (garden.clientWidth - 100)}px`;
+        flowerEl.style.top = `${Math.random() * (garden.clientHeight - 100)}px`;
+
+        flowerEl.addEventListener("click", () => {
+          playSound(flower);
+        });
+
+        garden.appendChild(flowerEl);
+        return flowerEl;
+      }
+
+      function playSound(flower) {
+        flower.sound.currentTime = 0;
+
+        if (flower.name === "Rose") {
+          flower.sound.volume = pianoVolume.value;
+        } else if (flower.name === "Tulip") {
+          flower.sound.volume = fluteVolume.value;
+        } else if (flower.name === "Lily") {
+          flower.sound.volume = violinVolume.value;
+        }
+
+        flower.el.classList.add("playing");
+        flower.sound.play();
+        playingSounds.push(flower);
+        flower.sound.addEventListener("ended", () => {
+          flower.el.classList.remove("playing");
+          playingSounds = playingSounds.filter((f) => f !== flower);
+        });
+      }
+
+      flowers.forEach((flower) => {
+        flower.el = createFlower(flower);
+      });
+
+      pianoVolume.addEventListener("input", () => {
+        playingSounds.forEach((flower) => {
+          if (flower.name === "Rose") {
+            flower.sound.volume = pianoVolume.value;
+          }
+        });
+      });
+
+      fluteVolume.addEventListener("input", () => {
+        playingSounds.forEach((flower) => {
+          if (flower.name === "Tulip") {
+            flower.sound.volume = fluteVolume.value;
+          }
+        });
+      });
+
+      violinVolume.addEventListener("input", () => {
+        playingSounds.forEach((flower) => {
+          if (flower.name === "Lily") {
+            flower.sound.volume = violinVolume.value;
+          }
+        });
+      });
+
+      let mediaRecorder;
+      let chunks = [];
+      let recordedBlob;
+
+      recordBtn.addEventListener("click", () => {
+        if (recordBtn.textContent === "Start Recording") {
+          navigator.mediaDevices
+            .getUserMedia({ audio: true })
+            .then((stream) => {
+              mediaRecorder = new MediaRecorder(stream);
+              mediaRecorder.ondataavailable = (e) => chunks.push(e.data);
+              mediaRecorder.onstop = (e) => {
+                recordedBlob = new Blob(chunks, {
+                  type: "audio/ogg; codecs=opus",
+                });
+                chunks = [];
+                playRecordedBtn.style.display = "block";
+              };
+              mediaRecorder.start();
+              recordBtn.textContent = "Stop Recording";
+            });
+        } else {
+          mediaRecorder.stop();
+          recordBtn.textContent = "Start Recording";
+        }
+      });
+
+      playRecordedBtn.addEventListener("click", () => {
+        const audioURL = URL.createObjectURL(recordedBlob);
+        const audio = new Audio(audioURL);
+        audio.play();
+      });
+    </script>
+  </body>
+</html>

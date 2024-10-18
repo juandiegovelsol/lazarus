@@ -1,0 +1,46 @@
+#controls {
+  margin-top: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+}
+
+.volume-control {
+  display: flex;
+  align-items: center;
+}
+
+.volume-control label {
+  margin-right: 10px;
+  color: #37474f;
+}
+
+.volume-control input[type="range"] {
+  width: 150px;
+}
+
+button {
+  padding: 10px 20px;
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #45a049;
+}
+
+@media (max-width: 600px) {
+  #controls {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .volume-control input[type="range"] {
+    width: 100px;
+  }
+}

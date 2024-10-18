@@ -1,0 +1,7 @@
+.menu li {
+  padding: 10px 20px;
+}
+
+.menu li:hover {
+  background-color: #f1f1f1;
+}

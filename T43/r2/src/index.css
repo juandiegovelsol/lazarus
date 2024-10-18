@@ -1,0 +1,106 @@
+body {
+  margin: 0;
+  overflow: hidden;
+  background-color: #a2d9ce;
+  font-family: sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+}
+
+#garden {
+  display: flex;
+  flex-wrap: wrap;
+  width: 80vw;
+  height: 60vh;
+  border: 10px solid #78909c;
+  border-radius: 20px;
+  overflow: hidden;
+  background-color: #e0f2f1;
+  justify-content: center;
+  align-items: center;
+}
+
+.flower {
+  width: 100px;
+  height: 100px;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+  margin: 10px;
+}
+
+.flower img {
+  width: 100%;
+  height: 100%;
+}
+
+.flower:hover {
+  transform: scale(1.1);
+}
+
+.flower .playing {
+  animation: pulse 0.5s infinite alternate ease-in-out;
+}
+
+@keyframes pulse {
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(1.2);
+  }
+}
+
+#controls {
+  margin-top: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+}
+
+.volume-control {
+  display: flex;
+  align-items: center;
+}
+
+.volume-control label {
+  margin-right: 10px;
+  color: #37474f;
+}
+
+.volume-control input[type="range"] {
+  width: 150px;
+}
+
+button {
+  padding: 10px 20px;
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #45a049;
+}
+
+@media (max-width: 600px) {
+  #garden {
+    width: 90vw;
+    height: 50vh;
+  }
+
+  #controls {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .volume-control input[type="range"] {
+    width: 100px;
+  }
+}

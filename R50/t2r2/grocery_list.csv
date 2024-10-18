@@ -1,0 +1,4 @@
+name,price,description,imageUrl,category
+apple,1.99,Fresh apple,https://example.com/apple.jpg,Fruits
+banana,0.99,Fresh banana,https://example.com/banana.jpg,Fruits
+orange,2.49,Fresh orange,https://example.com/orange.jpg,Fruits

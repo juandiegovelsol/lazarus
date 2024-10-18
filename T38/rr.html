@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Interactive Koi Fish Aquarium</title>
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        font-family: Arial, sans-serif;
+        background-color: #87ceeb;
+      }
+      h1 {
+        text-align: center;
+        margin-top: 20px;
+        color: #fff;
+        text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+      }
+      #aquarium {
+        position: relative;
+        width: 100vw;
+        height: 80vh;
+        background-color: #1e90ff;
+        overflow: hidden;
+        border: 2px solid #0077b6;
+        border-radius: 20px;
+        margin: 20px auto;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+      }
+      #koi-fish {
+        position: absolute;
+        width: 150px;
+        transition: transform 2s ease, top 2s ease, left 2s ease;
+        transform-origin: center;
+      }
+      .food {
+        position: absolute;
+        width: 20px;
+        height: 20px;
+        background-color: #ff4500;
+        border-radius: 50%;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Interactive Koi Fish Aquarium</h1>
+    <div id="aquarium">
+      <img id="koi-fish" src="./koi.svg" alt="Koi Fish" />
+    </div>
+
+    <script>
+      const aquarium = document.getElementById("aquarium");
+      const koiFish = document.getElementById("koi-fish");
+
+      let foodQueue = [];
+
+      function randomPosition(max) {
+        return Math.random() * (max - 50);
+      }
+
+      function moveKoiTo(x, y) {
+        const koiX = koiFish.offsetLeft + koiFish.offsetWidth / 2;
+        const koiY = koiFish.offsetTop + koiFish.offsetHeight / 2;
+        const angle = Math.atan2(y - koiY, x - koiX) * (180 / Math.PI);
+        koiFish.style.transform = `rotate(${angle + 90}deg)`;
+        koiFish.style.left = `${x - koiFish.offsetWidth / 2}px`;
+        koiFish.style.top = `${y - koiFish.offsetHeight / 2}px`;
+      }
+
+      function createFood(x, y) {
+        const food = document.createElement("div");
+        food.className = "food";
+        food.style.left = `${x}px`;
+        food.style.top = `${y}px`;
+        aquarium.appendChild(food);
+        return food;
+      }
+
+      aquarium.addEventListener("click", (event) => {
+        const rect = aquarium.getBoundingClientRect();
+        const foodX = event.clientX - rect.left - 10;
+        const foodY = event.clientY - rect.top - 10;
+
+        const food = createFood(foodX, foodY);
+        foodQueue.push({ food, x: foodX, y: foodY });
+
+        if (foodQueue.length === 1) {
+          eatFood();
+        }
+      });
+
+      function eatFood() {
+        if (foodQueue.length > 0) {
+          const { food, x, y } = foodQueue[0];
+          moveKoiTo(x, y);
+          setTimeout(() => {
+            aquarium.removeChild(food);
+            foodQueue.shift();
+            eatFood();
+          }, 2000);
+        }
+      }
+
+      koiFish.style.left = `${randomPosition(aquarium.offsetWidth)}px`;
+      koiFish.style.top = `${randomPosition(aquarium.offsetHeight)}px`;
+    </script>
+  </body>
+</html>

@@ -1,0 +1,119 @@
+<!-- 
+  The HTML document starts with the declaration of the document type and the language used.
+  The 'lang' attribute specifies the language of the document's content.
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <!-- 
+  The 'head' section contains metadata about the document, such as the character encoding, 
+  viewport settings, and links to external stylesheets or scripts.
+-->
+
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard Layout</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+
+  <!-- 
+  The 'body' section contains the content of the HTML document.
+  In this case, we're using a flexbox layout to divide the content into two main sections: 
+  the sidebar and the main content area.
+-->
+
+  <body>
+    <!-- 
+    The sidebar section contains the navigation menu and the app name.
+    It's styled using the '.sidebar' class in the CSS file.
+  -->
+    <div class="sidebar">
+      <!-- 
+      The sidebar header contains the app name.
+      It's styled using the '.sidebar-header' class in the CSS file.
+    -->
+      <div class="sidebar-header">
+        <h2>App Name</h2>
+      </div>
+
+      <!-- 
+      The sidebar navigation menu contains links to different pages.
+      It's styled using the '.sidebar-nav' class in the CSS file.
+    -->
+      <ul class="sidebar-nav">
+        <li><a href="index.html">Dashboard</a></li>
+        <li><a href="reports.html">Reports</a></li>
+        <li><a href="working-on-it.html">Analytics</a></li>
+        <li><a href="working-on-it.html">Settings</a></li>
+      </ul>
+    </div>
+
+    <!-- 
+    The main content section contains the dashboard widgets and other content.
+    It's styled using the '.main-content' class in the CSS file.
+  -->
+    <div class="main-content">
+      <!-- 
+      The header section contains the branding and user profile information.
+      It's styled using the '.header' class in the CSS file.
+    -->
+      <header class="header">
+        <div class="branding">
+          <h1>Dashboard</h1>
+        </div>
+        <div class="user-profile">
+          <img src="user-avatar.png" alt="User Avatar" class="user-avatar" />
+          <span class="username">John Doe</span>
+        </div>
+      </header>
+
+      <!-- 
+      The content section contains the dashboard widgets.
+      It's styled using the '.content' class in the CSS file.
+    -->
+      <div class="content">
+        <!-- 
+        The dashboard widgets section contains three widgets: revenue, sales, and customers.
+        It's styled using the '.dashboard-widgets' class in the CSS file.
+      -->
+        <div class="dashboard-widgets">
+          <div class="widget">
+            <h3>Revenue</h3>
+            <p>$45,000</p>
+          </div>
+          <div class="widget">
+            <h3>Sales</h3>
+            <p>350</p>
+          </div>
+          <div class="widget">
+            <h3>Customers</h3>
+            <p>1200</p>
+          </div>
+        </div>
+
+        <!-- 
+        The feedback section contains 3 fields: name, email, and suggestions.
+        It's styled using the '.feedback-section' class in the CSS file.
+      -->
+        <div class="feedback-section">
+          <h2>Send Feedback</h2>
+          <form class="feedback-form">
+            <div class="form-group">
+              <label for="name">Name:</label>
+              <input type="text" id="name" name="name" required />
+            </div>
+            <div class="form-group">
+              <label for="email">Email:</label>
+              <input type="email" id="email" name="email" required />
+            </div>
+            <div class="form-group">
+              <label for="suggestions">Suggestions:</label>
+              <textarea id="suggestions" name="suggestions" required></textarea>
+            </div>
+            <button type="submit" class="submit-btn">Send Feedback</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,12 @@
+{
+  "name": "t1r2",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "start": "start.bat"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": ""
+}

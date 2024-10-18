@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Police & Thief Game</title>
+    <style>
+        .container {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            overflow: hidden;
+            background-color: #f0f0f0;
+        }
+
+        .car {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 5vw;
+            height: 2.5vw;
+            background-color: red;
+            transform: translate(-50%, -50%);
+            transition: transform 0.2s ease-in-out;
+        }
+
+        #message {
+            position: absolute;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: yellow;
+            padding: 10px;
+            border-radius: 5px;
+            display: none;
+        }
+
+        #startButton {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 10px 20px;
+            background-color: green;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div id="car" class="car"></div>
+        <div id="message">YOU GOT CAUGHT!</div>
+        <button id="startButton">Start</button>
+    </div>
+
+    <script>
+        const car = document.getElementById("car");
+        const startButton = document.getElementById("startButton");
+        const message = document.getElementById("message");
+        let mouseX = 0, mouseY = 0;
+        let speed = 2;
+        let animationFrameId; // Track requestAnimationFrame to stop animation when necessary
+
+        function logAction(action, details = {}) {
+            console.log(`[${new Date().toISOString()}] ${action}`, details);
+        }
+
+        function moveCar() {
+            const carRect = car.getBoundingClientRect();
+            const carX = carRect.left + carRect.width / 2;
+            const carY = carRect.top + carRect.height / 2;
+
+            const deltaX = mouseX - carX;
+            const deltaY = mouseY - carY;
+            const distance = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
+
+            if (distance > speed) {
+                const moveX = (deltaX / distance) * speed;
+                const moveY = (deltaY / distance) * speed;
+                car.style.transform = `translate(${carX + moveX - 50}px, ${carY + moveY - 10}px)`;
+            }
+
+            logAction('Car Moved', { carX, carY });
+            animationFrameId = requestAnimationFrame(moveCar); // Use requestAnimationFrame for smooth movement
+            handleCollision(carRect);
+        }
+
+        function handleCollision(carRect) {
+            const isCollision = (
+                carRect.left < mouseX &&
+                carRect.right > mouseX &&
+                carRect.top < mouseY &&
+                carRect.bottom > mouseY
+            );
+            if (isCollision) {
+                resetCar();
+                displayCaughtMessage();
+                cancelAnimationFrame(animationFrameId); // Stop the game loop
+                logAction('Collision Detected', { carRect });
+            }
+        }
+
+        function resetCar() {
+            car.style.transform = "translate(0, 0)";
+            logAction('Car Reset');
+        }
+
+        function displayCaughtMessage() {
+            message.textContent = "YOU GOT CAUGHT!";
+            message.style.display = "block";
+            logAction('Game Ended');
+        }
+
+        function startGame() {
+            resetCar();
+            message.style.display = "none";
+            animationFrameId = requestAnimationFrame(moveCar); // Start the animation loop
+            logAction('Game Started');
+        }
+
+        // Start the game
+        startButton.addEventListener("click", () => {
+            startGame();
+        });
+
+        // Update mouse position on mousemove
+        document.addEventListener("mousemove", (event) => {
+            mouseX = event.clientX;
+            mouseY = event.clientY;
+            logAction('Mouse Position Updated', { mouseX, mouseY });
+        });
+    </script>
+</body>
+
+</html>

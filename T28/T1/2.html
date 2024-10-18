@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Health Monitoring App</title>
+    <style>
+      /* Global Styles */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: Arial, sans-serif;
+        height: 100vh;
+        margin: 0;
+      }
+
+      /* Container Styles */
+      .container {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        background-color: #f0f0f0;
+      }
+
+      /* Header Styles */
+      .header {
+        width: 100%;
+        height: 60px;
+        background: linear-gradient(to right, #33ccff, #ff99cc);
+        color: #333;
+        text-align: center;
+        line-height: 60px;
+        position: relative;
+      }
+
+      .header h1 {
+        font-size: 24px;
+      }
+
+      /* Metrics Styles */
+      .metrics {
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+        padding: 20px;
+        flex-wrap: wrap;
+      }
+
+      .metric {
+        width: 250px;
+        background-color: #ffffff;
+        padding: 20px;
+        text-align: center;
+        border-radius: 10px;
+        box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .metric h2 {
+        font-size: 18px;
+        margin-bottom: 10px;
+      }
+
+      .metric p {
+        font-size: 24px;
+        font-weight: bold;
+      }
+
+      /* Icon Styles */
+      .icon {
+        font-size: 60px;
+        position: relative;
+      }
+
+      /* Animation Styles */
+      @keyframes heartbeat {
+        0% {
+          transform: scale(1);
+        }
+        50% {
+          transform: scale(1.1);
+        }
+        100% {
+          transform: scale(1);
+        }
+      }
+
+      @keyframes waterdrop {
+        0% {
+          top: 0;
+        }
+        100% {
+          top: 100%;
+        }
+      }
+
+      @keyframes walking {
+        0% {
+          left: 0;
+        }
+        100% {
+          left: 100%;
+        }
+      }
+
+      .heart-rate .icon::before {
+        content: "\2764";
+        animation: heartbeat 1s infinite;
+      }
+
+      .water-intake .icon::before {
+        content: "\1F4A7";
+        position: absolute;
+        animation: waterdrop 2s infinite;
+      }
+
+      .steps .icon::before {
+        content: "\1F45F";
+        position: absolute;
+        animation: walking 2s infinite;
+      }
+
+      /* Footer Styles */
+      footer {
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        height: 50px;
+        background-color: #333;
+        color: white;
+        text-align: center;
+        line-height: 50px;
+      }
+
+      /* Responsive Styles */
+      @media (max-width: 768px) {
+        .metrics {
+          flex-direction: column;
+          padding: 10px;
+        }
+
+        .metric {
+          width: 100%;
+          margin-bottom: 15px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="header">
+        <h1>Your Personal Health Dashboard</h1>
+      </div>
+
+      <div class="metrics">
+        <div class="metric steps">
+          <div class="icon"></div>
+          <h2>Steps Taken Today</h2>
+          <p id="steps-count">12,000</p>
+        </div>
+
+        <div class="metric heart-rate">
+          <div class="icon"></div>
+          <h2>Current Heart Rate</h2>
+          <p id="heart-rate">80 bpm</p>
+        </div>
+
+        <div class="metric water-intake">
+          <div class="icon"></div>
+          <h2>Water Intake</h2>
+          <p id="water-intake">2 liters</p>
+        </div>
+      </div>
+    </div>
+
+    <footer>
+      <p>Stay Healthy! Monitor your progress every day.</p>
+    </footer>
+  </body>
+</html>

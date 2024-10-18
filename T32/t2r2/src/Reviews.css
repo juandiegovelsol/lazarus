@@ -1,0 +1,28 @@
+.reviews {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2em;
+  opacity: 0;
+  transform: translateY(50px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.reviews-container {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.reviews.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Responsive styles for small devices */
+@media (max-width: 768px) {
+  .reviews-container {
+    flex-direction: column;
+    align-items: center;
+  }
+}
