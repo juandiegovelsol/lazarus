@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Shape Creator</title>
+    <style>
+      body {
+        font-family: sans-serif;
+        display: flex;
+      }
+
+      #canvas {
+        width: 800px;
+        height: 600px;
+        border: 1px solid black;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .shape {
+        position: absolute;
+        border: 1px solid;
+        background-color: transparent;
+      }
+
+      .circle {
+        border-radius: 50%;
+      }
+
+      #controls {
+        margin-left: 20px;
+        padding: 10px;
+        border: 1px solid #ccc;
+      }
+
+      #controls div {
+        margin-bottom: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="canvas"></div>
+    <div id="controls">
+      <h2>Add Shape</h2>
+      <div>
+        <label for="shape-type">Shape:</label>
+        <select id="shape-type">
+          <option value="circle">Circle</option>
+          <option value="square">Square</option>
+        </select>
+      </div>
+      <div>
+        <label for="color">Color:</label>
+        <input type="color" id="color" value="#000000" />
+      </div>
+      <div>
+        <label for="size">Size:</label>
+        <input type="range" id="size" min="10" max="200" value="50" />
+      </div>
+      <button id="add-shape">Add</button>
+
+      <h2>Edit Shape</h2>
+      <div>
+        <label for="edit-color">Color:</label>
+        <input type="color" id="edit-color" value="#000000" />
+      </div>
+      <div>
+        <label for="edit-size">Size:</label>
+        <input type="range" id="edit-size" min="10" max="200" value="50" />
+      </div>
+    </div>
+
+    <script>
+      const canvas = document.getElementById("canvas");
+      const addShapeBtn = document.getElementById("add-shape");
+      const shapeTypeSelect = document.getElementById("shape-type");
+      const colorInput = document.getElementById("color");
+      const sizeInput = document.getElementById("size");
+      const editColorInput = document.getElementById("edit-color");
+      const editSizeInput = document.getElementById("edit-size");
+
+      let selectedShape = null;
+      let isDragging = false;
+      let offsetX;
+      let offsetY;
+
+      function addShape() {
+        const shapeType = shapeTypeSelect.value;
+        const color = colorInput.value;
+        const size = parseInt(sizeInput.value);
+
+        const shape = document.createElement("div");
+        shape.classList.add("shape", shapeType);
+        shape.style.width = `${size}px`;
+        shape.style.height = `${size}px`;
+        shape.style.borderColor = color;
+
+        const maxLeft = canvas.offsetWidth - size;
+        const maxTop = canvas.offsetHeight - size;
+        shape.style.left = `${Math.min(Math.random() * maxLeft, maxLeft)}px`;
+        shape.style.top = `${Math.min(Math.random() * maxTop, maxTop)}px`;
+
+        shape.addEventListener("mousedown", (e) => {
+          if (selectedShape) {
+            selectedShape.style.boxShadow = "none";
+          }
+          selectedShape = shape;
+          shape.style.boxShadow = "0 0 10px blue";
+          editColorInput.value = shape.style.borderColor;
+          editSizeInput.value = parseInt(shape.style.width);
+
+          isDragging = true;
+          offsetX = e.clientX - shape.offsetLeft;
+          offsetY = e.clientY - shape.offsetTop;
+          e.preventDefault();
+        });
+
+        canvas.appendChild(shape);
+      }
+
+      function editShape() {
+        if (selectedShape) {
+          const newSize = parseInt(editSizeInput.value);
+          selectedShape.style.borderColor = editColorInput.value;
+          selectedShape.style.width = `${newSize}px`;
+          selectedShape.style.height = `${newSize}px`;
+
+          const maxLeft = canvas.offsetWidth - newSize;
+          const maxTop = canvas.offsetHeight - newSize;
+          selectedShape.style.left = `${Math.min(
+            parseInt(selectedShape.style.left),
+            maxLeft
+          )}px`;
+          selectedShape.style.top = `${Math.min(
+            parseInt(selectedShape.style.top),
+            maxTop
+          )}px`;
+        }
+      }
+
+      function moveShape(e) {
+        if (isDragging && selectedShape) {
+          const canvasRect = canvas.getBoundingClientRect();
+          const shapeWidth = selectedShape.offsetWidth;
+          const shapeHeight = selectedShape.offsetHeight;
+
+          let newLeft = e.clientX - canvasRect.left - offsetX;
+          let newTop = e.clientY - canvasRect.top - offsetY;
+
+          newLeft = Math.max(
+            0,
+            Math.min(newLeft, canvas.offsetWidth - shapeWidth)
+          );
+          newTop = Math.max(
+            0,
+            Math.min(newTop, canvas.offsetHeight - shapeHeight)
+          );
+
+          selectedShape.style.left = `${newLeft}px`;
+          selectedShape.style.top = `${newTop}px`;
+        }
+      }
+
+      addShapeBtn.addEventListener("click", addShape);
+      editColorInput.addEventListener("input", editShape);
+      editSizeInput.addEventListener("input", editShape);
+
+      canvas.addEventListener("mousemove", moveShape);
+      canvas.addEventListener("mouseup", () => {
+        isDragging = false;
+      });
+      canvas.addEventListener("mouseleave", () => {
+        isDragging = false;
+      });
+    </script>
+  </body>
+</html>

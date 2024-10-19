@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Shape Creator</title>
+    <style>
+      /* ... */
+    </style>
+  </head>
+
+  <body>
+    <div id="canvas"></div>
+    <div id="controls">
+      <!-- ... -->
+    </div>
+
+    <script>
+      const canvas = document.getElementById("canvas");
+      // ...
+
+      let selectedShape = null;
+      let isDragging = false;
+      let offsetX; // stores the x-coordinate offset from the shape's left edge to the mouse cursor
+      let offsetY; // stores the y-coordinate offset from the shape's top edge to the mouse cursor
+
+      function addShape() {
+        // ...
+
+        // Generate a random position for the shape within the canvas boundaries
+        const maxLeft = canvas.offsetWidth - size;
+        const maxTop = canvas.offsetHeight - size;
+        shape.style.left = `${Math.min(Math.random() * maxLeft, maxLeft)}px`;
+        shape.style.top = `${Math.min(Math.random() * maxTop, maxTop)}px`;
+
+        // Add event listener to handle mouse down events for shape dragging
+        shape.addEventListener("mousedown", (e) => {
+          // Update the selected shape and its styles
+          if (selectedShape) {
+            selectedShape.style.boxShadow = "none";
+          }
+          selectedShape = shape;
+          shape.style.boxShadow = "0 0 10px blue";
+
+          // Update the edit inputs with the shape's current color and size
+          editColorInput.value = shape.style.borderColor;
+          editSizeInput.value = parseInt(shape.style.width);
+
+          // Initialize dragging variables
+          isDragging = true;
+          offsetX = e.clientX - shape.offsetLeft;
+          offsetY = e.clientY - shape.offsetTop;
+          e.preventDefault(); // prevent default mouse down behavior
+        });
+
+        canvas.appendChild(shape);
+      }
+
+      function editShape() {
+        // Update the selected shape's styles with the new color and size
+        if (selectedShape) {
+          const newSize = parseInt(editSizeInput.value);
+          selectedShape.style.borderColor = editColorInput.value;
+          selectedShape.style.width = `${newSize}px`;
+          selectedShape.style.height = `${newSize}px`;
+
+          // Ensure the shape remains within the canvas boundaries after resizing
+          const maxLeft = canvas.offsetWidth - newSize;
+          const maxTop = canvas.offsetHeight - newSize;
+          selectedShape.style.left = `${Math.min(
+            parseInt(selectedShape.style.left),
+            maxLeft
+          )}px`;
+          selectedShape.style.top = `${Math.min(
+            parseInt(selectedShape.style.top),
+            maxTop
+          )}px`;
+        }
+      }
+
+      // Handle shape movement while dragging
+      function moveShape(e) {
+        // Check if the shape is being dragged and the mouse is moving within the canvas
+        if (isDragging && selectedShape) {
+          // Get the canvas's bounding rectangle
+          const canvasRect = canvas.getBoundingClientRect();
+
+          // Calculate the new position of the shape based on the mouse movement
+          const shapeWidth = selectedShape.offsetWidth;
+          const shapeHeight = selectedShape.offsetHeight;
+          let newLeft = e.clientX - canvasRect.left - offsetX;
+          let newTop = e.clientY - canvasRect.top - offsetY;
+
+          // Ensure the shape remains within the canvas boundaries while dragging
+          newLeft = Math.max(
+            0,
+            Math.min(newLeft, canvas.offsetWidth - shapeWidth)
+          );
+          newTop = Math.max(
+            0,
+            Math.min(newTop, canvas.offsetHeight - shapeHeight)
+          );
+
+          // Update the shape's position
+          selectedShape.style.left = `${newLeft}px`;
+          selectedShape.style.top = `${newTop}px`;
+        }
+      }
+
+      // ...
+    </script>
+  </body>
+</html>

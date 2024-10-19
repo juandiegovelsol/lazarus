@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Animated Switch</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f0f0f0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        width: 100vw;
+      }
+
+      .switch {
+        position: relative;
+        display: inline-block;
+        width: 60px;
+        height: 34px;
+      }
+
+      .switch input {
+        opacity: 0;
+        width: 0;
+        height: 0;
+      }
+
+      .slider {
+        position: absolute;
+        cursor: pointer;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: #ccc;
+        transition: 0.4s;
+        border-radius: 34px;
+      }
+
+      .slider:before {
+        position: absolute;
+        content: "";
+        height: 26px;
+        width: 26px;
+        left: -1px;
+        top: 50%;
+        border: 5px solid transparent;
+        transform: translateY(-50%);
+        transition: 0.4s;
+        border-radius: 50%;
+        background: linear-gradient(#f0f0f0, #f0f0f0) padding-box;
+      }
+
+      input:checked + .slider {
+        background-color: #2196f3;
+      }
+
+      input:checked + .slider:before {
+        transform: translate(26px, -50%);
+      }
+
+      .switch:active .slider:before {
+        animation: sparks 0.2s;
+      }
+
+      @keyframes sparks {
+        0% {
+          background: linear-gradient(#f0f0f0, #f0f0f0) padding-box;
+        }
+        50% {
+          background: linear-gradient(#f0f0f0, #f0f0f0) padding-box,
+            conic-gradient(
+                yellow 0deg 3deg,
+                transparent 3deg 57deg,
+                yellow 57deg 63deg,
+                transparent 63deg 117deg,
+                yellow 117deg 123deg,
+                transparent 123deg 177deg,
+                yellow 177deg 183deg,
+                transparent 183deg 237deg,
+                yellow 237deg 243deg,
+                transparent 243deg 297deg,
+                yellow 297deg 303deg,
+                transparent 303deg 357deg,
+                yellow 357deg 360deg
+              )
+              border-box;
+        }
+        100% {
+          background: linear-gradient(#f0f0f0, #f0f0f0) padding-box;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <label class="switch">
+      <input type="checkbox" />
+      <span class="slider"></span>
+    </label>
+  </body>
+</html>
