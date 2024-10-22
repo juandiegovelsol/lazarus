@@ -1,0 +1,52 @@
+body {
+  font-family: sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: #f4f4f4;
+}
+
+.container {
+  display: flex;
+  gap: 20px;
+}
+
+#card {
+  width: 350px;
+  height: 200px;
+  border: 2px solid #ccc;
+  background-color: #fff;
+  padding: 20px;
+  position: relative;
+}
+
+.element {
+  position: absolute;
+  font-size: 14px;
+  color: #333;
+  cursor: move;
+}
+
+#controls {
+  width: 300px;
+}
+
+#controls div {
+  margin-bottom: 10px;
+}
+
+input[type="text"],
+textarea {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+}

@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Multi-Track Audio Recorder</title>
+    <style>
+      body {
+        font-family: sans-serif;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 20px;
+      }
+      #tracks {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-bottom: 20px;
+      }
+      .track {
+        border: 1px solid #ccc;
+        padding: 10px;
+        width: 200px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+      .visualization {
+        width: 100%;
+        height: 50px;
+        display: flex;
+        margin-top: 5px;
+        overflow-x: auto;
+      }
+      .bar {
+        background-color: #4caf50;
+        width: 5px;
+        margin: 1px;
+        flex-shrink: 0;
+      }
+      button {
+        padding: 10px 20px;
+        background-color: #4caf50;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+      button:hover {
+        background-color: #3e8e41;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Multi-Track Audio Recorder</h1>
+    <div id="tracks"></div>
+    <button id="add-track">Add Track</button>
+    <button id="play-all">Play All</button>
+
+    <script>
+      const tracksContainer = document.getElementById("tracks");
+      const addTrackBtn = document.getElementById("add-track");
+      const playAllBtn = document.getElementById("play-all");
+      let tracks = [];
+
+      function addTrack() {
+        const track = {
+          element: document.createElement("div"),
+          recordBtn: document.createElement("button"),
+          playBtn: document.createElement("button"),
+          audio: null,
+          mediaRecorder: null,
+          chunks: [],
+          visualization: document.createElement("div"),
+          intensityData: [],
+        };
+
+        track.element.classList.add("track");
+        track.recordBtn.textContent = "Start Recording";
+        track.playBtn.textContent = "Play";
+        track.playBtn.disabled = true;
+        track.visualization.classList.add("visualization");
+
+        track.element.appendChild(track.recordBtn);
+        track.element.appendChild(track.playBtn);
+        track.element.appendChild(track.visualization);
+        tracksContainer.appendChild(track.element);
+
+        track.recordBtn.addEventListener("click", () => {
+          if (track.recordBtn.textContent === "Start Recording") {
+            navigator.mediaDevices
+              .getUserMedia({ audio: true })
+              .then((stream) => {
+                track.mediaRecorder = new MediaRecorder(stream);
+                track.mediaRecorder.ondataavailable = (e) => {
+                  track.chunks.push(e.data);
+                };
+                track.mediaRecorder.onstop = () => {
+                  const blob = new Blob(track.chunks, {
+                    type: "audio/ogg; codecs=opus",
+                  });
+                  track.audio = new Audio(URL.createObjectURL(blob));
+                  track.playBtn.disabled = false;
+                  processAudio(blob, track);
+                  track.chunks = [];
+                };
+                track.mediaRecorder.start();
+                track.recordBtn.textContent = "Stop Recording";
+              });
+          } else {
+            track.mediaRecorder.stop();
+            track.recordBtn.textContent = "Start Recording";
+          }
+        });
+
+        track.playBtn.addEventListener("click", () => {
+          if (track.audio) {
+            track.audio.play();
+          }
+        });
+
+        tracks.push(track);
+      }
+
+      function processAudio(blob, track) {
+        const audioContext = new (window.AudioContext ||
+          window.webkitAudioContext)();
+        const reader = new FileReader();
+        reader.readAsArrayBuffer(blob);
+        reader.onloadend = () => {
+          audioContext.decodeAudioData(reader.result, (buffer) => {
+            const sampleRate = buffer.sampleRate;
+            const duration = buffer.duration;
+            const interval = 0.25;
+            const totalBars = Math.floor(duration / interval);
+            const channelData = buffer.getChannelData(0);
+
+            for (let i = 0; i < totalBars; i++) {
+              const start = Math.floor(i * interval * sampleRate);
+              const end = Math.floor((i + 1) * interval * sampleRate);
+              let sum = 0;
+              for (let j = start; j < end; j++) {
+                sum += Math.abs(channelData[j]);
+              }
+              const intensity = sum / (end - start);
+              track.intensityData.push(intensity);
+              const bar = document.createElement("div");
+              bar.classList.add("bar");
+              bar.style.height = `${intensity * 100}px`;
+              track.visualization.appendChild(bar);
+            }
+          });
+        };
+      }
+
+      playAllBtn.addEventListener("click", () => {
+        tracks.forEach((track) => {
+          if (track.audio) {
+            track.audio.play();
+          }
+        });
+      });
+
+      addTrackBtn.addEventListener("click", addTrack);
+    </script>
+  </body>
+</html>

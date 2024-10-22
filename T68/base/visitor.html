@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Intercom - Visitor</title>
+    <style>
+      body {
+        font-family: sans-serif;
+      }
+      #apartments {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+        gap: 10px;
+      }
+      button {
+        padding: 10px;
+        margin: 5px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Intercom</h1>
+    <div id="apartments"></div>
+    <div id="chat" style="display: none">
+      <h2>Chat</h2>
+      <div id="messages"></div>
+      <input type="text" id="message" />
+      <button id="send">Send</button>
+    </div>
+
+    <script>
+      const socket = io(); // Connection with socket.io
+      const apartmentsDiv = document.getElementById("apartments");
+      const chatDiv = document.getElementById("chat");
+      const messagesDiv = document.getElementById("messages");
+      const messageInput = document.getElementById("message");
+      const sendBtn = document.getElementById("send");
+
+      // Generate buttons for the apartments
+      for (let i = 1; i <= 10; i++) {
+        // Example: 10 apartments
+        const btn = document.createElement("button");
+        btn.textContent = `Apartment ${i}`;
+        btn.addEventListener("click", () => {
+          socket.emit("call", i); // Send "call" event to server
+          chatDiv.style.display = "block";
+        });
+        apartmentsDiv.appendChild(btn);
+      }
+
+      // Send chat message
+      sendBtn.addEventListener("click", () => {
+        socket.emit("message", messageInput.value);
+        messageInput.value = "";
+      });
+
+      // Receive chat message
+      socket.on("message", (message) => {
+        const msgElement = document.createElement("p");
+        msgElement.textContent = message;
+        messagesDiv.appendChild(msgElement);
+      });
+    </script>
+    <script src="/node_modules/socket.io-client/dist/socket.io.js"></script>
+  </body>
+</html>

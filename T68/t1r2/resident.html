@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Intercom - Resident</title>
+    <style>
+      body {
+        font-family: sans-serif;
+      }
+      #chat {
+        display: none;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Intercom</h1>
+    <div id="call" style="display: none">
+      <h2>Call from: <span id="visitor"></span></h2>
+      <button id="open">Open Door</button>
+    </div>
+    <div id="chat">
+      <h2>Chat</h2>
+      <div id="messages"></div>
+      <input type="text" id="message" />
+      <button id="send">Send</button>
+    </div>
+
+    <script src="resident.js" type="module"></script>
+  </body>
+</html>

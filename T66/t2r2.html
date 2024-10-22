@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Digital Business Card Creator</title>
+    <style>
+      body {
+        font-family: sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        background-color: #f4f4f4;
+      }
+
+      .container {
+        display: flex;
+        gap: 20px;
+      }
+
+      #card {
+        width: 350px;
+        height: 200px;
+        border: 2px solid #ccc;
+        background-color: #fff;
+        padding: 20px;
+        position: relative;
+      }
+
+      .element {
+        position: absolute;
+        font-size: 14px;
+        color: #333;
+        cursor: move;
+      }
+
+      #controls {
+        width: 300px;
+      }
+
+      #controls div {
+        margin-bottom: 10px;
+      }
+
+      input[type="text"],
+      textarea {
+        width: 100%;
+        padding: 8px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        box-sizing: border-box;
+      }
+
+      canvas {
+        position: absolute;
+        top: 0;
+        left: 0;
+        pointer-events: none;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+      <div id="card">
+        <canvas id="drawingCanvas"></canvas>
+      </div>
+      <div id="controls">
+        <h2>Customize Your Card</h2>
+        <div>
+          <label for="text">Text:</label>
+          <input type="text" id="text" placeholder="Enter your text" />
+        </div>
+        <button id="add-element">Add Element</button>
+        <div>
+          <label for="pen-thickness">Pen Thickness:</label>
+          <input type="number" id="pen-thickness" value="5" min="1" max="20" />
+        </div>
+        <div>
+          <label for="pen-toggle">Pen Mode:</label>
+          <input type="checkbox" id="pen-toggle" />
+        </div>
+        <button id="export-btn">Export as Image</button>
+      </div>
+    </div>
+
+    <script>
+      // Get the card element
+      const card = document.getElementById("card");
+
+      // Get the add element button
+      const addElementBtn = document.getElementById("add-element");
+
+      // Get the export button
+      const exportBtn = document.getElementById("export-btn");
+
+      // Get the text input field
+      const textInput = document.getElementById("text");
+
+      // Get the pen thickness input field
+      const penThicknessInput = document.getElementById("pen-thickness");
+
+      // Get the pen toggle checkbox
+      const penToggleInput = document.getElementById("pen-toggle");
+
+      // Get the canvas element
+      const canvas = document.getElementById("drawingCanvas");
+
+      // Get the 2D drawing context of the canvas
+      const ctx = canvas.getContext("2d");
+
+      // Flag to track if the mouse is down
+      let isDown = false;
+
+      // Offset of the element being dragged
+      let offset = [0, 0];
+
+      // Current element being dragged
+      let currentElement;
+
+      // Flag to track if drawing is in progress
+      let drawing = false;
+
+      // Last coordinates of the drawing
+      let lastX, lastY;
+
+      canvas.width = card.offsetWidth;
+      canvas.height = card.offsetHeight;
+
+      // Add event listener to the add element button
+      addElementBtn.addEventListener("click", () => {
+        const element = document.createElement("div");
+        element.classList.add("element");
+        element.textContent = textInput.value;
+        // Randomly position the element within the card boundaries
+        element.style.left = `${
+          Math.random() * (card.offsetWidth - 100 - 20)
+        }px`;
+        element.style.top = `${
+          Math.random() * (card.offsetHeight - 50 - 20)
+        }px`;
+        card.appendChild(element);
+
+        // Add event listener to the new element for mouse down
+        element.addEventListener("mousedown", (e) => {
+          if (!penToggleInput.checked) {
+            isDown = true;
+            offset = [
+              element.offsetLeft - e.clientX,
+              element.offsetTop - e.clientY,
+            ];
+            currentElement = element;
+            e.preventDefault();
+          }
+        });
+      });
+
+      // Add event listener to the card for mouse down
+      card.addEventListener("mousedown", (e) => {
+        if (penToggleInput.checked) {
+          drawing = true;
+          [lastX, lastY] = [
+            Math.max(0, Math.min(e.clientX - card.offsetLeft, canvas.width)),
+            Math.max(0, Math.min(e.clientY - card.offsetTop, canvas.height)),
+          ];
+          e.preventDefault();
+        }
+      });
+
+      // Add event listener to the card for mouse move
+      card.addEventListener("mousemove", (e) => {
+        if (drawing) {
+          let x = Math.max(
+            0,
+            Math.min(e.clientX - card.offsetLeft, canvas.width)
+          );
+          let y = Math.max(
+            0,
+            Math.min(e.clientY - card.offsetTop, canvas.height)
+          );
+          ctx.beginPath();
+          ctx.moveTo(lastX, lastY);
+          ctx.lineTo(x, y);
+          ctx.strokeStyle = "black";
+          ctx.lineWidth = penThicknessInput.value;
+          ctx.lineCap = "round";
+          ctx.stroke();
+          [lastX, lastY] = [x, y];
+        } else if (isDown) {
+          let x = Math.max(
+            0,
+            Math.min(e.clientX + offset[0], card.offsetWidth - 20)
+          );
+          let y = Math.max(
+            0,
+            Math.min(e.clientY + offset[1], card.offsetHeight - 20)
+          );
+          currentElement.style.left = `${x}px`;
+          currentElement.style.top = `${y}px`;
+        }
+      });
+
+      // Add event listener to the document for mouse up
+      document.addEventListener("mouseup", () => {
+        isDown = false;
+        drawing = false;
+      });
+
+      // Add event listener to the export button
+      exportBtn.addEventListener("click", () => {
+        domtoimage.toBlob(card).then(function (blob) {
+          window.saveAs(blob, "business-card.png");
+        });
+      });
+
+      // Add event listener to the card to prevent drag start
+      card.addEventListener("dragstart", (e) => {
+        e.preventDefault();
+      });
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dom-to-image/2.6.0/dom-to-image.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
+  </body>
+</html>

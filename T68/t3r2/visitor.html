@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Intercom - Visitor</title>
+    <style>
+      body {
+        font-family: sans-serif;
+      }
+
+      #apartments {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+        gap: 10px;
+      }
+
+      button {
+        padding: 10px;
+        margin: 5px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+
+  <body>
+    <h1>Intercom</h1>
+    <div id="apartments"></div>
+    <div id="chat" style="display: none">
+      <h2>Chat</h2>
+      <div id="messages"></div>
+      <input type="text" id="message" />
+      <button id="send">Send</button>
+    </div>
+    <audio
+      id="door-open-sound"
+      src="door-open.mp3"
+      style="display: none"
+    ></audio>
+    <script src="visitor.js" type="module"></script>
+  </body>
+</html>
