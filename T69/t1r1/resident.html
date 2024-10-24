@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Intercom - Resident</title>
+    <style>
+      body {
+        font-family: sans-serif;
+      }
+
+      #chat {
+        display: none;
+      }
+    </style>
+  </head>
+
+  <body>
+    <h1>Intercom</h1>
+    <form id="login-form">
+      <label for="apartment">Apartment:</label>
+      <select id="apartment" name="apartment">
+        <option value="1">Apartment 1</option>
+        <option value="2">Apartment 2</option>
+        <option value="3">Apartment 3</option>
+        <option value="4">Apartment 4</option>
+        <option value="5">Apartment 5</option>
+        <option value="6">Apartment 6</option>
+        <option value="7">Apartment 7</option>
+        <option value="8">Apartment 8</option>
+        <option value="9">Apartment 9</option>
+        <option value="10">Apartment 10</option>
+      </select>
+      <label for="password">Password:</label>
+      <input type="password" id="password" name="password" />
+      <button type="submit">Login</button>
+    </form>
+    <div id="call" style="display: none">
+      <h2>Call from: <span id="visitor"></span></h2>
+      <button id="open">Open Door</button>
+    </div>
+    <div id="chat">
+      <h2>Chat</h2>
+      <div id="messages"></div>
+      <input type="text" id="message" />
+      <button id="send">Send</button>
+    </div>
+    <div id="visitor-entered-message" style="display: none">
+      Visitor has entered.
+    </div>
+    <script src="resident.js" type="module"></script>
+  </body>
+</html>

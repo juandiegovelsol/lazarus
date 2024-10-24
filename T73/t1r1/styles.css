@@ -1,0 +1,36 @@
+body {
+  background-color: #f0f0f0;
+}
+
+#game-container {
+  width: 800px;
+  height: 600px;
+  border: 1px solid black;
+  margin: 40px auto;
+  position: relative;
+}
+
+.shape {
+  position: absolute;
+  cursor: pointer;
+}
+
+.circle {
+  border-radius: 50%;
+}
+
+.square {
+  border-radius: 0;
+}
+
+.triangle {
+  width: 0;
+  height: 0;
+  position: absolute;
+  cursor: pointer;
+}
+
+#score-container {
+  text-align: center;
+  font-size: 24px;
+}
