@@ -1,0 +1,57 @@
+body {
+  background-color: #f0f0f0;
+}
+
+#game-container {
+  width: 800px;
+  height: 600px;
+  border: 1px solid black;
+  margin: 40px auto;
+  position: relative;
+}
+
+.shape {
+  position: absolute;
+  cursor: pointer;
+  width: 50px;
+  height: 50px;
+  transform-origin: center;
+  transition: transform 0.3s ease;
+}
+
+.circle {
+  border-radius: 50%;
+}
+
+.square {
+  border-radius: 0;
+}
+
+.triangle {
+  width: 0;
+  height: 0;
+  border-left: 25px solid transparent;
+  border-right: 25px solid transparent;
+  border-bottom: 50px solid;
+}
+
+@keyframes pulse {
+  0% {
+    scale: 1;
+  }
+  50% {
+    scale: 1.2;
+  }
+  100% {
+    scale: 1;
+  }
+}
+
+.clicked {
+  animation: pulse 1s infinite;
+}
+
+#score-container {
+  text-align: center;
+  font-size: 24px;
+}
