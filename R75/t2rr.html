@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Rotating Menu Wheel with Ripple Effect</title>
+    <style>
+      /* Global Styles */
+      body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+        background-color: #333;
+      }
+
+      /* Wheel Container */
+      .wheel {
+        position: relative;
+        width: 200px;
+        height: 200px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      /* Center Button */
+      .center-btn {
+        position: absolute;
+        width: 50px;
+        height: 50px;
+        background-color: #ff5722;
+        border-radius: 50%;
+        z-index: 10;
+        /* Ensure it sits above rotating items */
+        cursor: pointer;
+      }
+
+      /* Items Container with Rotation Animation */
+      .items {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        animation: rotate-items 10s linear infinite;
+        /* Continuous rotation */
+      }
+
+      /* Item Styles */
+      .item {
+        position: absolute;
+        width: 40px;
+        height: 40px;
+        background-color: #4caf50;
+        border-radius: 50%;
+        /* Make items circular */
+        color: #fff;
+        font-weight: bold;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        transition: transform 0.3s ease, background-color 0.3s ease;
+        /* Smooth transitions */
+        cursor: pointer;
+        /* Pointer cursor for interactivity */
+      }
+
+      /* Calculate Rotation for Each Item */
+      .item:nth-child(1) {
+        --rotation: 0deg;
+      }
+
+      /* First item at 0 degrees */
+      .item:nth-child(2) {
+        --rotation: calc(360deg / var(--num-items) * 1);
+      }
+
+      /* Angle for second item */
+      .item:nth-child(3) {
+        --rotation: calc(360deg / var(--num-items) * 2);
+      }
+
+      /* Angle for third item */
+      .item:nth-child(4) {
+        --rotation: calc(360deg / var(--num-items) * 3);
+      }
+
+      .item:nth-child(5) {
+        --rotation: calc(360deg / var(--num-items) * 4);
+      }
+
+      .item:nth-child(6) {
+        --rotation: calc(360deg / var(--num-items) * 5);
+      }
+
+      /* Position Items Around the Circle */
+      .item {
+        /* Rotate to calculated position, move outwards, and counter-rotate to keep upright */
+        transform: rotate(var(--rotation)) translate(80px)
+          rotate(calc(-1 * var(--rotation)));
+      }
+
+      /* Hover Effect for Items */
+      .item:hover {
+        background-color: #2196f3;
+        /* Change color to blue */
+        transform: rotate(var(--rotation)) translate(80px)
+          rotate(calc(-1 * var(--rotation))) scale(1.5);
+        /* Enlarge */
+      }
+
+      /* Ripple Effect on Hover - Expand Next Item */
+      .item:hover + .item {
+        transform: rotate(var(--rotation)) translate(80px)
+          rotate(calc(-1 * var(--rotation))) scale(1.25);
+        /* Slightly enlarge */
+      }
+
+      /* Ripple Effect on Hover - Expand Previous Item */
+      .items:hover .item:has(+ .item:hover) {
+        transform: rotate(var(--rotation)) translate(80px)
+          rotate(calc(-1 * var(--rotation))) scale(1.25);
+        /* Slightly enlarge */
+      }
+
+      /* Handle Edge Cases for First and Last Items */
+      .items:hover .item:last-child:hover ~ .item:first-child {
+        /* Ensures first item scales up when hovering over the last item */
+        transform: rotate(var(--rotation)) translate(80px)
+          rotate(calc(-1 * var(--rotation))) scale(1.25);
+      }
+
+      .item:first-child:hover ~ .item:last-child {
+        /* Ensures last item scales up when hovering over the first item */
+        transform: rotate(var(--rotation)) translate(80px)
+          rotate(calc(-1 * var(--rotation))) scale(1.25);
+      }
+
+      /* Mobile Responsiveness */
+      @media (max-width: 768px) {
+        /* Reduce Wheel Size */
+        .wheel {
+          width: 150px;
+          height: 150px;
+        }
+
+        /* Reduce Item Size */
+        .item {
+          width: 30px;
+          height: 30px;
+        }
+
+        /* Adjust Transform Properties */
+        .item {
+          transform: rotate(var(--rotation)) translate(60px)
+            rotate(calc(-1 * var(--rotation)));
+        }
+
+        /* Responsive Hover Effects for Mobile */
+        .item:hover {
+          transform: rotate(var(--rotation)) translate(60px)
+            rotate(calc(-1 * var(--rotation))) scale(1.5) !important;
+        }
+
+        /* Adjust for Ripple Effect on Smaller Screens */
+        .item:hover + .item,
+        .items:hover .item:has(+ .item:hover),
+        .items:hover .item:last-child:hover ~ .item:first-child,
+        .item:first-child:hover ~ .item:last-child {
+          transform: rotate(var(--rotation)) translate(60px)
+            rotate(calc(-1 * var(--rotation))) scale(1.25);
+        }
+      }
+
+      /* Keyframes for Rotating Items */
+      @keyframes rotate-items {
+        from {
+          transform: rotate(0deg);
+          /* Start rotation */
+        }
+
+        to {
+          transform: rotate(360deg);
+          /* Complete full rotation */
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- Wheel Container with Center Button and Rotating Items -->
+    <div class="wheel" style="--num-items: 6">
+      <!-- Center Button -->
+      <div class="center-btn"></div>
+
+      <!-- Items Container with Rotation Animation -->
+      <div class="items">
+        <!-- Individual Items -->
+        <div class="item">1</div>
+        <div class="item">2</div>
+        <div class="item">3</div>
+        <div class="item">4</div>
+        <div class="item">5</div>
+        <div class="item">6</div>
+      </div>
+    </div>
+  </body>
+</html>

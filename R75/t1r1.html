@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Rotating Menu Wheel</title>
+    <style>
+      body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+        background-color: #333;
+      }
+
+      .wheel {
+        position: relative;
+        width: 200px;
+        height: 200px;
+        border-radius: 50%;
+        overflow: hidden;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .wheel .center-btn {
+        position: absolute;
+        width: 50px;
+        height: 50px;
+        background-color: #ff5722;
+        border-radius: 50%;
+        z-index: 10;
+        cursor: pointer;
+      }
+
+      .wheel .items {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        animation: rotate-items 10s linear infinite;
+      }
+
+      .item {
+        position: absolute;
+        --item-size: 40px;
+        width: var(--item-size);
+        height: var(--item-size);
+        background-color: #4caf50;
+        border-radius: 50%;
+        transition: all 0.3s ease;
+        cursor: pointer;
+        transform-origin: center;
+      }
+
+      .item:hover {
+        background-color: #2196f3;
+        transform: scale(1.5);
+      }
+
+      .item:nth-child(1) {
+        transform: rotate(45deg) translate(60px) rotate(-45deg);
+      }
+
+      .item:nth-child(2) {
+        transform: rotate(135deg) translate(60px) rotate(-135deg);
+      }
+
+      .item:nth-child(3) {
+        transform: rotate(225deg) translate(60px) rotate(-225deg);
+      }
+
+      .item:nth-child(4) {
+        transform: rotate(315deg) translate(60px) rotate(-315deg);
+      }
+
+      @keyframes rotate-items {
+        from {
+          transform: rotate(0deg);
+        }
+        to {
+          transform: rotate(360deg);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wheel">
+      <div class="center-btn"></div>
+      <div class="items">
+        <div class="item"></div>
+        <div class="item"></div>
+        <div class="item"></div>
+        <div class="item"></div>
+      </div>
+    </div>
+  </body>
+</html>

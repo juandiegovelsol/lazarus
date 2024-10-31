@@ -1,0 +1,75 @@
+<!-- index.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Incident Response Automation Tools</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header>
+      <nav>
+        <ul>
+          <li><a href="#dashboard">Dashboard</a></li>
+          <li><a href="#incidents">Incidents</a></li>
+          <li><a href="#reports">Reports</a></li>
+        </ul>
+      </nav>
+    </header>
+    <main>
+      <section id="dashboard">
+        <h1>Dashboard</h1>
+        <div class="cards">
+          <div class="card">
+            <h2>Incidents</h2>
+            <p>Total: 10</p>
+          </div>
+          <div class="card">
+            <h2>Resolved</h2>
+            <p>Total: 5</p>
+          </div>
+          <div class="card">
+            <h2>Pending</h2>
+            <p>Total: 3</p>
+          </div>
+        </div>
+      </section>
+      <section id="incidents">
+        <h1>Incidents</h1>
+        <table>
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Date</th>
+              <th>Description</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>INC001</td>
+              <td>2022-01-01</td>
+              <td>Network outage</td>
+              <td>Pending</td>
+            </tr>
+            <tr>
+              <td>INC002</td>
+              <td>2022-01-05</td>
+              <td>System failure</td>
+              <td>Resolved</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+      <section id="reports">
+        <h1>Reports</h1>
+        <div class="charts">
+          <canvas id="incident-chart"></canvas>
+        </div>
+      </section>
+    </main>
+    <script src="script.js"></script>
+  </body>
+</html>

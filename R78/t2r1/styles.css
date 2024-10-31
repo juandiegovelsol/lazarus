@@ -1,0 +1,251 @@
+/* Base styles reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+}
+
+/* General body styles */
+body {
+  font-family: Arial, sans-serif;
+  line-height: 1.6;
+  background-color: #f4f4f4;
+  overflow-x: hidden;
+}
+
+/* Header styling */
+header {
+  background-color: #228b22;
+  color: white;
+  padding: 20px;
+  text-align: center;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  opacity: 1;
+}
+
+/* Header title animation */
+header h1 {
+  margin-bottom: 10px;
+  animation: fadeIn 2s ease-in-out;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Navigation menu */
+nav ul {
+  list-style: none;
+}
+
+nav ul li {
+  display: inline;
+  margin: 0 15px;
+}
+
+/* Navigation links and hover effects */
+nav ul li a {
+  color: white;
+  text-decoration: none;
+  position: relative;
+  padding-bottom: 5px;
+}
+
+nav ul li a::after {
+  content: '';
+  display: block;
+  width: 0;
+  height: 3px;
+  background: white;
+  transition: width 0.3s;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+}
+
+nav ul li a:hover::after {
+  width: 100%;
+}
+
+/* Main section containers */
+section {
+  padding: 40px;
+  margin: 20px auto;
+  max-width: 900px;
+  background-color: white;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+  animation: fadeInUp 1.5s ease-in-out;
+  margin-bottom: 50px;
+}
+
+/* Section fade-in animation */
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Section heading styles */
+h2 {
+  margin-bottom: 15px;
+  position: relative;
+}
+
+/* Heading underline decoration */
+h2::after {
+  content: '';
+  width: 50px;
+  height: 3px;
+  background-color: #228b22;
+  position: absolute;
+  bottom: -10px;
+  left: 0;
+}
+
+/* Plant grid layout */
+.care-info {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
+  z-index: 10;
+}
+
+/* Plant card styling */
+.plant {
+  text-align: center;
+  perspective: 1000px;
+}
+
+/* Plant description box */
+.plant-description {
+  background-color: rgba(255, 255, 255, 0.8);
+  padding: 10px;
+  border-radius: 10px;
+  color: black;
+}
+
+/* Plant title styling */
+.plant h3 {
+  margin: 10px 0;
+  color: black;
+  background-color: rgba(255, 255, 255, 0.8);
+  padding: 5px;
+  border-radius: 10px;
+}
+
+/* Plant image and hover effects */
+.plant-image img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+  transition: transform 0.3s ease-in-out, filter 0.4s ease;
+  transform: scale(1.05);
+}
+
+.plant-image:hover img {
+  transform: scale(0.9) rotate(10deg);
+  filter: brightness(1.2);
+}
+
+/* Footer styling */
+footer {
+  text-align: center;
+  padding: 20px;
+  background-color: #228b22;
+  color: white;
+  box-shadow: 0 -10px 20px rgba(0, 0, 0, 0.2);
+  position: relative;
+}
+
+/* Care section background */
+#care {
+  background: url('https://images.pexels.com/photos/1542937/pexels-photo-1542937.jpeg')
+    no-repeat center center/cover;
+  padding: 60px 0;
+  background-attachment: fixed;
+  padding-top: 200px;
+  z-index: 10;
+}
+
+/* Care section heading */
+#care h2 {
+  color: black;
+  background-color: rgba(255, 255, 255, 0.8);
+  padding: 10px;
+  border-radius: 10px;
+  display: inline-block;
+  margin-bottom: 30px;
+}
+
+#care h2::after {
+  bottom: -15px;
+  background-color: #228b22;
+}
+
+/* Gallery section background */
+#gallery {
+  background: url('https://images.pexels.com/photos/1405773/pexels-photo-1405773.jpeg')
+    no-repeat center center/cover;
+  padding: 60px 0;
+  background-attachment: fixed;
+}
+
+/* Gallery layout */
+.gallery-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+/* Main gallery image */
+.gallery-main {
+  margin-bottom: 20px;
+}
+
+.gallery-main img {
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+}
+
+/* Thumbnail grid */
+.gallery-thumbnails {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+/* Thumbnail images */
+.thumbnail {
+  width: 100px;
+  height: 100px;
+  margin: 10px;
+  border-radius: 10px;
+  cursor: pointer;
+  opacity: 0.5;
+}
+
+/* Active thumbnail state */
+.thumbnail.active {
+  opacity: 1;
+  border: 2px solid white;
+}
+
+

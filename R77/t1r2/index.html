@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Health Monitoring App</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div id="login-page">
+      <h1>Login Page</h1>
+      <label for="national-id">National ID:</label>
+      <input type="text" id="national-id" required />
+      <label for="gender">Gender:</label>
+      <select id="gender" required>
+        <option value="male">Male</option>
+        <option value="female">Female</option>
+      </select>
+      <button id="login-btn">Login</button>
+    </div>
+    <div id="hospital-page" style="display: none">
+      <h1>Hospital and Doctor Selection</h1>
+      <label for="hospital">Hospital:</label>
+      <select id="hospital" required>
+        <option value="hospital1">Hospital 1</option>
+        <option value="hospital2">Hospital 2</option>
+      </select>
+      <label for="doctor">Doctor:</label>
+      <select id="doctor" required></select>
+      <button id="hospital-btn">Proceed</button>
+    </div>
+    <div id="blood-page" style="display: none">
+      <h1>Blood Sample Values</h1>
+      <label for="hgb">Hemoglobin (Hgb):</label>
+      <input type="number" id="hgb" required />
+      <label for="hct">Hematocrit (Hct):</label>
+      <input type="number" id="hct" required />
+      <label for="wbc">White Blood Cell (WBC):</label>
+      <input type="number" id="wbc" required />
+      <label for="plt">Platelets (Plt):</label>
+      <input type="number" id="plt" required />
+      <label for="rbc">Red Blood Cells (RBC):</label>
+      <input type="number" id="rbc" required />
+      <button id="evaluate-btn">Evaluate</button>
+      <div id="result"></div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>

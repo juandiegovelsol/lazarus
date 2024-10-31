@@ -1,0 +1,181 @@
+/* Base styles reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+}
+
+/* General body styles */
+body {
+  font-family: Arial, sans-serif;
+  line-height: 1.6;
+  background-color: #f4f4f4;
+  overflow-x: hidden;
+}
+
+/* Header styling */
+header {
+  background-color: #228b22;
+  color: white;
+  padding: 20px;
+  text-align: center;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  opacity: 1;
+}
+
+/* Header animation */
+header h1 {
+  margin-bottom: 10px;
+  animation: fadeIn 2s ease-in-out;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Navigation styles */
+nav ul {
+  list-style: none;
+}
+
+nav ul li {
+  display: inline;
+  margin: 0 15px;
+}
+
+/* Navigation links and hover effects */
+nav ul li a {
+  color: white;
+  text-decoration: none;
+  position: relative;
+  padding-bottom: 5px;
+}
+
+nav ul li a::after {
+  content: '';
+  display: block;
+  width: 0;
+  height: 3px;
+  background: white;
+  transition: width 0.3s;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+}
+
+nav ul li a:hover::after {
+  width: 100%;
+}
+
+/* Main section styles */
+section {
+  padding: 40px;
+  margin: 20px auto;
+  max-width: 900px;
+  background-color: white;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+  animation: fadeInUp 1.5s ease-in-out;
+  margin-bottom: 50px;
+}
+
+/* Section animation */
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Heading styles */
+h2 {
+  margin-bottom: 15px;
+  position: relative;
+}
+
+h2::after {
+  content: '';
+  width: 50px;
+  height: 3px;
+  background-color: #228b22;
+  position: absolute;
+  bottom: -10px;
+  left: 0;
+}
+
+/* Grid layout for plant care info */
+.care-info {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
+  z-index: 10;
+}
+
+/* Plant card styles and animations */
+.plant {
+  text-align: center;
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+  perspective: 1000px;
+}
+
+.plant:hover {
+  transform: rotate(20deg);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+}
+
+/* Plant image styles */
+.plant img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+  transition: transform 0.3s ease-in-out, filter 0.4s ease;
+  transform: scale(1.05);
+}
+
+.plant:hover img {
+  transform: scale(1.1);
+  filter: brightness(1.2);
+}
+
+/* Footer styles */
+footer {
+  text-align: center;
+  padding: 20px;
+  background-color: #228b22;
+  color: white;
+  box-shadow: 0 -10px 20px rgba(0, 0, 0, 0.2);
+  position: relative;
+}
+
+/* Background sections */
+#care {
+  background: url('https://images.pexels.com/photos/1542937/pexels-photo-1542937.jpeg')
+    no-repeat center center/cover;
+  padding: 60px 0;
+  background-attachment: fixed;
+  color: black;
+  padding-top: 200px;
+  z-index: 10;
+}
+
+#gallery {
+  background: url('https://images.pexels.com/photos/1405773/pexels-photo-1405773.jpeg')
+    no-repeat center center/cover;
+  padding: 60px 0;
+  background-attachment: fixed;
+  color: white;
+}
+

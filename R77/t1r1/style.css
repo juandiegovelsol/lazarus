@@ -1,0 +1,43 @@
+body {
+    font-family: Arial, sans-serif;
+}
+/* Style for the main containers (login, hospital, and blood sample pages) */
+#login-page, #hospital-page, #blood-sample-page {
+    width: 50%;
+    margin: 40px auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+/* Style for labels */
+label {
+    display: block;
+    margin-bottom: 10px;
+}
+/* Style for input fields and dropdown menus */
+input, select {
+    width: 100%;
+    height: 40px;
+    margin-bottom: 20px;
+    padding: 10px;
+    border: 1px solid #ccc;
+}
+/* Style for buttons */
+button {
+    width: 100%;
+    height: 30px;
+    background-color: #4CAF50;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+/* Change the button's background color when hovered over */
+button:hover {
+    background-color: #3e8e41;
+}
+/* Style for the result display */
+#result {
+    margin-top: 20px;
+}

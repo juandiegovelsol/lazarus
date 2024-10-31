@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Space Shooter Game</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: black;
+        }
+
+        canvas {
+            border: 2px solid white;
+        }
+
+        #color-picker {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+        }
+
+        #restart-button {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            display: none;
+        }
+
+        #exit-button {
+            position: absolute;
+            top: 50px;
+            left: 10px;
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <canvas id="gameCanvas" width="800" height="600"></canvas>
+    <input type="color" id="color-picker" value="#ffffff">
+    <button id="restart-button" onclick="restartGame()">Restart</button>
+    <button id="exit-button" onclick="exitGame()">Exit</button>
+    <script src="game.js"></script>
+</body>
+
+</html>

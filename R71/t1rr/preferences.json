@@ -1,0 +1,30 @@
+{
+  "rules": {
+    "code-clarity": {
+      "enabled": true,
+      "threshold": 10,
+      "maxNestingDepth": 3,
+      "maxFunctionLength": 50
+    },
+    "naming-convention": {
+      "enabled": true,
+      "conventions": {
+        "variables": "camelCase",
+        "functions": "camelCase",
+        "classes": "PascalCase",
+        "constants": "UPPER_CASE"
+      },
+      "forbiddenAbbreviations": [
+        "tmp",
+        "val"
+      ],
+      "requireAsyncSuffix": true,
+      "privatePrefix": "_"
+    },
+    "algorithm-complexity": {
+      "enabled": true,
+      "threshold": 2,
+      "maxNestingDepth": 2
+    }
+  }
+}

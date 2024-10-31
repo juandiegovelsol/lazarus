@@ -1,0 +1,173 @@
+@import url(https://fonts.googleapis.com/css?family=Nunito:400,700,300);
+/* Importing the Nunito font from Google Fonts */
+
+/* Applying box-sizing to all elements to include padding and border in the element's total width and height */
+* {
+    box-sizing: border-box;
+}
+
+/* Body styles */
+body {
+    font-family: 'Nunito', sans-serif; /* Set the font for the entire page */
+    height: 100vh; /* Ensure the body takes the full height of the viewport */
+    display: flex; /* Use Flexbox for layout */
+    justify-content: center; /* Center children horizontally */
+    align-items: center; /* Center children vertically */
+    margin: 0; /* Remove default margin */
+}
+
+/* Container for all circles */
+body .circles {
+    width: 920px; /* Set the width of the container */
+    display: flex; /* Use Flexbox for layout */
+    flex-direction: column; /* Stack children vertically */
+    align-items: center; /* Center the circles horizontally */
+}
+
+/* Style for individual circle containers */
+body .content {
+    flex: 0 0 auto; /* Prevent circles from growing or shrinking */
+    position: relative; /* Position relative for child elements */
+    max-width: 300px; /* Set maximum width for each circle */
+    margin: 20px 0; /* Add vertical spacing between circles */
+    height: auto; /* Allow height to adjust automatically */
+}
+
+/* Unique background colors for each circle */
+body .circle_inner.circle1 {
+    background: linear-gradient(to bottom right, #ff00ff, #4b0082); /* Magenta to Indigo gradient */
+}
+
+body .circle_inner.circle2 {
+    background: linear-gradient(to bottom right, #00ffff, #0000ff); /* Cyan to Blue gradient */
+}
+
+body .circle_inner.circle3 {
+    background: linear-gradient(to bottom right, #800080, #ff1493); /* Purple to Deep Pink gradient */
+}
+
+/* Layer styles for circles */
+body .circle_inner__layer {
+    width: 600px; /* Set width of inner layer */
+    height: 200px; /* Set height of inner layer */
+    top: 0; /* Position from the top */
+    left: -200px; /* Position from the left */
+    position: absolute; /* Absolute positioning to overlap */
+    transition: all 0.4s; /* Smooth transition for movement */
+}
+
+/* Styles for images inside the inner layer */
+body .circle_inner__layer img {
+    width: 100%; /* Ensure images fill the layer */
+    position: absolute; /* Position absolutely within the layer */
+    bottom: 0; /* Align image to the bottom */
+}
+
+/* Style for the main circle element */
+body .circle {
+    position: relative; /* Allow for positioning of child elements */
+    margin: auto; /* Center the circle horizontally */
+    width: 200px; /* Set width of the circle */
+    transition: all 0.5s; /* Smooth transitions for hover effects */
+}
+
+/* Hover effects for titles inside circles */
+body .circle:hover h2,
+body .circle:hover h3 {
+    opacity: 1; /* Make titles visible on hover */
+    top: -36px; /* Move titles upwards */
+}
+
+/* Shadow effect on hover */
+body .circle:hover .circle_shadow {
+    transform: scale(1.1); /* Enlarge shadow */
+    top: -22px; /* Move shadow upwards */
+}
+
+/* Transition effects for titles on hover */
+body .circle:hover h2 {
+    transition: all 0.6s; /* Smooth transition for title */
+}
+
+/* Positioning of inner layers within circles */
+body .circle .circle_inner__layer:nth-of-type(1) {
+    top: 0px; /* First layer at the top */
+    left: 0px; /* Align with the left edge */
+}
+
+body .circle .circle_inner__layer:nth-of-type(2) {
+    top: 0px; /* Second layer also at the top */
+    left: -210px; /* Offset to the left */
+}
+
+body .circle .circle_inner__layer:nth-of-type(3) {
+    top: 0px; /* Third layer at the top */
+    left: -440px; /* Further offset to the left */
+}
+
+/* Title styles for each circle */
+body .circle_title {
+    text-align: center; /* Center the text */
+}
+
+/* Title styles for h2 elements */
+body .circle_title h2 {
+    opacity: 0; /* Start as invisible */
+    color: #4a7479; /* Set text color */
+    margin: 0; /* Remove default margin */
+    position: relative; /* Relative positioning for movement */
+    top: -10px; /* Initial vertical position */
+    transition: all 0.2s 0.04s; /* Smooth transition for hover effect */
+}
+
+/* Title styles for h3 elements */
+body .circle_title h3 {
+    transition: all 0.2s; /* Smooth transition for hover effect */
+    color: #b0d5d6; /* Set text color */
+    font-size: 15px; /* Set font size */
+}
+
+/* Main circle inner styles */
+body .circle_inner {
+    width: 200px; /* Set width of the circle inner */
+    height: 200px; /* Set height of the circle inner */
+    border-radius: 200px; /* Make it a perfect circle */
+    background: #b0d5d6; /* Set background color */
+    overflow: hidden; /* Hide overflow */
+    margin: auto; /* Center the circle inner */
+    position: relative; /* Position relative for child elements */
+    z-index: 1; /* Set stacking order */
+    transition: all 0.3s; /* Smooth transitions for hover effects */
+}
+
+/* Scale up the circle on hover */
+body .circle_inner:hover {
+    transform: scale(1.1); /* Enlarge the circle */
+}
+
+/* Movement of inner layers on hover */
+body .circle_inner:hover .circle_inner__layer:nth-of-type(1) {
+    left: -80px; /* Move first layer */
+    transition: all 4s linear; /* Slow linear transition */
+}
+
+body .circle_inner:hover .circle_inner__layer:nth-of-type(2) {
+    left: -400px; /* Move second layer */
+    transition: all 4s linear; /* Slow linear transition */
+}
+
+body .circle_inner:hover .circle_inner__layer:nth-of-type(3) {
+    left: -140px; /* Move third layer */
+    transition: all 4s linear; /* Slow linear transition */
+}
+
+/* Shadow styles for circles */
+body .circle_shadow {
+    width: 200px; /* Set width of the shadow */
+    height: 21px; /* Set height of the shadow */
+    box-shadow: 0px 34px 18px -1px #e0e8f9; /* Add shadow effect */
+    border-radius: 60%; /* Round the edges */
+    top: -40px; /* Position above the circle */
+    position: relative; /* Relative positioning for proper layout */
+    transition: all 0.5s; /* Smooth transition for shadow effects */
+}

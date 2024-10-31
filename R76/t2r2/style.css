@@ -1,0 +1,16 @@
+body {
+    text-align: center;
+}
+
+#slot {
+    width: 200px;
+    height: 200px;
+    background-color: white;
+    margin: 20px auto;
+    border: 1px solid black;
+}
+
+#pause-resume-btn {
+    margin: 10px auto;
+    display: block;
+}

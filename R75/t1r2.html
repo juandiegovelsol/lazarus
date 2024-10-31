@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Rotating Menu Wheel</title>
+    <style>
+      body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+        background-color: #333;
+      }
+
+      .wheel {
+        position: relative;
+        width: 200px;
+        height: 200px;
+        border-radius: 50%;
+        overflow: hidden;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .center-btn {
+        position: absolute;
+        width: 50px;
+        height: 50px;
+        background-color: #ff5722;
+        border-radius: 50%;
+        z-index: 10;
+        cursor: pointer;
+      }
+
+      .item {
+        position: absolute;
+        width: 40px;
+        height: 40px;
+        background-color: #4caf50;
+        border-radius: 50%;
+        transition: all 0.3s ease;
+        cursor: pointer;
+      }
+
+      .item:hover {
+        background-color: #2196f3;
+        transform: scale(1.5);
+      }
+
+      .item:nth-child(1) {
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -100%) rotate(0deg);
+      }
+      .item:nth-child(2) {
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, 0) rotate(90deg);
+      }
+      .item:nth-child(3) {
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, 100%) rotate(180deg);
+      }
+      .item:nth-child(4) {
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, 0) rotate(270deg);
+      }
+
+      .item-animate {
+        animation: rotate-items 5s linear infinite;
+      }
+
+      @keyframes rotate-items {
+        from {
+          transform: rotate(0deg);
+        }
+        to {
+          transform: rotate(360deg);
+        }
+      }
+
+      /* Add this to fix the animation on hover */
+      .item:hover {
+        animation: none;
+      }
+
+      /* Add this to fix the positioning of items */
+      .item {
+        transform-origin: center;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wheel">
+      <div class="center-btn"></div>
+      <div class="item item-animate"></div>
+      <div class="item item-animate"></div>
+      <div class="item item-animate"></div>
+      <div class="item item-animate"></div>
+    </div>
+  </body>
+</html>

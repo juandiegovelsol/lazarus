@@ -1,0 +1,142 @@
+/* styles.css */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+}
+
+.container {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f0f0f0;
+}
+
+.circle-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.circle {
+    position: relative;
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    margin: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    transition: all 0.5s ease-in-out;
+}
+
+.red-circle {
+    background-color: #ff69b4;
+}
+
+.purple-circle {
+    background-color: #7a288a;
+}
+
+.blue-circle {
+    background-color: #3498db;
+}
+
+.parallax-layer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background-size: cover;
+    background-position: center;
+    transition: all 0.5s ease-in-out;
+}
+
+.red-circle .layer-1 {
+    background-image: url('red-layer-1.png');
+    transform: translateZ(10px);
+}
+
+.red-circle .layer-2 {
+    background-image: url('red-layer-2.png');
+    transform: translateZ(20px);
+}
+
+.red-circle .layer-3 {
+    background-image: url('red-layer-3.png');
+    transform: translateZ(30px);
+}
+
+.red-circle .layer-4 {
+    background-image: url('red-layer-4.png');
+    transform: translateZ(40px);
+}
+
+.purple-circle .layer-1 {
+    background-image: url('purple-layer-1.png');
+    transform: translateZ(10px);
+}
+
+.purple-circle .layer-2 {
+    background-image: url('purple-layer-2.png');
+    transform: translateZ(20px);
+}
+
+.purple-circle .layer-3 {
+    background-image: url('purple-layer-3.png');
+    transform: translateZ(30px);
+}
+
+.purple-circle .layer-4 {
+    background-image: url('purple-layer-4.png');
+    transform: translateZ(40px);
+}
+
+.blue-circle .layer-1 {
+    background-image: url('blue-layer-1.png');
+    transform: translateZ(10px);
+}
+
+.blue-circle .layer-2 {
+    background-image: url('blue-layer-2.png');
+    transform: translateZ(20px);
+}
+
+.blue-circle .layer-3 {
+    background-image: url('blue-layer-3.png');
+    transform: translateZ(30px);
+}
+
+.blue-circle .layer-4 {
+    background-image: url('blue-layer-4.png');
+    transform: translateZ(40px);
+}
+
+.title {
+    position: absolute;
+    top: -50px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 24px;
+    color: #add8e6;
+    opacity: 0;
+    transition: all 0.5s ease-in-out;
+}
+
+.circle:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+}
+
+.circle:hover .title {
+    opacity: 1;
+    top: -60px;
+}
+
+.circle:hover .parallax-layer {
+    transform: translateZ(0);
+}

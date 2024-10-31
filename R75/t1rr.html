@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Rotating Menu Wheel</title>
+    <style>
+      /* Set up full-page centered layout with dark background */
+      body {
+        display: flex;
+        /* Center the wheel horizontally */
+        justify-content: center;
+        align-items: center;
+        /* Center the wheel vertically */
+        height: 100vh;
+        /* Take full viewport height */
+        margin: 0;
+        background-color: #333;
+        /* Dark background for contrast */
+      }
+
+      /* Wheel container - used to position the rotating items */
+      .wheel {
+        position: relative;
+        /* Allows absolute positioning of child elements */
+        width: 200px;
+        /* Fixed width for the wheel */
+        height: 200px;
+        /* Fixed height for the wheel */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      /* Center button in the middle of the wheel */
+      .center-btn {
+        position: absolute;
+        width: 50px;
+        /* Button width */
+        height: 50px;
+        /* Button height */
+        background-color: #ff5722;
+        /* Orange color */
+        border-radius: 50%;
+        /* Makes the button circular */
+        z-index: 10;
+        /* Ensure it sits above rotating items */
+        cursor: pointer;
+        /* Indicates clickability */
+      }
+
+      /* Container for rotating items */
+      .items {
+        position: absolute;
+        width: 100%;
+        /* Matches the wheel's dimensions */
+        height: 100%;
+        /* Matches the wheel's dimensions */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        animation: rotate-items 10s linear infinite;
+        /* Rotates items continuously */
+      }
+
+      /* Style for each individual menu item */
+      .item {
+        position: absolute;
+        width: 40px;
+        /* Item width */
+        height: 40px;
+        /* Item height */
+        background-color: #4caf50;
+        /* Green color */
+        border-radius: 50%;
+        /* Makes each item circular */
+        transition: transform 0.3s ease, background-color 0.3s ease;
+        /* Smooth transitions for hover effects */
+        cursor: pointer;
+        /* Pointer cursor to indicate interactivity */
+      }
+
+      /* Automatically position items in a circle based on the number of items */
+      /* For each item, we calculate its angle around the circle */
+      .item:nth-child(1) {
+        --rotation: 0deg;
+        /* First item at 0 degrees */
+      }
+
+      .item:nth-child(2) {
+        --rotation: calc(360deg / var(--num-items) * 1);
+        /* Second item at calculated angle */
+      }
+
+      .item:nth-child(3) {
+        --rotation: calc(360deg / var(--num-items) * 2);
+        /* Third item at calculated angle */
+      }
+
+      .item:nth-child(4) {
+        --rotation: calc(360deg / var(--num-items) * 3);
+        /* Fourth item at calculated angle */
+      }
+
+      .item:nth-child(5) {
+        --rotation: calc(360deg / var(--num-items) * 4);
+        /* Fifth item at calculated angle */
+      }
+
+      .item:nth-child(6) {
+        --rotation: calc(360deg / var(--num-items) * 5);
+        /* Sixth item at calculated angle */
+      }
+
+      /* Apply the calculated rotation to each item, centering them around the wheel */
+      .item {
+        transform: rotate(var(--rotation)) translate(80px)
+          rotate(calc(-1 * var(--rotation)));
+        /* Explanation:
+         1. rotate(var(--rotation)) - Rotate the coordinate system to the calculated angle.
+         2. translate(80px) - Move the item outward from the center by 80px (radius of the wheel).
+         3. rotate(calc(-1 * var(--rotation))) - Counter-rotate the item to keep it upright. */
+      }
+
+      /* Hover effect for items - change color and enlarge */
+      .item:hover {
+        background-color: #2196f3;
+        /* Change color to blue on hover */
+        transform: rotate(var(--rotation)) translate(80px)
+          rotate(calc(-1 * var(--rotation))) scale(1.5);
+        /* Scale up */
+      }
+
+      /* Keyframes for rotating items */
+      @keyframes rotate-items {
+        from {
+          transform: rotate(0deg);
+          /* Start rotation at 0 degrees */
+        }
+
+        to {
+          transform: rotate(360deg);
+          /* Complete a full 360-degree rotation */
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- Wheel container holding the rotating items and the center button -->
+    <div class="wheel" style="--num-items: 6">
+      <!-- Center button in the middle of the rotating menu -->
+      <div class="center-btn"></div>
+
+      <!-- Container for rotating menu items -->
+      <div class="items">
+        <!-- Each item represents a menu option positioned around the center button -->
+        <div class="item"></div>
+        <div class="item"></div>
+        <div class="item"></div>
+        <div class="item"></div>
+        <div class="item"></div>
+        <div class="item"></div>
+      </div>
+    </div>
+  </body>
+</html>
