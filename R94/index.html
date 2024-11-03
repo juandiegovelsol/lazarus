@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DnD Dice Roller</title>
+    <style>
+      .roll-log {
+        padding: 10px;
+        border: 1px solid black;
+        border-radius: 5px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>DnD Dice Roller</h1>
+    <label for="dex-mod">Dexterity Modifier:</label>
+    <input type="number" id="dex-mod" value="0" />
+    <br />
+    <label for="prof-bonus">Proficiency Bonus:</label>
+    <input type="number" id="prof-bonus" value="0" />
+    <br />
+    <label for="weapon-level">Weapon Level:</label>
+    <input type="number" id="weapon-level" value="0" />
+    <br />
+    <button id="longbow-hit">Longbow Hit</button>
+    <button id="longbow-damage">Longbow Damage</button>
+    <button id="toggle-log">Toggle Roll Log</button>
+    <button id="end-session">End Session</button>
+    <div id="roll-result"></div>
+    <div id="roll-log" class="roll-log" style="display: none"></div>
+
+    <script>
+      let dexMod = 0;
+      let profBonus = 0;
+      let weaponLevel = 0;
+      let rollLog = [];
+      let critSuccesses = 0;
+      let critFailures = 0;
+      let longbowHitResults = [];
+      let longbowDamageResults = [];
+
+      document.getElementById("dex-mod").addEventListener("input", (e) => {
+        dexMod = parseInt(e.target.value);
+      });
+
+      document.getElementById("prof-bonus").addEventListener("input", (e) => {
+        profBonus = parseInt(e.target.value);
+      });
+
+      document.getElementById("weapon-level").addEventListener("input", (e) => {
+        weaponLevel = parseInt(e.target.value);
+      });
+
+      document.getElementById("longbow-hit").addEventListener("click", () => {
+        let roll = rollDice(20);
+        let result = roll + dexMod + profBonus + weaponLevel;
+        let critMessage = "";
+        if (roll === 20) {
+          critMessage = "Critical Success";
+          critSuccesses++;
+        } else if (roll === 1) {
+          critMessage = "Critical Failure";
+          critFailures++;
+        }
+        let calculation = `d20: ${roll} + Dex Mod: ${dexMod} + Prof Bonus: ${profBonus} + Weapon Level: ${weaponLevel}`;
+        if (critMessage !== "") {
+          displayRoll("Longbow Hit", critMessage, calculation);
+          rollLog.push(`Longbow Hit: ${critMessage} (${calculation})`);
+        } else {
+          displayRoll("Longbow Hit", result, calculation);
+          rollLog.push(`Longbow Hit: ${result} (${calculation})`);
+          longbowHitResults.push(result);
+        }
+        updateLog();
+      });
+
+      document
+        .getElementById("longbow-damage")
+        .addEventListener("click", () => {
+          let roll = rollDice(8);
+          let result = roll + dexMod + weaponLevel;
+          let calculation = `d8: ${roll} + Dex Mod: ${dexMod} + Weapon Level: ${weaponLevel}`;
+          displayRoll("Longbow Damage", result, calculation);
+          rollLog.push(`Longbow Damage: ${result} (${calculation})`);
+          longbowDamageResults.push(result);
+          updateLog();
+        });
+
+      document.getElementById("toggle-log").addEventListener("click", () => {
+        let logElement = document.getElementById("roll-log");
+        if (logElement.style.display === "none") {
+          logElement.style.display = "block";
+        } else {
+          logElement.style.display = "none";
+        }
+      });
+
+      document.getElementById("end-session").addEventListener("click", () => {
+        let longbowHitAverage =
+          longbowHitResults.reduce((a, b) => a + b, 0) /
+            longbowHitResults.length || 0;
+        let longbowDamageAverage =
+          longbowDamageResults.reduce((a, b) => a + b, 0) /
+            longbowDamageResults.length || 0;
+        let summary = `
+                Session Summary:
+                Longbow Hit Average: ${longbowHitAverage.toFixed(2)}
+                Longbow Damage Average: ${longbowDamageAverage.toFixed(2)}
+                Critical Successes: ${critSuccesses}
+                Critical Failures: ${critFailures}
+            `;
+        document.getElementById("roll-result").innerHTML = summary;
+        document.getElementById("roll-log").style.display = "none";
+        document.getElementById("longbow-hit").disabled = true;
+        document.getElementById("longbow-damage").disabled = true;
+        document.getElementById("toggle-log").disabled = true;
+        document.getElementById("end-session").disabled = true;
+      });
+
+      function rollDice(sides) {
+        return Math.floor(Math.random() * sides) + 1;
+      }
+
+      function displayRoll(rollName, result, calculation) {
+        let rollResultElement = document.getElementById("roll-result");
+        rollResultElement.innerHTML = `
+                ${rollName}:
+                Result: ${result}
+                Calculation: ${calculation}
+            `;
+      }
+
+      function updateLog() {
+        let logElement = document.getElementById("roll-log");
+        logElement.innerHTML = "";
+        let logHtml = "";
+        for (let i = rollLog.length - 1; i >= 0; i--) {
+          logHtml += `${rollLog[i]}<br>`;
+        }
+        logElement.innerHTML = `
+                <h2>Roll Log:</h2>
+                ${logHtml}
+            `;
+      }
+    </script>
+  </body>
+</html>

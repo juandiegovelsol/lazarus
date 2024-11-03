@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Task Tracker</title>
+    <style>
+      .stage {
+        width: 200px;
+        height: 300px;
+        border: 1px solid black;
+        margin: 10px;
+        padding: 10px;
+        display: inline-block;
+        vertical-align: top;
+      }
+
+      .task {
+        width: 180px;
+        height: 30px;
+        border: 1px solid black;
+        margin-bottom: 10px;
+        padding: 5px;
+      }
+
+      .log {
+        width: 800px;
+        height: 100px;
+        border: 1px solid black;
+        margin: 10px;
+        padding: 10px;
+        overflow-y: auto;
+      }
+    </style>
+  </head>
+  <body>
+    <button id="add-task-button">Add Task</button>
+    <div id="stages">
+      <div class="stage" id="planning-stage">
+        <h2>Planning</h2>
+      </div>
+      <div class="stage" id="development-stage">
+        <h2>Development</h2>
+      </div>
+      <div class="stage" id="testing-stage">
+        <h2>Testing</h2>
+      </div>
+      <div class="stage" id="completed-stage">
+        <h2>Completed</h2>
+      </div>
+    </div>
+    <div class="log" id="log-stage">
+      <h2>Log</h2>
+    </div>
+
+    <script>
+      let tasks = [];
+      let log = [];
+
+      // Function to add a new task
+      function addTask() {
+        let taskName = prompt("Enter task name:");
+        let taskDescription = prompt("Enter task description:");
+        if (taskName && taskDescription) {
+          if (tasks.filter((task) => task.stage !== "Completed").length < 5) {
+            if (document.querySelectorAll("#planning-stage .task").length < 3) {
+              let task = {
+                name: taskName,
+                description: taskDescription,
+                stage: "Planning",
+              };
+              tasks.push(task);
+              updateStages();
+              log.push(`${taskName} created`);
+              updateLog();
+            } else {
+              alert("Cannot add more than 3 tasks to the Planning stage.");
+            }
+          } else {
+            alert("Cannot add more than 5 incomplete tasks.");
+          }
+        }
+      }
+
+      // Function to update the stages
+      function updateStages() {
+        document.querySelectorAll(".stage").forEach((stage) => {
+          stage.innerHTML = `<h2>${
+            stage.id.replace("-stage", "").charAt(0).toUpperCase() +
+            stage.id.replace("-stage", "").slice(1)
+          }</h2>`;
+        });
+        tasks.forEach((task) => {
+          let taskElement = document.createElement("div");
+          taskElement.className = "task";
+          taskElement.innerHTML = `${task.name} - ${task.description}`;
+          if (task.stage === "Testing") {
+            taskElement.innerHTML += `
+                        <input type="checkbox" id="${task.name}-proceed">
+                        <label for="${task.name}-proceed">Proceed</label>
+                        <input type="checkbox" id="${task.name}-revert">
+                        <label for="${task.name}-revert">Revert</label>
+                    `;
+            document
+              .querySelector(`#${task.stage.toLowerCase()}-stage`)
+              .appendChild(taskElement);
+            document
+              .querySelector(`#${task.name}-proceed`)
+              .addEventListener("change", () => {
+                if (document.querySelector(`#${task.name}-proceed`).checked) {
+                  task.stage = "Completed";
+                  log.push(`${task.name} moved to Completed stage`);
+                  updateLog();
+                  updateStages();
+                }
+              });
+            document
+              .querySelector(`#${task.name}-revert`)
+              .addEventListener("change", () => {
+                if (document.querySelector(`#${task.name}-revert`).checked) {
+                  task.stage = "Development";
+                  log.push(`${task.name} reverted to Development stage`);
+                  updateLog();
+                  updateStages();
+                }
+              });
+          } else if (task.stage !== "Completed") {
+            taskElement.innerHTML += `
+                        <input type="checkbox" id="${task.name}-proceed">
+                        <label for="${task.name}-proceed">Proceed</label>
+                    `;
+            document
+              .querySelector(`#${task.stage.toLowerCase()}-stage`)
+              .appendChild(taskElement);
+            document
+              .querySelector(`#${task.name}-proceed`)
+              .addEventListener("change", () => {
+                if (document.querySelector(`#${task.name}-proceed`).checked) {
+                  if (
+                    task.stage === "Planning" &&
+                    document.querySelectorAll("#development-stage .task")
+                      .length < 2
+                  ) {
+                    task.stage = "Development";
+                    log.push(`${task.name} moved to Development stage`);
+                  } else if (
+                    task.stage === "Development" &&
+                    document.querySelectorAll("#testing-stage .task").length < 1
+                  ) {
+                    task.stage = "Testing";
+                    log.push(`${task.name} moved to Testing stage`);
+                  }
+                  updateLog();
+                  updateStages();
+                }
+              });
+          } else {
+            document
+              .querySelector(`#${task.stage.toLowerCase()}-stage`)
+              .appendChild(taskElement);
+          }
+        });
+      }
+
+      // Function to update the log
+      function updateLog() {
+        document.querySelector("#log-stage").innerHTML = "<h2>Log</h2>";
+        log.slice(-5).forEach((logEntry) => {
+          let logElement = document.createElement("div");
+          logElement.innerHTML = logEntry;
+          document.querySelector("#log-stage").appendChild(logElement);
+        });
+      }
+
+      // Add event listener to add task button
+      document
+        .querySelector("#add-task-button")
+        .addEventListener("click", addTask);
+    </script>
+  </body>
+</html>

@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DnD Dice Roller</title>
+    <style>
+      #roll-log {
+        display: none;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>DnD Dice Roller</h1>
+    <form id="character-form">
+      <label for="dex-mod">Dexterity Modifier:</label>
+      <input type="number" id="dex-mod" value="0" /><br /><br />
+      <label for="prof-bonus">Proficiency Bonus:</label>
+      <input type="number" id="prof-bonus" value="0" /><br /><br />
+      <label for="weapon-level">Weapon Level:</label>
+      <input type="number" id="weapon-level" value="0" /><br /><br />
+    </form>
+    <button id="longbow-hit-button">Longbow Hit</button>
+    <button id="longbow-damage-button">Longbow Damage</button>
+    <button id="toggle-log-button">Toggle Roll Log</button>
+    <button id="end-session-button">End Session</button>
+    <h2>Most Recent Roll:</h2>
+    <p id="most-recent-roll"></p>
+    <h2 id="roll-log-header">Roll Log:</h2>
+    <div id="roll-log"></div>
+
+    <script>
+      let dexMod = 0;
+      let profBonus = 0;
+      let weaponLevel = 0;
+      let rollLog = [];
+      let critSuccesses = 0;
+      let critFailures = 0;
+      let longbowHitSum = 0;
+      let longbowHitCount = 0;
+      let longbowDamageSum = 0;
+      let longbowDamageCount = 0;
+
+      document
+        .getElementById("character-form")
+        .addEventListener("input", (e) => {
+          dexMod = parseInt(document.getElementById("dex-mod").value);
+          profBonus = parseInt(document.getElementById("prof-bonus").value);
+          weaponLevel = parseInt(document.getElementById("weapon-level").value);
+        });
+
+      document
+        .getElementById("longbow-hit-button")
+        .addEventListener("click", () => {
+          let roll = rollD20() + dexMod + profBonus + weaponLevel;
+          let calculation = `d20: ${rollD20()} + Dex Mod: ${dexMod} + Prof Bonus: ${profBonus} + Weapon Level: ${weaponLevel}`;
+          let result = `Longbow Hit: ${roll}`;
+          if (rollD20() === 20) {
+            result = "Critical Success";
+            critSuccesses++;
+          } else if (rollD20() === 1) {
+            result = "Critical Failure";
+            critFailures++;
+          } else {
+            longbowHitSum += roll;
+            longbowHitCount++;
+          }
+          updateMostRecentRoll(result, calculation);
+          updateRollLog(result, calculation);
+        });
+
+      document
+        .getElementById("longbow-damage-button")
+        .addEventListener("click", () => {
+          let roll = rollD8() + dexMod + weaponLevel;
+          let calculation = `d8: ${rollD8()} + Dex Mod: ${dexMod} + Weapon Level: ${weaponLevel}`;
+          let result = `Longbow Damage: ${roll}`;
+          longbowDamageSum += roll;
+          longbowDamageCount++;
+          updateMostRecentRoll(result, calculation);
+          updateRollLog(result, calculation);
+        });
+
+      document
+        .getElementById("toggle-log-button")
+        .addEventListener("click", () => {
+          let rollLogDiv = document.getElementById("roll-log");
+          if (rollLogDiv.style.display === "none") {
+            rollLogDiv.style.display = "block";
+          } else {
+            rollLogDiv.style.display = "none";
+          }
+        });
+
+      document
+        .getElementById("end-session-button")
+        .addEventListener("click", () => {
+          let summary = `Session Summary:\n`;
+          if (longbowHitCount > 0) {
+            summary += `Longbow Hit Average: ${
+              longbowHitSum / longbowHitCount
+            }\n`;
+          } else {
+            summary += `Longbow Hit Average: N/A\n`;
+          }
+          if (longbowDamageCount > 0) {
+            summary += `Longbow Damage Average: ${
+              longbowDamageSum / longbowDamageCount
+            }\n`;
+          } else {
+            summary += `Longbow Damage Average: N/A\n`;
+          }
+          summary += `Critical Successes: ${critSuccesses}\n`;
+          summary += `Critical Failures: ${critFailures}`;
+          alert(summary);
+        });
+
+      function rollD20() {
+        return Math.floor(Math.random() * 20) + 1;
+      }
+
+      function rollD8() {
+        return Math.floor(Math.random() * 8) + 1;
+      }
+
+      function updateMostRecentRoll(result, calculation) {
+        document.getElementById(
+          "most-recent-roll"
+        ).innerText = `${result}\nCalculation: ${calculation}`;
+      }
+
+      function updateRollLog(result, calculation) {
+        rollLog.unshift(`${result}\nCalculation: ${calculation}\n`);
+        let rollLogDiv = document.getElementById("roll-log");
+        rollLogDiv.innerText = rollLog.join("\n");
+      }
+    </script>
+  </body>
+</html>
