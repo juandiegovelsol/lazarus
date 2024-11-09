@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>3D Digital Clock</title>
+    <style>
+      body {
+        margin: 0;
+        background-color: #f0f0f0;
+        font-family: Arial, sans-serif;
+      }
+      #canvas {
+        width: 100%;
+        height: 100vh;
+        display: block;
+      }
+    </style>
+  </head>
+  <body>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script>
+      // Create the scene, camera, and renderer
+      let scene = new THREE.Scene();
+      let camera = new THREE.PerspectiveCamera(
+        75,
+        window.innerWidth / window.innerHeight,
+        0.1,
+        1000
+      );
+      let renderer = new THREE.WebGLRenderer({
+        canvas: document.createElement("canvas"),
+        antialias: true,
+      });
+      renderer.setSize(window.innerWidth, window.innerHeight);
+      document.body.appendChild(renderer.domElement);
+
+      // Create the clock
+      let clock = new THREE.Group();
+      scene.add(clock);
+
+      // Create the clock box
+      let boxGeometry = new THREE.BoxGeometry(5, 1, 0.1);
+      let boxMaterial = new THREE.MeshBasicMaterial({ color: 0x333333 });
+      let box = new THREE.Mesh(boxGeometry, boxMaterial);
+      clock.add(box);
+
+      // Create the clock display
+      let displayGeometry = new THREE.PlaneGeometry(4.5, 0.9);
+      let displayMaterial = new THREE.MeshBasicMaterial({ color: 0x000000 });
+      let display = new THREE.Mesh(displayGeometry, displayMaterial);
+      display.position.z = 0.06;
+      clock.add(display);
+
+      // Create the clock text
+      let canvas = document.createElement("canvas");
+      canvas.width = 256;
+      canvas.height = 64;
+      let context = canvas.getContext("2d");
+      context.font = "48px Arial";
+      context.fillStyle = "#ffffff";
+      context.textAlign = "center";
+      context.textBaseline = "middle";
+
+      let texture = new THREE.CanvasTexture(canvas);
+      let textMaterial = new THREE.MeshBasicMaterial({
+        map: texture,
+        transparent: true,
+      });
+      let textGeometry = new THREE.PlaneGeometry(4, 0.8);
+      let text = new THREE.Mesh(textGeometry, textMaterial);
+      text.position.z = 0.08;
+      clock.add(text);
+
+      // Position the camera and clock
+      camera.position.z = 10;
+      clock.position.y = -1;
+
+      // Animate the scene
+      function animate() {
+        requestAnimationFrame(animate);
+
+        // Update the clock text
+        let now = new Date();
+        let hours = now.getHours().toString().padStart(2, "0");
+        let minutes = now.getMinutes().toString().padStart(2, "0");
+        let seconds = now.getSeconds().toString().padStart(2, "0");
+        context.clearRect(0, 0, canvas.width, canvas.height);
+        context.fillText(
+          `${hours}:${minutes}:${seconds}`,
+          canvas.width / 2,
+          canvas.height / 2
+        );
+        texture.needsUpdate = true;
+
+        // Render the scene
+        renderer.render(scene, camera);
+      }
+
+      // Start the animation
+      animate();
+    </script>
+  </body>
+</html>

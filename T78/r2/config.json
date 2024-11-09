@@ -1,0 +1,7 @@
+{
+  "rules": {
+    "functionName": "camelCase",
+    "componentName": "PascalCase",
+    "constantName": "SCREAMING_SNAKE_CASE"
+  }
+}

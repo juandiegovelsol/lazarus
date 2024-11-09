@@ -1,0 +1,37 @@
+.container {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  font-family: sans-serif;
+}
+
+.board {
+  display: grid;
+  grid-template-columns: repeat(10, 1fr);
+  grid-gap: 2px;
+  width: 300px;
+  margin-top: 20px;
+}
+
+.cell {
+  width: 30px;
+  height: 30px;
+  background-color: #ADD8E6; /* Light blue for water */
+  border: 1px solid #000;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.ship {
+  background-color: #A4A4A4; /* Gray for ships */
+}
+
+.hit {
+  background-color: #FF0000; /* Red for hits */
+}
+
+.miss {
+  background-color: #FFFFFF; /* White for misses */
+}

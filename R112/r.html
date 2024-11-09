@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>3D Digital Clock</title>
+    <style>
+      body {
+        margin: 0;
+        overflow: hidden;
+      }
+
+      canvas {
+        display: block;
+      }
+    </style>
+  </head>
+
+  <body>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script>
+      // Scene Setup
+      const scene = new THREE.Scene();
+      const camera = new THREE.PerspectiveCamera(
+        75,
+        window.innerWidth / window.innerHeight,
+        0.1,
+        1000
+      );
+      const renderer = new THREE.WebGLRenderer();
+      renderer.setSize(window.innerWidth, window.innerHeight);
+      document.body.appendChild(renderer.domElement);
+
+      // Lighting
+      const light = new THREE.PointLight(0xffffff, 1, 100);
+      light.position.set(10, 10, 10);
+      scene.add(light);
+
+      // Font and Text
+      const fontLoader = new THREE.FontLoader();
+      let font;
+
+      // Clock meshes for hours, minutes, and seconds
+      let hoursMesh, minutesMesh, secondsMesh;
+
+      // Load font and create the initial text
+      fontLoader.load(
+        "https://threejs.org/examples/fonts/droid/droid_sans_bold.typeface.json",
+        (loadedFont) => {
+          font = loadedFont;
+          createClockText();
+        }
+      );
+
+      // Function to create the clock text meshes for hours, minutes, and seconds
+      function createClockText() {
+        // Create the 3D text for hours, minutes, seconds with the same size and depth
+        hoursMesh = createTextMesh("00", -10); // Adjust position for hours
+        minutesMesh = createTextMesh("00", 5); // Adjust position for minutes (closer to hours)
+        secondsMesh = createTextMesh("00", 20); // Adjust position for seconds (closer to minutes)
+
+        // Add all meshes to the scene
+        scene.add(hoursMesh);
+        scene.add(minutesMesh);
+        scene.add(secondsMesh);
+      }
+
+      // Function to create individual text meshes with consistent 3D effect
+      function createTextMesh(text, xPos) {
+        const textGeometry = new THREE.TextGeometry(text, {
+          font: font,
+          size: 6, // Uniform size for all
+          height: 3, // Uniform depth (height) for all to maintain the same 3D look
+          curveSegments: 12,
+        });
+
+        const material = new THREE.MeshPhongMaterial({ color: 0xff0000 });
+        const mesh = new THREE.Mesh(textGeometry, material);
+        mesh.position.set(xPos, 0, 0); // Position mesh based on xPos
+        return mesh;
+      }
+
+      // Clock update function
+      function updateClock() {
+        if (!font) return;
+
+        const now = new Date();
+        const hours = now.getHours().toString().padStart(2, "0");
+        const minutes = now.getMinutes().toString().padStart(2, "0");
+        const seconds = now.getSeconds().toString().padStart(2, "0");
+
+        // Update the text for hours, minutes, and seconds
+        hoursMesh.geometry.dispose();
+        minutesMesh.geometry.dispose();
+        secondsMesh.geometry.dispose();
+
+        // Update the geometry for each part with the same depth (height)
+        hoursMesh.geometry = new THREE.TextGeometry(hours, {
+          font: font,
+          size: 6,
+          height: 3,
+          curveSegments: 12,
+        });
+
+        minutesMesh.geometry = new THREE.TextGeometry(minutes, {
+          font: font,
+          size: 6,
+          height: 3,
+          curveSegments: 12,
+        });
+
+        secondsMesh.geometry = new THREE.TextGeometry(seconds, {
+          font: font,
+          size: 6,
+          height: 3,
+          curveSegments: 12,
+        });
+
+        // Recompute bounding boxes after geometry updates
+        hoursMesh.geometry.computeBoundingBox();
+        minutesMesh.geometry.computeBoundingBox();
+        secondsMesh.geometry.computeBoundingBox();
+      }
+
+      // Animation Loop
+      function animate() {
+        requestAnimationFrame(animate);
+        updateClock();
+        renderer.render(scene, camera);
+      }
+
+      camera.position.z = 30;
+
+      animate();
+    </script>
+  </body>
+</html>

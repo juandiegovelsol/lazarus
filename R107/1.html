@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>3D Balloons</title>
+    <style>
+      body {
+        margin: 0;
+      }
+      canvas {
+        display: block;
+      }
+      #balloon-count {
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        color: #ffffff;
+        font-size: 24px;
+      }
+      #background-select {
+        position: absolute;
+        top: 50px;
+        left: 10px;
+      }
+      #camera-controls {
+        position: absolute;
+        top: 100px;
+        left: 10px;
+      }
+      #color-change-pop-button {
+        position: absolute;
+        top: 150px;
+        left: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="balloon-count"></div>
+    <select id="background-select">
+      <option value="day">Day</option>
+      <option value="night">Night</option>
+    </select>
+    <div id="camera-controls">
+      <button id="rotate-left">Rotate Left</button>
+      <button id="rotate-right">Rotate Right</button>
+    </div>
+    <div id="color-change-pop-button">
+      <button id="color-change">Change Color</button>
+      <button id="pop-balloon">Pop Balloon</button>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script>
+      const scene = new THREE.Scene();
+      const camera = new THREE.PerspectiveCamera(
+        75,
+        window.innerWidth / window.innerHeight,
+        0.1,
+        1000
+      );
+      camera.position.z = 10;
+
+      const renderer = new THREE.WebGLRenderer({ antialias: true });
+      renderer.setSize(window.innerWidth, window.innerHeight);
+      document.body.appendChild(renderer.domElement);
+
+      const skyGeometry = new THREE.SphereGeometry(500, 60, 40);
+      let skyMaterial = new THREE.MeshBasicMaterial({
+        color: 0x87ceeb,
+        side: THREE.BackSide,
+      });
+      const sky = new THREE.Mesh(skyGeometry, skyMaterial);
+      scene.add(sky);
+
+      const balloonGroup = new THREE.Group();
+      scene.add(balloonGroup);
+
+      const colors = [0xff0000, 0x00ff00, 0x0000ff, 0xffff00, 0xff00ff];
+
+      function createBalloon(color, initialY, speed) {
+        const balloon = new THREE.Group();
+
+        const balloonGeometry = new THREE.SphereGeometry(0.7, 32, 32);
+        const balloonMaterial = new THREE.MeshLambertMaterial({ color });
+        const balloonMesh = new THREE.Mesh(balloonGeometry, balloonMaterial);
+        balloonMesh.position.y = 2;
+        balloon.add(balloonMesh);
+
+        const basketGeometry = new THREE.CylinderGeometry(0.2, 0.2, 0.3, 32);
+        const basketMaterial = new THREE.MeshLambertMaterial({
+          color: 0x8b4513,
+        });
+        const basket = new THREE.Mesh(basketGeometry, basketMaterial);
+        basket.position.y = 0.5;
+        balloon.add(basket);
+
+        const stringMaterial = new THREE.LineBasicMaterial({ color: 0x000000 });
+        const stringGeometry = new THREE.BufferGeometry().setFromPoints([
+          new THREE.Vector3(0, 0.5, 0),
+          new THREE.Vector3(0, 2, 0),
+        ]);
+        const string = new THREE.Line(stringGeometry, stringMaterial);
+        balloon.add(string);
+
+        balloon.position.y = initialY;
+        balloon.userData = { speed };
+
+        return balloon;
+      }
+
+      for (let i = 0; i < colors.length; i++) {
+        const initialY = Math.random() * 2 + 1;
+        const speed = 0.005 + Math.random() * 0.015;
+        const balloon = createBalloon(colors[i], initialY, speed);
+        balloon.position.x = (i - 2) * 1.5;
+        balloonGroup.add(balloon);
+      }
+
+      const light = new THREE.DirectionalLight(0xffffff, 1);
+      light.position.set(5, 10, 7).normalize();
+      scene.add(light);
+
+      let balloonCount = document.getElementById("balloon-count");
+      let backgroundSelect = document.getElementById("background-select");
+      let rotateLeftButton = document.getElementById("rotate-left");
+      let rotateRightButton = document.getElementById("rotate-right");
+      let colorChangeButton = document.getElementById("color-change");
+      let popBalloonButton = document.getElementById("pop-balloon");
+
+      let isColorChange = true;
+
+      colorChangeButton.addEventListener("click", () => {
+        isColorChange = true;
+      });
+
+      popBalloonButton.addEventListener("click", () => {
+        isColorChange = false;
+      });
+
+      backgroundSelect.addEventListener("change", (e) => {
+        if (e.target.value === "day") {
+          skyMaterial = new THREE.MeshBasicMaterial({
+            color: 0x87ceeb,
+            side: THREE.BackSide,
+          });
+        } else if (e.target.value === "night") {
+          skyMaterial = new THREE.MeshBasicMaterial({
+            color: 0x2f4f7f,
+            side: THREE.BackSide,
+          });
+        }
+        sky.material = skyMaterial;
+      });
+
+      rotateLeftButton.addEventListener("click", () => {
+        camera.position.x -= 1;
+      });
+
+      rotateRightButton.addEventListener("click", () => {
+        camera.position.x += 1;
+      });
+
+      let spawnInterval = setInterval(() => {
+        const initialY = -5;
+        const speed = 0.005 + Math.random() * 0.015;
+        const balloon = createBalloon(
+          colors[Math.floor(Math.random() * colors.length)],
+          initialY,
+          speed
+        );
+        balloon.position.x = Math.random() * 5 - 2.5;
+        balloonGroup.add(balloon);
+      }, 1000);
+
+      function animate() {
+        requestAnimationFrame(animate);
+
+        balloonCount.textContent = `Balloon Count: ${balloonGroup.children.length}`;
+
+        balloonGroup.children.forEach((balloon) => {
+          balloon.position.y += balloon.userData.speed;
+
+          if (balloon.position.y > 5 || balloon.position.y < -5) {
+            balloonGroup.remove(balloon);
+          }
+        });
+
+        renderer.render(scene, camera);
+      }
+
+      animate();
+
+      window.addEventListener("resize", () => {
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        camera.aspect = window.innerWidth / window.innerHeight;
+        camera.updateProjectionMatrix();
+      });
+
+      window.addEventListener("click", (e) => {
+        const raycaster = new THREE.Raycaster();
+        const mousePosition = new THREE.Vector2();
+        mousePosition.x = (e.clientX / window.innerWidth) * 2 - 1;
+        mousePosition.y = -(e.clientY / window.innerHeight) * 2 + 1;
+        raycaster.setFromCamera(mousePosition, camera);
+        const intersects = raycaster.intersectObjects(
+          balloonGroup.children,
+          true
+        );
+        if (intersects.length > 0) {
+          const balloon = intersects[0].object.parent;
+          if (isColorChange) {
+            const newColor = colors[Math.floor(Math.random() * colors.length)];
+            balloon.children[0].material.color.setHex(newColor);
+          } else {
+            balloonGroup.remove(balloon);
+          }
+        }
+      });
+    </script>
+  </body>
+</html>
