@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>3D Balloons</title>
+    <style>
+      body {
+        margin: 0;
+      }
+      canvas {
+        display: block;
+      }
+      #balloon-count {
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        font-size: 24px;
+        color: white;
+      }
+      #pop-color-button {
+        position: absolute;
+        top: 50px;
+        left: 10px;
+      }
+      #background-select {
+        position: absolute;
+        top: 100px;
+        left: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="balloon-count"></div>
+    <button id="pop-color-button">Pop</button>
+    <select id="background-select">
+      <option value="day">Day</option>
+      <option value="night">Night</option>
+    </select>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script>
+      const scene = new THREE.Scene();
+      const camera = new THREE.PerspectiveCamera(
+        75,
+        window.innerWidth / window.innerHeight,
+        0.1,
+        1000
+      );
+      camera.position.z = 10;
+
+      const renderer = new THREE.WebGLRenderer({ antialias: true });
+      renderer.setSize(window.innerWidth, window.innerHeight);
+      document.body.appendChild(renderer.domElement);
+
+      const skyGeometry = new THREE.SphereGeometry(500, 60, 40);
+      const skyMaterial = new THREE.MeshBasicMaterial({
+        color: 0x87ceeb,
+        side: THREE.BackSide,
+      });
+      const sky = new THREE.Mesh(skyGeometry, skyMaterial);
+      scene.add(sky);
+
+      const balloonGroup = new THREE.Group();
+      scene.add(balloonGroup);
+
+      const colors = [0xff0000, 0x00ff00, 0x0000ff, 0xffff00, 0xff00ff];
+
+      let balloonCount = 0;
+      const balloonCountDiv = document.getElementById("balloon-count");
+
+      function createBalloon(color, initialY, speed) {
+        const balloon = new THREE.Group();
+
+        const balloonGeometry = new THREE.SphereGeometry(0.7, 32, 32);
+        const balloonMaterial = new THREE.MeshLambertMaterial({ color });
+        const balloonMesh = new THREE.Mesh(balloonGeometry, balloonMaterial);
+        balloonMesh.position.y = 2;
+        balloon.add(balloonMesh);
+
+        const basketGeometry = new THREE.CylinderGeometry(0.2, 0.2, 0.3, 32);
+        const basketMaterial = new THREE.MeshLambertMaterial({
+          color: 0x8b4513,
+        });
+        const basket = new THREE.Mesh(basketGeometry, basketMaterial);
+        basket.position.y = 0.5;
+        balloon.add(basket);
+
+        const stringMaterial = new THREE.LineBasicMaterial({ color: 0x000000 });
+        const stringGeometry = new THREE.BufferGeometry().setFromPoints([
+          new THREE.Vector3(0, 0.5, 0),
+          new THREE.Vector3(0, 2, 0),
+        ]);
+        const string = new THREE.Line(stringGeometry, stringMaterial);
+        balloon.add(string);
+
+        balloon.position.y = initialY;
+        balloon.userData = { speed, color };
+
+        return balloon;
+      }
+
+      for (let i = 0; i < colors.length; i++) {
+        const initialY = Math.random() * 2 + 1;
+        const speed = 0.005 + Math.random() * 0.015;
+        const balloon = createBalloon(colors[i], initialY, speed);
+        balloon.position.x = (i - 2) * 1.5;
+        balloonGroup.add(balloon);
+        balloonCount++;
+      }
+
+      const light = new THREE.DirectionalLight(0xffffff, 1);
+      light.position.set(5, 10, 7).normalize();
+      scene.add(light);
+
+      let popColorButton = document.getElementById("pop-color-button");
+      let isPop = true;
+      popColorButton.onclick = function () {
+        isPop = !isPop;
+        if (isPop) {
+          popColorButton.textContent = "Pop";
+        } else {
+          popColorButton.textContent = "Change Color";
+        }
+      };
+
+      function animate() {
+        requestAnimationFrame(animate);
+
+        balloonGroup.children.forEach((balloon) => {
+          balloon.position.y += balloon.userData.speed;
+
+          if (balloon.position.y > 5 || balloon.position.y < 1) {
+            balloon.userData.speed = -balloon.userData.speed;
+          }
+        });
+
+        balloonCountDiv.textContent =
+          "Balloons: " + balloonGroup.children.length;
+
+        renderer.render(scene, camera);
+      }
+
+      animate();
+
+      let backgroundSelect = document.getElementById("background-select");
+      backgroundSelect.onchange = function () {
+        if (backgroundSelect.value === "day") {
+          skyMaterial.color.setHex(0x87ceeb);
+        } else if (backgroundSelect.value === "night") {
+          skyMaterial.color.setHex(0x1a1d23);
+        }
+      };
+
+      let raycaster = new THREE.Raycaster();
+      let mouse = new THREE.Vector2();
+      window.addEventListener("click", function (event) {
+        mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
+        mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
+
+        raycaster.setFromCamera(mouse, camera);
+        let intersects = raycaster.intersectObjects(balloonGroup.children);
+
+        if (intersects.length > 0) {
+          let balloon = intersects[0].object.parent;
+          if (isPop) {
+            balloonGroup.remove(balloon);
+          } else {
+            let newColor = colors[Math.floor(Math.random() * colors.length)];
+            balloon.children[0].material.color.setHex(newColor);
+          }
+        }
+      });
+
+      window.addEventListener("resize", () => {
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        camera.aspect = window.innerWidth / window.innerHeight;
+        camera.updateProjectionMatrix();
+      });
+
+      // Periodically spawn new balloons
+      setInterval(function () {
+        const initialY = -2;
+        const speed = 0.005 + Math.random() * 0.015;
+        const balloon = createBalloon(
+          colors[Math.floor(Math.random() * colors.length)],
+          initialY,
+          speed
+        );
+        balloon.position.x = Math.random() * 6 - 3;
+        balloonGroup.add(balloon);
+        balloonCount++;
+      }, 2000);
+
+      // Camera orbit controls
+      let isDragging = false;
+      let previousMousePosition = null;
+      window.addEventListener("mousedown", function (event) {
+        isDragging = true;
+        previousMousePosition = { x: event.clientX, y: event.clientY };
+      });
+      window.addEventListener("mousemove", function (event) {
+        if (isDragging) {
+          let deltaMousePosition = {
+            x: event.clientX - previousMousePosition.x,
+            y: event.clientY - previousMousePosition.y,
+          };
+          previousMousePosition = { x: event.clientX, y: event.clientY };
+
+          camera.position.x += deltaMousePosition.x * 0.01;
+          camera.position.y += deltaMousePosition.y * 0.01;
+
+          camera.lookAt(new THREE.Vector3(0, 0, 0));
+        }
+      });
+      window.addEventListener("mouseup", function () {
+        isDragging = false;
+        previousMousePosition = null;
+      });
+    </script>
+  </body>
+</html>

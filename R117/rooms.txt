@@ -1,0 +1,10 @@
+Entrance Hall:The grand entrance with a dusty chandelier hanging precariously above.
+Library:A quiet room filled with old, dusty books and a strange humming sound.
+Dining Room:A long table covered with remnants of an unfinished meal.
+Garden:A neglected garden with overgrown plants and a stone fountain in the center.
+Basement:A dark, damp room with an eerie feeling of being watched.
+Attic:A cramped space filled with old trunks and cobweb-covered portraits.
+Master Bedroom:A large bed dominates the room, with a mirror that seems to follow you.
+Servant Quarters:Small rooms with narrow beds, as though expecting a guest.
+Observatory:A tower room with a broken telescope pointing at the night sky.
+Ballroom:A vast room with cracked mirrors and dusty chandeliers, echoing with whispers.

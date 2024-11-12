@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Skrew Game</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+
+  <body>
+    <h1>Skrew Game</h1>
+    <div class="game-container">
+      <div class="player-container">
+        <h2>Player 1</h2>
+        <div class="player-hand"></div>
+        <!-- Player's hand -->
+        <button class="draw-button">Draw Card</button>
+        <button class="swap-button">Swap Card</button>
+        <button class="discard-button">Discard Card</button>
+        <button class="skrew-button">Call Skrew</button>
+      </div>
+      <div class="discard-pile">
+        <h2>Discard Pile</h2>
+        <div class="card"></div>
+        <!-- Discarded card display -->
+      </div>
+    </div>
+
+    <script src="game.js"></script>
+    <!-- Main game logic -->
+    <script src="script.js"></script>
+    <!-- UI interaction logic -->
+  </body>
+</html>
