@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Loan Eligibility Evaluator</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <h1>Loan Eligibility Evaluator</h1>
+      <form id="loan-form">
+        <section>
+          <h2>Financial Details</h2>
+          <label for="monthly-income">Monthly Income:</label>
+          <input type="number" id="monthly-income" required />
+          <label for="existing-debt">Existing Debt:</label>
+          <input type="number" id="existing-debt" required />
+          <label for="monthly-expenses">Monthly Expenses:</label>
+          <input type="number" id="monthly-expenses" required />
+          <label for="desired-loan-amount">Desired Loan Amount:</label>
+          <input type="number" id="desired-loan-amount" required />
+          <label for="loan-term">Loan Term (in years):</label>
+          <input type="number" id="loan-term" required />
+          <label for="annual-interest-rate">Annual Interest Rate (%):</label>
+          <input type="number" id="annual-interest-rate" required />
+        </section>
+        <section>
+          <h2>Personal Details</h2>
+          <label for="name">Name:</label>
+          <input type="text" id="name" required />
+          <label for="age">Age:</label>
+          <input type="number" id="age" required />
+          <label for="employment-status">Employment Status:</label>
+          <select id="employment-status" required>
+            <option value="">Select Employment Status</option>
+            <option value="employed">Employed</option>
+            <option value="unemployed">Unemployed</option>
+            <option value="self-employed">Self-Employed</option>
+          </select>
+          <label for="credit-score">Credit Score:</label>
+          <input type="number" id="credit-score" required />
+        </section>
+        <button type="submit">Evaluate Loan Eligibility</button>
+        <button type="reset" id="reset-button">Reset</button>
+      </form>
+      <div id="result"></div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
