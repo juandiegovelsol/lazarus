@@ -1,0 +1,7 @@
+Dear tasker, I appreciate the effort made in this task. Unfortunately, it can't be approved because of the following reasons.
+
+According to the project instructions, anything that can be found or copied from internet sources such as Leetcode is strictly forbidden under the project removal penalty, all the ideas and prompts must be original since enhancing the model's ability to understand common user problems is the main goal of the project. The problem and code used in the prompt are very similar to problems found in the mentioned source so it can't be accepted.
+
+Also, keep in mind that the prompt requirements must be specific enough to guide the model in the desired direction, you can't just ask the model to give suggestions to improve the quality and complexity of the code, you need to include details about how you want to achieve those goals. The prompt is not specific enough so it can't be accepted either.
+
+Please edit the prompt following the given instructions and reroll the responses. Keep on improving!

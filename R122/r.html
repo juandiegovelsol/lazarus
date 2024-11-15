@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Medical Laboratory Appointment System</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+      }
+
+      #patient-interface,
+      #employee-interface {
+        border: 1px solid black;
+        padding: 10px;
+        width: 40%;
+        margin: 20px;
+        float: left;
+      }
+
+      label {
+        display: block;
+        margin-bottom: 10px;
+      }
+
+      input[type="text"],
+      select,
+      input[type="date"] {
+        width: 100%;
+        height: 30px;
+        margin-bottom: 20px;
+      }
+
+      button {
+        width: 100%;
+        height: 30px;
+      }
+
+      #reservations {
+        padding: 10px;
+        border: 1px solid black;
+      }
+    </style>
+  </head>
+
+  <body>
+    <h1>Medical Laboratory Appointment System</h1>
+    <div id="patient-interface">
+      <h2>Patient Interface</h2>
+      <label for="name">Name:</label>
+      <input type="text" id="name" />
+      <label for="id-number">ID Number:</label>
+      <input type="text" id="id-number" />
+      <label for="date">Date:</label>
+      <input type="date" id="date" />
+      <label for="time">Time:</label>
+      <select id="time">
+        <option value="8:00">8:00</option>
+        <option value="8:30">8:30</option>
+        <option value="9:00">9:00</option>
+        <option value="9:30">9:30</option>
+        <option value="10:00">10:00</option>
+        <option value="10:30">10:30</option>
+        <option value="11:00">11:00</option>
+        <option value="11:30">11:30</option>
+        <option value="12:30">12:30</option>
+        <option value="13:00">13:00</option>
+        <option value="13:30">13:30</option>
+        <option value="14:00">14:00</option>
+        <option value="14:30">14:30</option>
+        <option value="15:00">15:00</option>
+        <option value="15:30">15:30</option>
+        <option value="16:00">16:00</option>
+        <option value="16:30">16:30</option>
+      </select>
+      <label for="tests">Tests:</label>
+      <select id="tests" multiple>
+        <option value="liver|30|60">Liver Test (30 minutes, 60₪)</option>
+        <option value="blood|20|50">Blood Test (20 minutes, 50₪)</option>
+        <option value="protein|40|100">Protein Test (40 minutes, 100₪)</option>
+        <option value="kidney|30|70">Kidney Test (30 minutes, 70₪)</option>
+      </select>
+      <button onclick="bookAppointment()">Book Appointment</button>
+      <p id="appointment-details"></p>
+    </div>
+    <div id="employee-interface">
+      <h2>Employee Interface</h2>
+      <div id="reservations"></div>
+    </div>
+
+    <script>
+      let reservations = [];
+
+      function bookAppointment() {
+        let name = document.getElementById("name").value;
+        let idNumber = document.getElementById("id-number").value;
+        let date = document.getElementById("date").value;
+        let time = document.getElementById("time").value;
+        let tests = Array.from(
+          document.getElementById("tests").selectedOptions
+        ).map((option) => option.value);
+
+        // Input validation: Check if all fields are filled
+        if (!name || !idNumber || !date || !time || tests.length === 0) {
+          alert("Please fill in all fields.");
+          return;
+        }
+
+        // ID validation: Ensure ID is a number
+        if (isNaN(idNumber) || idNumber.trim() === "") {
+          alert("Please enter a valid numeric ID.");
+          return;
+        }
+
+        // Name validation: Ensure name is a non-empty string
+        if (name.trim() === "") {
+          alert("Please enter a valid name.");
+          return;
+        }
+
+        // Check for valid date (should not be in the past or too far in the future)
+        let currentDate = new Date();
+        let appointmentDate = new Date(date);
+        if (appointmentDate < currentDate.setHours(0, 0, 0, 0)) {
+          alert("Please select a future date.");
+          return;
+        }
+
+        // Check if the patient is already booked for the same test at the same time
+        for (let test of tests) {
+          let [testName] = test.split("|");
+          let isTestAlreadyBooked = reservations.some(
+            (reservation) =>
+              reservation.idNumber === idNumber &&
+              reservation.date === date &&
+              reservation.tests.some((t) => t.testName === testName)
+          );
+
+          if (isTestAlreadyBooked) {
+            alert(`You have already booked the ${testName} for this date.`);
+            return;
+          }
+        }
+
+        // Calculate total duration and price
+        let startTime = convertTimeToMinutes(time);
+        let duration = 0;
+        let price = 0;
+        let testNames = [];
+
+        for (let test of tests) {
+          let [testName, testDuration, testPrice] = test.split("|");
+          duration += parseInt(testDuration);
+          price += parseInt(testPrice);
+          testNames.push({ testName, time: time });
+        }
+
+        // Validate that the selected time slot is available and does not overlap
+        if (
+          startTime + duration > 17 * 60 ||
+          (startTime >= 12 * 60 && startTime < 12.5 * 60)
+        ) {
+          alert("Invalid time slot. Please choose a different time.");
+          return;
+        }
+
+        // Check if the time slot is already reserved
+        let isTimeSlotTaken = reservations.some(
+          (reservation) =>
+            reservation.date === date && reservation.time === time
+        );
+        if (isTimeSlotTaken) {
+          alert("This time slot is already booked.");
+          return;
+        }
+
+        // Find if the patient already has a reservation for the same date
+        let existingReservation = reservations.find(
+          (reservation) =>
+            reservation.idNumber === idNumber && reservation.date === date
+        );
+        if (existingReservation) {
+          // Add the new tests to the existing tests, and update the duration and price
+          let newTestNames = [];
+          let newTestDuration = 0;
+          let newTestPrice = 0;
+
+          for (let test of tests) {
+            let [testName, testDuration, testPrice] = test.split("|");
+            if (
+              !existingReservation.tests.some((t) => t.testName === testName)
+            ) {
+              existingReservation.tests.push({ testName, time });
+              newTestNames.push({ testName, time });
+              newTestDuration += parseInt(testDuration);
+              newTestPrice += parseInt(testPrice);
+            }
+          }
+
+          // Add the duration and price for all the new tests
+          existingReservation.duration += newTestDuration;
+          existingReservation.price += newTestPrice;
+
+          // Update the time if changed
+          existingReservation.time = time;
+          updateReservations();
+          alert("Your existing reservation has been updated!");
+        } else {
+          // Create and add a new appointment
+          let appointment = {
+            name,
+            idNumber,
+            date,
+            time,
+            tests: testNames,
+            duration,
+            price,
+          };
+          reservations.push(appointment);
+          updateReservations();
+          alert("Appointment booked successfully!");
+        }
+      }
+
+      function updateReservations() {
+        let reservationsHtml = "";
+
+        // Display all reservations
+        for (let reservation of reservations) {
+          reservationsHtml += `
+                    <p>Patient Name: ${reservation.name}</p>
+                    <p>ID Number: ${reservation.idNumber}</p>
+                    <p>Date: ${reservation.date}</p>
+                    <p>Time: ${reservation.time}</p>
+                    <p>Tests:</p>
+                    <ul>`;
+          reservation.tests.forEach((test) => {
+            reservationsHtml += `<li>${test.testName} at ${test.time}</li>`;
+          });
+          reservationsHtml += `
+                    </ul>
+                    <p>Duration: ${reservation.duration} minutes</p>
+                    <p>Price: ${reservation.price}₪</p>
+                    <hr>`;
+        }
+
+        document.getElementById("reservations").innerHTML = reservationsHtml;
+      }
+
+      // Helper function to convert time (HH:MM) to minutes
+      function convertTimeToMinutes(time) {
+        let [hours, minutes] = time.split(":");
+        return parseInt(hours) * 60 + parseInt(minutes);
+      }
+    </script>
+  </body>
+</html>

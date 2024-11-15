@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Medical Laboratory Appointment System</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+      }
+
+      #patient-interface,
+      #employee-interface {
+        border: 1px solid black;
+        padding: 20px;
+        width: 40%;
+        margin: 20px;
+        display: inline-block;
+        vertical-align: top;
+      }
+
+      label {
+        display: block;
+        margin-bottom: 10px;
+      }
+
+      input,
+      select {
+        margin-bottom: 20px;
+      }
+
+      button {
+        margin-top: 20px;
+      }
+
+      #reservations {
+        border: 1px solid black;
+        padding: 20px;
+        margin-top: 20px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <h1>Medical Laboratory Appointment System</h1>
+
+    <div id="patient-interface">
+      <h2>Patient Interface</h2>
+      <!-- Input fields for patient name, ID, date, time, and test selection -->
+      <label for="name">Name:</label>
+      <input type="text" id="name" />
+
+      <label for="id-number">ID Number:</label>
+      <input type="number" id="id-number" />
+
+      <label for="date">Date:</label>
+      <input type="date" id="date" />
+
+      <label for="time">Time:</label>
+      <select id="time">
+        <!-- Time slots available for booking -->
+        <option value="8:00">8:00</option>
+        <option value="8:30">8:30</option>
+        <option value="9:00">9:00</option>
+        <option value="9:30">9:30</option>
+        <option value="10:00">10:00</option>
+        <option value="10:30">10:30</option>
+        <option value="11:00">11:00</option>
+        <option value="11:30">11:30</option>
+        <option value="12:30">12:30</option>
+        <option value="13:00">13:00</option>
+        <option value="13:30">13:30</option>
+        <option value="14:00">14:00</option>
+        <option value="14:30">14:30</option>
+        <option value="15:00">15:00</option>
+        <option value="15:30">15:30</option>
+        <option value="16:00">16:00</option>
+        <option value="16:30">16:30</option>
+      </select>
+
+      <label for="tests">Tests:</label>
+      <!-- Test selection with multiple options -->
+      <select id="tests" multiple>
+        <option value="liver-test">Liver Test (30 minutes, 60₪)</option>
+        <option value="blood-test">Blood Test (20 minutes, 50₪)</option>
+        <option value="protein-test">Protein Test (40 minutes, 100₪)</option>
+        <option value="kidney-test">Kidney Test (30 minutes, 80₪)</option>
+      </select>
+
+      <!-- Button to book appointment -->
+      <button onclick="bookAppointment()">Book Appointment</button>
+
+      <p id="total-time"></p>
+      <p id="total-price"></p>
+    </div>
+
+    <div id="employee-interface">
+      <h2>Employee Interface</h2>
+      <div id="reservations"></div>
+    </div>
+
+    <script>
+      // Array to store all reservations
+      let reservations = [];
+
+      // Function to handle appointment booking
+      function bookAppointment() {
+        // Get values from input fields
+        let name = document.getElementById("name").value.trim();
+        let idNumber = document.getElementById("id-number").value.trim();
+        let date = document.getElementById("date").value;
+        let time = document.getElementById("time").value;
+        let tests = Array.from(
+          document.getElementById("tests").selectedOptions
+        ).map((option) => option.value);
+
+        // Input validation for empty or incorrect fields
+        if (name === "") {
+          alert("Please enter your name.");
+          return;
+        }
+
+        if (idNumber === "") {
+          alert("Please enter your ID number.");
+          return;
+        }
+
+        // Ensure ID number is a positive integer
+        if (isNaN(idNumber) || parseInt(idNumber) <= 0) {
+          alert("Please enter a valid ID number.");
+          return;
+        }
+
+        // Check if date is selected and in the future
+        if (date === "") {
+          alert("Please select a date.");
+          return;
+        }
+
+        // Convert date to a Date object for comparison
+        let selectedDate = new Date(date);
+        let today = new Date();
+        today.setHours(0, 0, 0, 0); // Reset current date to midnight
+        if (selectedDate < today) {
+          alert("Please select a future date.");
+          return;
+        }
+
+        // Check if at least one test is selected
+        if (tests.length === 0) {
+          alert("Please select at least one test.");
+          return;
+        }
+
+        // Calculate total time and price based on selected tests
+        let totalTime = 0;
+        let totalPrice = 0;
+
+        tests.forEach((test) => {
+          // Add time and price based on selected test type
+          switch (test) {
+            case "liver-test":
+              totalTime += 30;
+              totalPrice += 60;
+              break;
+            case "blood-test":
+              totalTime += 20;
+              totalPrice += 50;
+              break;
+            case "protein-test":
+              totalTime += 40;
+              totalPrice += 100;
+              break;
+            case "kidney-test":
+              totalTime += 30;
+              totalPrice += 80;
+              break;
+          }
+        });
+
+        // Check if the selected time slot is available
+        let startTime = convertTimeToMinutes(time);
+        let endTime = startTime + totalTime;
+
+        if (isTimeSlotAvailable(date, startTime, endTime)) {
+          // If time slot is available, save the reservation
+          reservations.push({
+            name: name,
+            idNumber: idNumber,
+            date: date,
+            time: time,
+            tests: tests,
+            totalTime: totalTime,
+            totalPrice: totalPrice,
+          });
+
+          // Display total time and price
+          document.getElementById(
+            "total-time"
+          ).innerHTML = `Total Time: ${totalTime} minutes`;
+          document.getElementById(
+            "total-price"
+          ).innerHTML = `Total Price: ${totalPrice}₪`;
+
+          // Update the reservations list
+          updateReservations();
+        } else {
+          alert("The selected time slot is not available.");
+        }
+      }
+
+      // Function to check if a given time slot is available
+      function isTimeSlotAvailable(date, startTime, endTime) {
+        for (let reservation of reservations) {
+          // Check if any existing reservation conflicts with the new one
+          if (reservation.date === date) {
+            let reservedStartTime = convertTimeToMinutes(reservation.time);
+            let reservedEndTime = reservedStartTime + reservation.totalTime;
+
+            if (startTime < reservedEndTime && endTime > reservedStartTime) {
+              return false;
+            }
+          }
+        }
+
+        // Check if the selected time slot overlaps with a lunch break (12:00 - 12:30)
+        let breakStartTime = convertTimeToMinutes("12:00");
+        let breakEndTime = convertTimeToMinutes("12:30");
+
+        if (startTime < breakEndTime && endTime > breakStartTime) {
+          return false;
+        }
+
+        //Check if the selected time slot is within the last available time
+        let lastEndTime = convertTimeToMinutes("17:00");
+        if (endTime > lastEndTime) {
+          return false;
+        }
+
+        return true;
+      }
+
+      // Helper function to convert time to minutes for easy calculations
+      function convertTimeToMinutes(time) {
+        let parts = time.split(":");
+        let hours = parseInt(parts[0]);
+        let minutes = parseInt(parts[1]);
+
+        return hours * 60 + minutes;
+      }
+
+      // Function to display the list of reservations on the Employee Interface
+      function updateReservations() {
+        let reservationsHtml = "";
+
+        // Generate HTML content for each reservation
+        for (let reservation of reservations) {
+          reservationsHtml += `<p>Patient Name: ${reservation.name}</p>`;
+          reservationsHtml += `<p>ID Number: ${reservation.idNumber}</p>`;
+          reservationsHtml += `<p>Date: ${reservation.date}</p>`;
+          reservationsHtml += `<p>Time: ${reservation.time}</p>`;
+          reservationsHtml += `<p>Tests: ${reservation.tests.join(", ")}</p>`;
+          reservationsHtml += `<p>Total Time: ${reservation.totalTime} minutes</p>`;
+          reservationsHtml += `<p>Total Price: ${reservation.totalPrice}₪</p>`;
+          reservationsHtml += `<hr>`;
+        }
+
+        // Update the HTML of the reservations section with the generated content
+        document.getElementById("reservations").innerHTML = reservationsHtml;
+      }
+    </script>
+  </body>
+</html>

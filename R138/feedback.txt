@@ -1,0 +1,7 @@
+Dear tasker, I appreciate the effort you put into this task. Unfortunately, it can't be approved because of the following issues.
+
+The dimension ratings needed several modifications, both models claim to have understood the prompt instructions so the found issues can't be in the IF category, they must be in the Accuracy category. Also, both responses had additional issues that were not marked.
+
+The task is fixed until the rewritten response so editing the final response is mandatory, in the prompt you ask that if the recipe list is empty, the model must print a success message, and that if the available list is empty, the ingredients substitutions must be prompted. Those 2 instructions are not being followed in the rewritten response so a new major rewrite is needed.
+
+Please edit the final response according to these instructions and submit again the task. Keep on improving!
