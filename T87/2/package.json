@@ -1,0 +1,23 @@
+{
+  "name": "2",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "ts-node --loader ts-node/esm app.ts",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.21.1",
+    "loader": "^2.1.1"
+  },
+  "devDependencies": {
+    "@types/express": "^5.0.0",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.6.3"
+  }
+}
