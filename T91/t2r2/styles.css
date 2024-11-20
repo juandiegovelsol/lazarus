@@ -1,0 +1,67 @@
+body {
+  display: flex; /* Flexbox to position the children elements */
+  justify-content: center; /* Centers the elements along the horizontal axis */
+  align-items: center; /* Centers the elements along the vertical axis */
+  height: 100vh;
+  margin: 0;
+  background-color: #f0f0f0;
+  font-family: Arial, sans-serif;
+}
+
+.button-container {
+  position: relative; /* Position the container relative to its normal position */
+}
+
+.animated-button {
+  position: relative; /* Position the button relative to its normal position */
+  padding: 15px 30px;
+  font-size: 16px;
+  color: #fff;
+  background-color: #333;
+  border: 4px solid transparent; /* Set the border width and ensure it's transparent */
+  background-clip: padding-box; /* Ensures the background does not bleed into the border */
+  border-radius: 8px;
+  cursor: pointer;
+  z-index: 1; /* Stack the button on top of other elements */
+  background-origin: border-box;
+  background: linear-gradient(#333, #333) padding-box,
+    conic-gradient(#ff0000, #ff9900, #00ff00, #0000ff, #ff00ff, #ff0000)
+      border-box;
+}
+
+.animated-button:hover {
+  animation: rotate-gradient 2s linear infinite; /* Apply the animation on hover */
+}
+
+@keyframes rotate-gradient {
+  0% {
+    background: linear-gradient(#333, #333) padding-box,
+      conic-gradient(#ff0000, #ff9900, #00ff00, #0000ff, #ff00ff, #ff0000)
+        border-box;
+  }
+  20% {
+    background: linear-gradient(#333, #333) padding-box,
+      conic-gradient(#ff9900, #00ff00, #0000ff, #ff00ff, #ff0000, #ff9900)
+        border-box;
+  }
+  40% {
+    background: linear-gradient(#333, #333) padding-box,
+      conic-gradient(#00ff00, #0000ff, #ff00ff, #ff0000, #ff9900, #00ff00)
+        border-box;
+  }
+  60% {
+    background: linear-gradient(#333, #333) padding-box,
+      conic-gradient(#0000ff, #ff00ff, #ff0000, #ff9900, #00ff00, #0000ff)
+        border-box;
+  }
+  80% {
+    background: linear-gradient(#333, #333) padding-box,
+      conic-gradient(#ff00ff, #ff0000, #ff9900, #00ff00, #0000ff, #ff00ff)
+        border-box;
+  }
+  100% {
+    background: linear-gradient(#333, #333) padding-box,
+      conic-gradient(#ff0000, #ff9900, #00ff00, #0000ff, #ff00ff, #ff0000)
+        border-box;
+  }
+}

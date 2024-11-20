@@ -1,0 +1,16 @@
+{
+  "name": "t90",
+  "version": "1.0.0",
+  "main": "rewrite.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "joi": "^17.13.3",
+    "sqlite3": "^5.1.7"
+  }
+}

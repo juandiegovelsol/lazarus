@@ -1,0 +1,65 @@
+/* Center body content */
+body {
+  display: flex; /* Flexbox for centering child elements */
+  justify-content: center; /* Center horizontally */
+  align-items: center; /* Center vertically */
+  height: 100vh;
+  margin: 0;
+  background-color: #f0f0f0;
+  font-family: Arial, sans-serif;
+}
+
+/* Container for the button */
+.button-container {
+  position: relative; /* Context for the pseudo-element */
+  overflow: clip; /* Hide any overflowing content */
+  overflow-clip-margin: 4px;
+  border: 4px transparent solid;
+  background-clip: padding-box; /* Ensure the background does not bleed into the border */
+}
+
+/* Create a rotating conic gradient in a pseudo-element */
+.button-container::before {
+  height: 160px;
+  width: 160px;
+  content: ""; /* Empty pseudo-element */
+  position: absolute; /* Positioned relative to the button */
+  top: -55px; /* Slightly larger than the button */
+  left: -14px; /* Slightly larger than the button */
+  background: conic-gradient(
+    #ff0000,
+    #ff9900,
+    #00ff00,
+    #0000ff,
+    #ff00ff,
+    #ff0000
+  ); /* Conic gradient background */
+  z-index: -1; /* Place behind the button */
+  border-radius: 50%; /* Keep the gradient circular */
+}
+
+.button-container:hover::before {
+  animation: rotate-gradient 2s linear infinite; /* Smooth rotation */
+}
+
+/* Animated button */
+.animated-button {
+  position: relative; /* Position the button relative to itself */
+  padding: 15px 30px;
+  font-size: 16px;
+  color: #fff;
+  cursor: pointer;
+  z-index: 1; /* Button should be above pseudo-element */
+  border: none;
+  background-color: #333;
+}
+
+/* Animation for the gradient */
+@keyframes rotate-gradient {
+  0% {
+    transform: rotate(0deg); /* Start position */
+  }
+  100% {
+    transform: rotate(360deg); /* Full rotation */
+  }
+}

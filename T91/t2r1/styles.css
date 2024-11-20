@@ -1,0 +1,48 @@
+body {
+  display: flex; /* Flexbox to position the children elements */
+  justify-content: center; /* Centers the elements along the horizontal axis */
+  align-items: center; /* Centers the elements along the vertical axis */
+  height: 100vh;
+  margin: 0;
+  background-color: #f0f0f0;
+  font-family: Arial, sans-serif;
+}
+
+.button-container {
+  position: relative; /* Position the container relative to its normal position */
+}
+
+.animated-button {
+  position: relative; /* Position the button relative to its normal position */
+  padding: 15px 30px;
+  font-size: 16px;
+  color: #fff;
+  background-color: #333;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.border-svg {
+  position: absolute; /* Position the SVG absolute to its parent */
+  top: 0;
+  left: 0;
+}
+
+.border-svg rect {
+  stroke: url(#gradient); /* Use the gradient as the stroke color */
+}
+
+.animated-button:hover .border-svg rect {
+  /* Animate the gradient on hover */
+  animation: rotate-gradient 2s linear infinite;
+}
+
+@keyframes rotate-gradient {
+  0% {
+    stroke: url(#gradient-0); /* Initial gradient position */
+  }
+  100% {
+    stroke: url(#gradient-100); /* Final gradient position, rotated 360 degrees */
+  }
+}

@@ -1,0 +1,61 @@
+body {
+  display: flex; /* Flexbox to position the children elements */
+  justify-content: center; /* Centers the elements along the horizontal axis */
+  align-items: center; /* Centers the elements along the vertical axis */
+  height: 100vh;
+  margin: 0;
+  background-color: #f0f0f0;
+  font-family: Arial, sans-serif;
+}
+
+.button-container {
+  position: relative; /* Position the container relative to its normal position */
+}
+
+.animated-button {
+  position: relative; /* Position the button relative to its normal position */
+  padding: 15px 30px;
+  font-size: 16px;
+  color: #fff;
+  background-color: #333;
+  border: none; /* Remove the default border */
+  border-radius: 8px;
+  cursor: pointer;
+  z-index: 1; /* Stack the button on top of other elements */
+}
+
+.animated-button::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: 4px solid transparent; /* Create a transparent border */
+  border-radius: inherit; /* Inherit the border radius from the parent */
+  background-clip: padding-box; /* Ensure the background does not bleed into the border */
+  background-origin: border-box;
+  background: conic-gradient(
+      #ff0000,
+      #ff9900,
+      #00ff00,
+      #0000ff,
+      #ff00ff,
+      #ff0000
+    )
+    border-box;
+  z-index: -1; /* Stack the pseudo-element behind the button */
+}
+
+.animated-button:hover::before {
+  animation: rotate-gradient 2s linear infinite; /* Apply the animation on hover */
+}
+
+@keyframes rotate-gradient {
+  0% {
+    transform: rotate(0deg); /* Start at 0 degrees */
+  }
+  100% {
+    transform: rotate(360deg); /* Rotate 360 degrees */
+  }
+}
