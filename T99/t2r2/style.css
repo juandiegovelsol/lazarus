@@ -1,0 +1,103 @@
+/* style.css */
+
+/* Global Styles */
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: #f0f0f0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100vh;
+  justify-content: center;
+}
+
+/* Loading Element Styles */
+
+.loading-element {
+  position: relative;
+  width: 200px;
+  height: 200px;
+}
+
+.ring {
+  position: absolute;
+  border-radius: 50%;
+  border: 10px solid transparent;
+  animation: rotate infinite linear;
+}
+
+/* Ring 1 Styles */
+
+.ring-1 {
+  width: 100px;
+  height: 100px;
+  top: 50px;
+  left: 50px;
+  animation-duration: 2s;
+  background: linear-gradient(#f0f0f0, #f0f0f0) padding-box,
+    conic-gradient(
+        transparent calc(360deg * (1 - var(--percentage) / 100)),
+        #ff69b4
+      )
+      border-box;
+  z-index: 3;
+}
+
+/* Ring 2 Styles */
+
+.ring-2 {
+  width: 150px;
+  height: 150px;
+  top: 25px;
+  left: 25px;
+  animation-duration: 3s;
+  background: linear-gradient(#f0f0f0, #f0f0f0) padding-box,
+    conic-gradient(
+        transparent calc(360deg * (1 - var(--percentage) / 100)),
+        #33cc33
+      )
+      border-box;
+  z-index: 2;
+}
+
+/* Ring 3 Styles */
+
+.ring-3 {
+  width: 200px;
+  height: 200px;
+  top: 0px;
+  left: 0px;
+  animation-duration: 4s;
+  background: linear-gradient(#f0f0f0, #f0f0f0) padding-box,
+    conic-gradient(
+        transparent calc(360deg * (1 - var(--percentage) / 100)),
+        #6666ff
+      )
+      border-box;
+  z-index: 1;
+}
+
+/* Animation Styles */
+
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* Percentage Display Styles */
+
+.percentage-display {
+  font-size: 24px;
+  font-weight: bold;
+  margin-top: 20px;
+}

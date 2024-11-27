@@ -1,0 +1,27 @@
+<!-- Define the basic structure of the HTML document -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Set the character encoding and viewport settings -->
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Set the title of the page -->
+    <title>Asset Allocation</title>
+    <!-- Link to the external stylesheet -->
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <!-- Create a container element to hold the ring chart and asset list -->
+    <div class="container">
+      <!-- Create a container element to hold the ring chart -->
+      <div class="ring-container">
+        <!-- Create an SVG element to render the ring chart -->
+        <svg id="ring" viewBox="0 0 36 36" class="circular-chart"></svg>
+      </div>
+      <!-- Create an unordered list element to hold the asset list -->
+      <ul id="asset-list" class="asset-list"></ul>
+    </div>
+    <!-- Link to the external JavaScript file -->
+    <script src="script.js"></script>
+  </body>
+</html>

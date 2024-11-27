@@ -1,0 +1,44 @@
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+  background-color: #f4f4f9;
+  font-family: Arial, sans-serif;
+}
+
+.loading-bar {
+  position: relative;
+  display: flex;
+  width: 500px;
+  height: 20px;
+  background-color: #e0e0e0; /* Light gray background */
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.loading-section-container,
+.background-section-container {
+  display: flex;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+.loading-section-container .section,
+.background-section-container .section {
+  width: 10%; /* Fixed width for each section */
+  height: 100%;
+}
+
+.loading-section-container .section {
+  background-color: transparent;
+  transition: background-color 0.1s ease;
+}
+
+.background-section-container .section {
+  background-color: #e0e0e0;
+}

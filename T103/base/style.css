@@ -1,0 +1,12 @@
+.chart {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 300px;
+}
+
+.bar {
+  width: 20px;
+  margin: 5px;
+  background-color: #ccc;
+}

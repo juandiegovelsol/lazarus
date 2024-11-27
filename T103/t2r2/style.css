@@ -1,0 +1,53 @@
+/* Dimensions and centers the chart content */
+.chart {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 400px;
+}
+
+/* Dimensions and spaces the bars */
+.bars-container {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  height: 80%;
+  width: 100%;
+}
+
+.bar {
+  width: 20px;
+  margin: 5px;
+  background-color: #ccc;
+}
+
+/* Styles the y-axis */
+.y-axis {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 80%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.y-axis span {
+  font-size: 12px;
+}
+
+/* Styles the x-axis */
+.x-axis {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+}
+
+.x-axis span {
+  font-size: 12px;
+  margin: 0 5px;
+}

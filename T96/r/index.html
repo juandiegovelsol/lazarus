@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Data Anonymization Tool</title>
+    <!-- Link to the external stylesheet -->
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+
+  <body>
+    <!-- Website header -->
+    <header>
+      <h1>Data Anonymization Tool</h1>
+    </header>
+
+    <main>
+      <!-- Main form for text input -->
+      <form id="anonymization-form">
+        <!-- Label for the text area -->
+        <label for="input-text">Enter text to anonymize:</label>
+        <!-- Text area for users to input data -->
+        <textarea id="input-text" placeholder="Enter text here..."></textarea>
+        <!-- Button to trigger the anonymization process -->
+        <button type="submit">Anonymize</button>
+        <!-- Button to reverse anonymization (initially hidden) -->
+        <button type="button" id="reverse-anonymization" style="display: none">
+          Reverse Anonymization
+        </button>
+        <!-- Button to download the anonymized result (initially hidden) -->
+        <button type="button" id="download-result" style="display: none">
+          Download Result
+        </button>
+      </form>
+
+      <!-- Section to display a live preview of anonymized text -->
+      <section id="live-preview">
+        <h2>Live Preview:</h2>
+        <!-- Read-only text area to show anonymized text -->
+        <textarea id="anonymized-text" readonly></textarea>
+      </section>
+    </main>
+
+    <!-- Link to the external JavaScript file -->
+    <script src="script.js"></script>
+  </body>
+</html>

@@ -1,0 +1,62 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f0f0f0;
+}
+
+.container {
+  max-width: 800px;
+  margin: 40px auto;
+  padding: 20px;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+#input-text,
+#anonymized-text {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+}
+
+#anonymization-form {
+  margin-bottom: 20px;
+}
+
+#anonymize-btn,
+#reverse-btn,
+#download-btn {
+  padding: 10px 20px;
+  font-size: 16px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+#anonymize-btn {
+  background-color: #4caf50;
+  color: #fff;
+}
+
+#reverse-btn {
+  background-color: #03a9f4;
+  color: #fff;
+}
+
+#download-btn {
+  background-color: #795548;
+  color: #fff;
+}
+
+#live-preview {
+  margin-top: 20px;
+}
+
+#anonymized-text {
+  background-color: #f0f0f0;
+  color: #666;
+}

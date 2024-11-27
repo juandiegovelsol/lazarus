@@ -1,0 +1,102 @@
+/* Global styles */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: #f0f0f0; /* Light gray background */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+/* Styles for the loading container */
+.loading-container {
+  position: relative;
+  width: 200px;
+  height: 200px;
+}
+
+/* Styles for the rings */
+.ring {
+  position: absolute;
+  border-radius: 50%;
+  border-style: solid;
+  border-width: 10px; /* Thickness of the ring */
+  animation: rotate infinite linear;
+}
+
+/* Styles for the first ring */
+.ring-1 {
+  width: 100px;
+  height: 100px;
+  border-color: transparent;
+  animation-duration: 2s; /* Rotation speed */
+  animation-name: rotate-1;
+}
+
+/* Styles for the second ring */
+.ring-2 {
+  width: 150px;
+  height: 150px;
+  border-color: transparent;
+  animation-duration: 4s; /* Rotation speed */
+  animation-name: rotate-2;
+}
+
+/* Styles for the third ring */
+.ring-3 {
+  width: 200px;
+  height: 200px;
+  border-color: transparent;
+  animation-duration: 6s; /* Rotation speed */
+  animation-name: rotate-3;
+}
+
+/* Animation for the first ring */
+@keyframes rotate-1 {
+  0% {
+    transform: rotate(0deg);
+    border-color: transparent;
+  }
+  12.5% {
+    border-color: #ff69b450; /* 0-45 degrees: 50% of base color */
+  }
+  100% {
+    transform: rotate(360deg);
+    border-color: #ff69b4; /* Base color: pink */
+  }
+}
+
+/* Animation for the second ring */
+@keyframes rotate-2 {
+  0% {
+    transform: rotate(0deg);
+    border-color: transparent;
+  }
+  12.5% {
+    border-color: #4caf5050; /* 0-45 degrees: 50% of base color */
+  }
+  100% {
+    transform: rotate(360deg);
+    border-color: #4caf50; /* Base color: green */
+  }
+}
+
+/* Animation for the third ring */
+@keyframes rotate-3 {
+  0% {
+    transform: rotate(0deg);
+    border-color: transparent;
+  }
+  12.5% {
+    border-color: #03a9f450; /* 0-45 degrees: 50% of base color */
+  }
+  100% {
+    transform: rotate(360deg);
+    border-color: #03a9f4; /* Base color: blue */
+  }
+}

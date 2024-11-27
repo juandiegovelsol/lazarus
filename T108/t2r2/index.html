@@ -1,0 +1,29 @@
+<!-- Define the HTML structure for the chart and custom cursor -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Animated Chart with Custom Mouse Hover</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <!-- Container for the chart -->
+    <div class="chart-container">
+      <!-- The chart itself -->
+      <div class="chart">
+        <!-- Individual bars in the chart with their values -->
+        <div class="bar" data-value="30"></div>
+        <div class="bar" data-value="60"></div>
+        <div class="bar" data-value="90"></div>
+        <div class="bar" data-value="-45"></div>
+        <div class="bar" data-value="-75"></div>
+      </div>
+      <!-- Zero line -->
+      <div class="zero-line"></div>
+    </div>
+    <!-- Custom cursor element -->
+    <div id="cursor"></div>
+    <script src="script.js"></script>
+  </body>
+</html>

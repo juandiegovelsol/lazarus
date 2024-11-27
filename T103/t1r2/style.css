@@ -1,0 +1,14 @@
+/* Dimensions and centers the chart content */
+.chart {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 300px;
+}
+
+/* Dimensions and spaces the bars */
+.bar {
+  width: 20px;
+  margin: 5px;
+  background-color: #ccc;
+}

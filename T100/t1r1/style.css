@@ -1,0 +1,18 @@
+#chart {
+  position: relative;
+  width: 800px;
+  height: 400px;
+}
+
+.candle {
+  position: absolute;
+  width: 10px;
+}
+
+.candle.green {
+  background-color: green;
+}
+
+.candle.red {
+  background-color: red;
+}

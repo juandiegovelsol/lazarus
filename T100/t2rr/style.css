@@ -1,0 +1,47 @@
+/* Chart container styling */
+#chart {
+  position: relative; /* Allows absolute positioning of candles and axes */
+  width: 800px; /* Fixed width of the chart */
+  height: 400px; /* Fixed height of the chart */
+}
+
+/* Base styling for candle elements */
+.candle {
+  position: absolute; /* Position relative to the chart container */
+  width: 10px; /* Default width of a candle */
+}
+
+/* Styling for upward (green) candles */
+.candle.green {
+  background-color: green; /* Indicates positive price movement */
+}
+
+/* Styling for downward (red) candles */
+.candle.red {
+  background-color: red; /* Indicates negative price movement */
+}
+
+/* Styling for the x-axis */
+#x-axis {
+  position: absolute;
+  bottom: -20.67px;
+  left: 30px;
+  width: calc(100% - 30px);
+  height: 20px;
+  border-top: 1px solid black;
+}
+
+/* Styling for the y-axis */
+#y-axis {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 30px;
+  height: 100%;
+  border-right: 1px solid black;
+}
+
+/* Styling for axis labels */
+.axis-label {
+  font-size: 12px;
+}

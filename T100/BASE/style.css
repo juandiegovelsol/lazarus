@@ -1,0 +1,17 @@
+#chart {
+  width: 800px;
+  height: 400px;
+}
+
+.candle {
+  width: 10px;
+  margin: 0 2px;
+}
+
+.candle.green {
+  background-color: green;
+}
+
+.candle.red {
+  background-color: red;
+}

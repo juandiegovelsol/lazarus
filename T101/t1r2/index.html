@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Stock Price Chart</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <!-- Timeframe selector for choosing the candle time intervals -->
+    <select id="timeframe">
+      <option value="1">5 minutes</option>
+      <option value="2">10 minutes</option>
+      <option value="3">15 minutes</option>
+      <option value="6">30 minutes</option>
+      <option value="12">1 hour</option>
+    </select>
+    <!-- Chart container where candles are dynamically rendered -->
+    <div id="chart">
+      <div id="y-axis"></div>
+      <div id="x-axis"></div>
+      <div id="candles"></div>
+      <div id="cursor-tooltip"></div>
+      <div id="cursor-tooltip-time"></div>
+      <div id="cursor-tooltip-price"></div>
+      <div id="cursor-line-x"></div>
+      <div id="cursor-line-y"></div>
+    </div>
+    <script src="script.js"></script>
+  </body>
+</html>

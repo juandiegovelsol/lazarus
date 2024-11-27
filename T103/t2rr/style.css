@@ -1,0 +1,59 @@
+/* Chart container with padding for labels */
+.chart {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 400px;
+  padding: 20px 40px;
+}
+
+/* Bars container with proper spacing */
+.bars-container {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-end;
+  height: 80%;
+  width: 100%;
+}
+
+.bar {
+  width: 20px;
+  margin: 0 15px;
+  background-color: #ccc;
+  position: relative;
+}
+
+/* Y-axis with absolute positioning for labels */
+.y-axis {
+  position: absolute;
+  top: 20px;
+  left: 0;
+  height: 80%;
+  width: 40px;
+  border-right: 1px solid black;
+}
+
+.y-axis span {
+  position: absolute;
+  font-size: 12px;
+  transform: translateX(-100%);
+  left: 20px;
+}
+
+/* X-axis with absolute positioning for labels */
+.x-axis {
+  position: absolute;
+  bottom: 70px;
+  left: 40px;
+  width: calc(40% - 80px);
+  height: 20px;
+  border-top: 1px solid black;
+}
+
+.x-axis span {
+  position: absolute;
+  font-size: 12px;
+  transform: translateX(-50%);
+  margin: 0 15px;
+}

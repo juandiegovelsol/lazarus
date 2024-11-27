@@ -1,0 +1,86 @@
+/* style.css */
+
+/* Global Styles */
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: #f0f0f0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+/* Loading Element Styles */
+
+.loading-element {
+  position: relative;
+  width: 200px;
+  height: 200px;
+}
+
+.ring {
+  position: absolute;
+  border-radius: 50%;
+  border-style: solid;
+  border-width: 10px;
+  animation: rotate infinite linear;
+}
+
+/* Ring 1 Styles */
+
+.ring-1 {
+  width: 100px;
+  height: 100px;
+  top: 50px;
+  left: 50px;
+  border-color: transparent;
+  animation-duration: 2s;
+  background-image: conic-gradient(transparent 45deg, #ff69b4 45deg);
+  background-clip: border-box;
+  background-origin: border-box;
+}
+
+/* Ring 2 Styles */
+
+.ring-2 {
+  width: 150px;
+  height: 150px;
+  top: 25px;
+  left: 25px;
+  border-color: transparent;
+  animation-duration: 3s;
+  background-image: conic-gradient(transparent 45deg, #33cc33 45deg);
+  background-clip: border-box;
+  background-origin: border-box;
+}
+
+/* Ring 3 Styles */
+
+.ring-3 {
+  width: 200px;
+  height: 200px;
+  top: 0px;
+  left: 0px;
+  border-color: transparent;
+  animation-duration: 4s;
+  background-image: conic-gradient(transparent 45deg, #6666ff 45deg);
+  background-clip: border-box;
+  background-origin: border-box;
+}
+
+/* Animation Styles */
+
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

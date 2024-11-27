@@ -1,0 +1,50 @@
+/* Global styles for the body */
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #f4f4f9;
+  overflow: hidden;
+  cursor: none;
+}
+
+/* Styles for the chart container */
+.chart-container {
+  width: 80%;
+  max-width: 600px;
+}
+
+/* Styles for the chart itself */
+.chart {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  height: 300px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 10px;
+  background-color: #ffffff;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Styles for individual bars in the chart */
+.bar {
+  width: 15%;
+  background-color: #007bff;
+  border-radius: 4px;
+  transition: transform 0.3s, background-color 0.3s;
+}
+
+/* Styles for the custom cursor */
+#cursor {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  background-color: #007bff;
+  border-radius: 50%;
+  pointer-events: none;
+  transition: background-color 0.3s, transform 0.2s ease-in-out;
+}

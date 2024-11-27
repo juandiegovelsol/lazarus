@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Data Anonymization Tool</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header>
+      <h1>Data Anonymization Tool</h1>
+    </header>
+    <main>
+      <form id="anonymization-form">
+        <label for="input-text">Enter text to anonymize:</label>
+        <textarea id="input-text" placeholder="Enter text here..."></textarea>
+        <button type="submit">Anonymize</button>
+        <button type="button" id="reverse-anonymization">
+          Reverse Anonymization
+        </button>
+        <button type="button" id="download-result">Download Result</button>
+      </form>
+      <section id="live-preview">
+        <h2>Live Preview:</h2>
+        <textarea id="anonymized-text" readonly></textarea>
+      </section>
+    </main>
+
+    <script src="script.js"></script>
+  </body>
+</html>
